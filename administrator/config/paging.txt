@@ -1,0 +1,22 @@
+$p      = new Paging;
+			$batas  = 10;
+			$posisi = $p->cariPosisi($batas);
+$query = mysql_query("SELECT * FROM tknida_barang, tknida_kategori WHERE tknida_barang.id_kat=tknida_kategori.id_kat
+																			   ORDER BY tknida_barang.kode_barang
+			$i = $posisi+1;																   DESC LIMIT $posisi,$batas");
+			while ($row = mysql_fetch_array($query)){
+
+$i++;
+}
+			
+			
+
+
+
+    $jmldata = mysql_num_rows(mysql_query("SELECT * FROM tknida_barang"));
+      
+    $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
+    $linkHalaman = $p->navHalaman($_GET[halaman], $jmlhalaman);
+
+echo "<div class=\"pagination\"> $linkHalaman</div>";
+ 
