@@ -84,9 +84,8 @@
                     <td>$i</td>
 							<td>$a[username]</td>
 							<td>$a[nama_lengkap]</td>
-							<td>$a[password]</td>"
-                   
-				echo"<td>
+							<td>$a[password]</td>";
+                   echo"<td>
                         <a href='02_cetak_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]&halaman=$_GET[halaman]' class='btn btn-info btn-xs'>
 							<span class='glyphicon glyphicon-print' aria-hidden='true'></span>
 						</a>

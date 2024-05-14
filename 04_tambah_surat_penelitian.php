@@ -1,5 +1,5 @@
 <?php 	
-	include"01_nav.php";
+	include "01_nav.php";
 ?>
 <aside class="right-side">
     <section class="content-header">
@@ -121,7 +121,7 @@
 					<tr>
 						<td colspan="2">:</td>	
 						<td><input type="submit" name="submit" value="Simpan"  class="btn btn-primary">
-							<input type="reset" name="submit" value="Hapus" class="btn btn-danger">
+							<input type="reset" name="reset" value="Hapus" class="btn btn-danger">
 						</td>
 					</tr>
 
@@ -137,6 +137,8 @@
 										values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[no_hp]','$_POST[lama_penelitian]','$_POST[tempat_penelitian]','$_POST[judul_kti]','$_POST[jurusan]','$_POST[prodi]','$_POST[tugas_akhir]','$_POST[tujuan]','$date','$_POST[tahun_akademik]','$_POST[tembusan]')");				
 						if($query){
 								echo"<script>alert('Data Berhasil di Simpan');window.location='04_daftar_surat_penelitian.php'</script>";
+						} else {
+							echo "Data Gagal Disimpan";
 						}
 					}					
 		?>

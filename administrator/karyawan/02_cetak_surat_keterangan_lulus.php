@@ -29,11 +29,14 @@
 	</table>
 
 	<table border="0" width="100%" cellpadding="0">
+	<p class="MsoBodyText"><span style="mso-ignore:vglayout;position:
+relative;z-index:-1895824384"><span style="position:absolute;left:0px;
+top:-190px;width:794px;height:227px"><img width="794" height="227" src="../assets/images/kop2024.png" v:shapes="Picture_x0020_14"></span></span><!--[endif]--><span lang="id" style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><o:p></o:p></span></p>
 		<tr>
 			<td colspan="3" align="center" style='font-size:20.0pt;'><b><u>SURAT KETERANGAN</u></b><br></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><b>Nomor : PP.01.01/1/     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;        2023</b></td>
+			<td colspan="3" align="center"><b>Nomor : PP.01.01/1/     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;        <?php echo date('Y'); ?></b></td>
 		</tr>
 	</table>
 
@@ -133,6 +136,9 @@
 			<td>&nbsp; </td>
 			<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NIP.196505091989032001</td>
 		</tr>
+		<p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:
+absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:590px;
+width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span><!--[endif]--></span></p>
 	</table>
 </body>
 

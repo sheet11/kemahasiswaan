@@ -20,7 +20,7 @@ if($_SESSION['level'] == "karyawan"){ ?>
 		  	
 			<tr>
 				<td><a href="01_tambah_ijazah.php" class="btn btn-primary">Tambah data + </a>
-					<a href="../../../import-excel/upload.php" class="btn btn-primary">Import data + </a>
+					<a href="../../import" class="btn btn-primary">Import data + </a>
 					<a class="btn btn-info" > <i class="fa fa-cloud fa-sm"></i> | Jumlah : <?php
 			                                                        require_once("../config/koneksi.php");
 			                                                        $query = mysqli_query ($kon, "SELECT * from tb_ijazah");
