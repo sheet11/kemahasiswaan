@@ -132,9 +132,10 @@
 </div>
 		<?php
 			if(isset($_POST['submit'])){
-					$date = date("Y-m-d");										
+					$date = date("Y-m-d");		
+					$judul = addslashes($_POST["judul_kti"]);
 					$query=mysqli_query($kon,"insert into tb_surat_penelitian(nama_mahasiswa, nim_mahasiswa, no_hp, lama_penelitian,tempat_penelitian, judul_kti, jurusan,  prodi, tugas_akhir, tujuan, tanggal_cetak,tahun_akademik, tembusan)
-										values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[no_hp]','$_POST[lama_penelitian]','$_POST[tempat_penelitian]','$_POST[judul_kti]','$_POST[jurusan]','$_POST[prodi]','$_POST[tugas_akhir]','$_POST[tujuan]','$date','$_POST[tahun_akademik]','$_POST[tembusan]')");				
+										values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[no_hp]','$_POST[lama_penelitian]','$_POST[tempat_penelitian]', '$judul','$_POST[jurusan]','$_POST[prodi]','$_POST[tugas_akhir]','$_POST[tujuan]','$date','$_POST[tahun_akademik]','$_POST[tembusan]')");				
 						if($query){
 								echo"<script>alert('Data Berhasil di Simpan');window.location='04_daftar_surat_penelitian.php'</script>";
 						} else {

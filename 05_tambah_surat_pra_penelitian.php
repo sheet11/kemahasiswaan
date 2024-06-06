@@ -115,9 +115,10 @@
 		<?php
 			include"../config/koneksi.php";
 				if(isset($_POST['submit'])){
-					$date = date("Y-m-d");								
+					$date = date("Y-m-d");	
+					$judul = addslashes($_POST["judul_kti"]);							
 				$query=mysqli_query($kon,"insert into tb_surat_pra_penelitian(nama_mahasiswa, nim_mahasiswa,no_hp, judul_kti, lokasi, jurusan, prodi, tugas_akhir, tujuan, tahun_akademik, tanggal_cetak)
-									values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[no_hp]','$_POST[judul_kti]','$_POST[lokasi]','$_POST[jurusan]','$_POST[prodi]','$_POST[tugas_akhir]','$_POST[tujuan]','$_POST[tahun_akademik]','$date')");				
+									values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[no_hp]','$judul','$_POST[lokasi]','$_POST[jurusan]','$_POST[prodi]','$_POST[tugas_akhir]','$_POST[tujuan]','$_POST[tahun_akademik]','$date')");				
 					if($query)
 						{
 							echo"<script>alert('Data Berhasil di Simpan');window.location='05_daftar_surat_pra_penelitian.php'</script>";
