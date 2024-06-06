@@ -1,6 +1,6 @@
 <?php 
-	include"01_nav.php";
-	include"config/class_paging.php";
+	include "01_nav.php";
+	include "config/class_paging.php";
 ?>
 <aside class="right-side">
     <section class="content-header">
@@ -51,17 +51,15 @@
                 if(isset($_POST['submit'])){
                     $cariid = $_POST['cariid'];
                     $cari = $_POST['cari'];
-                    $query=mysql_query("select * from tb_surat_keterangan_lulus where $cariid = '$cari' or $cariid = '0' "); 
+                    $query=mysqli_query($kon, "select * from tb_surat_keterangan_lulus where $cariid = '$cari' or $cariid = '0' "); 
                     $i = $posisi+1;      
-                while($a=mysql_fetch_array($query)){
+                while($a=mysqli_fetch_array($query)){
             echo"
                 <tr>
                     <td>$i</td>
 							<td>$a[nama_mahasiswa]</td>
-							<td>$a[nim_mahasiswa]</td>
-							<td>$a[jurusan]</td>
-							<td>$a[tempat_lahir]</td>
-							<td>$a[tanggal_lahir]</td>      
+							<td>$a[nimir]</td>
+							     
                     <td>";
 										
 										if($a['status'] == 'Belum Dicetak')
@@ -97,9 +95,9 @@
             }
                 }
                 elseif(!empty($_GET['id_surat_keterangan_lulus'])){
-                    $query=mysql_query("select * from tb_surat_keterangan_lulus where id_surat_keterangan_lulus='$_GET[id_surat_keterangan_lulus]'"); 
+                    $query=mysqli_query($kon, "select * from tb_surat_keterangan_lulus where id_surat_keterangan_lulus='$_GET[id_surat_keterangan_lulus]'"); 
                     $i = $posisi+1;      
-                while($a=mysql_fetch_array($query)){
+                while($a=mysqli_fetch_array($query)){
             echo"
                 <tr>    
                     <td>$i</td>
@@ -107,7 +105,8 @@
 							<td>$a[nim_mahasiswa]</td>
 							<td>$a[jurusan]</td>
 							<td>$a[tempat_lahir]</td>
-							<td>$a[tanggal_lahir]</td>      
+							<td>$a[tanggal_lahir]</td>
+							    
                     <td>";
 										
 										if($a['status'] == 'Belum Dicetak')
@@ -146,10 +145,10 @@
                     $p      = new Paging;
                     $batas  = 10;
                     $posisi = $p->cariPosisi($batas);               
-                    $query=mysql_query("select * from tb_surat_keterangan_lulus order by id_surat_keterangan_lulus desc LIMIT $posisi,$batas");
+                    $query=mysqli_query($kon, "select * from tb_surat_keterangan_lulus order by id_surat_keterangan_lulus desc LIMIT $posisi,$batas");
                 
                     $i = $posisi+1;     
-                while($a=mysql_fetch_array($query)){
+                while($a=mysqli_fetch_array($query)){
 
                 echo"
                 <tr>
@@ -158,7 +157,8 @@
 							<td>$a[nim_mahasiswa]</td>
 							<td>$a[jurusan]</td>
 							<td>$a[tempat_lahir]</td>
-							<td>$a[tanggal_lahir]</td>      
+							<td>$a[tanggal_lahir]</td>   
+							   
                     <td>";
 										
 										if($a['status'] == 'Belum Dicetak')
@@ -193,10 +193,10 @@
             }
             
 
-    $jmldata = mysql_num_rows(mysql_query("SELECT * FROM tb_surat_keterangan_lulus "));
+    $jmldata = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM tb_surat_keterangan_lulus "));
       
     $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
-    $linkHalaman = $p->navHalaman($_GET[halaman], $jmlhalaman);
+    $linkHalaman = $p->navHalaman($_GET['halaman'], $jmlhalaman);
 
 echo "</table><div class=\"paginationw\">$linkHalaman</div>";
 }

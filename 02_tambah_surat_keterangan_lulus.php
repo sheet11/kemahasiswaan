@@ -15,14 +15,14 @@
 						<td><b>Nama Mahasiswa</b></td> 
 					</tr>
 					<tr>
-						<td><input type="text" placeholder="Nama Mahasiswa" name="nama_mahasiswa" required="yes" class="form-control" value="<?=$u['nama_lengkap'];?>" disabled> </td>
+						<td><input type="text" placeholder="Nama Mahasiswa" name="nama_mahasiswa" required="yes" class="form-control" value="<?=$u['nama_lengkap'];?>" > </td>
 					<tr>
 
 					<tr>
 						<td><b>NIM Mahasiswa</b></td> 
 					</tr>
 					</tr>
-						<td><input type="text" placeholder="Contoh : P05120213069" name="nim_mahasiswa" class="form-control" value="<?=$u['username'];?>" disabled></td>
+						<td><input type="text" placeholder="Contoh : P05120213069" name="nim_mahasiswa" class="form-control" value="<?=$u['username'];?>" ></td>
 					</tr>
 
 					<tr>
@@ -45,10 +45,10 @@
 						<td><input type="text" placeholder="Tempat Lahir " name="tempat_lahir" class="form-control"></td>
 					</tr>
 					<tr>
-						<td><b>Tanggal Lahir (Tahun-Bulan-Tanggal)</b></td> 
+						<td><b>Tanggal Lahir</b></td> 
 					</tr>
 					<tr>
-						<td><input type="text" value="0000-00-00" name="tanggal_lahir" class="form-control"></td>
+						<td><input type="date" name="tanggal_lahir" class="form-control"></td>
 					</tr>
 
 					<tr>
@@ -106,21 +106,21 @@
 						<td><b>Nomor Surat</b></td> 
 					</tr>
 					</tr>
-						<td><input type="text" placeholder="Nomor Surat" name="nomor_surat" class="form-control" value="2433/2018"></td>
+						<td><input type="text" placeholder="Nomor Surat" name="nomor_surat" class="form-control" ></td>
 					</tr>
 					
 					<tr>
 						<td><b>Tanggal SK</b></td> 
 					</tr>
 					</tr>
-						<td><input type="text" value="2018-08-13"  placeholder="Tanggal SK" name="tanggal_sk" class="form-control"></td>
+						<td><input type="text" placeholder="Tanggal SK" name="tanggal_sk" class="form-control"></td>
 					</tr>
 
                     <tr>
 						<td><b>Tanggal Wisudah</b></td> 
 					</tr>
 					</tr>
-						<td><input type="text" value="2018-08-13" placeholder="Tanggal Wisudah" name="tanggal_wisudah" class="form-control" ></td>
+						<td><input type="text" placeholder="Tanggal Wisudah" name="tanggal_wisudah" class="form-control" ></td>
 					</tr>
 
 					<tr>	
@@ -135,17 +135,19 @@
 	</div>
 </div>
 		<?php
-			include"../config/koneksi.php";
+			include "../config/koneksi.php";
 	
 				if(isset($_POST['submit'])){
 					$date = date("Y-m-d");
 														
-				$query=mysqli_query($kon,"insert into tb_surat_keterangan_lulus(nama_mahasiswa, nim_mahasiswa, keperluan, tempat_lahir, tanggal_lahir, jurusan,  prodi, tahun_akademik, nomor_surat, tanggal_sk, tanggal_wisudah, tanggal_cetak)
+				$query=mysqli_query($kon,"insert into tb_surat_keterangan_lulus (nama_mahasiswa, nim_mahasiswa, keperluan, tempat_lahir, tanggal_lahir, jurusan,  prodi, tahun_akademik, nomor_surat, tanggal_sk, tanggal_wisudah, tanggal_cetak)
 									values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[keperluan]','$_POST[tempat_lahir]','$_POST[tanggal_lahir]','$_POST[jurusan]','$_POST[prodi]','$_POST[tahun_akademik]','$_POST[nomor_surat]','$_POST[tanggal_sk]','$_POST[tanggal_wisudah]', '$date')");
 					
 										
 					if($query){
 						echo"<script>alert('Data Berhasil di Simpan');window.location='02_daftar_surat_keterangan_lulus.php'</script>";
+					}else{
+						echo "<script>alert('Data Gagal Disimpan, Coba lagi');window.location='02_daftar_surat_keterangan_lulus.php'</script>";
 					}
 				}					
 		?>
