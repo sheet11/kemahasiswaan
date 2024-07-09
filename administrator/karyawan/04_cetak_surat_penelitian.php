@@ -67,17 +67,11 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr >
-			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>DM. 01.04/..…….../2/<?php echo date('Y'); ?></td>
+			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/FXXXI.1/.…….../<?php echo date('Y'); ?></td>
 		</tr>
 
 		<tr>
-			<td>Lampiran</td>
-			<td>:</td>
-			<td>-</td>
-		</tr>
-
-		<tr>
-			<td>Hal</td>
+			<td>Perihal</td>
 			<td>:</td>
 			<td><b>Izin Penelitian</b></td>
 		</tr>
@@ -89,7 +83,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td>Yang Terhormat,</td>
+			<td>Yth,</td>
 		</tr>
 
 		<tr>
@@ -97,7 +91,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td>di_ </td>
+			<td>di </td>
 		</tr>
 
 		<tr>
@@ -113,7 +107,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 
 	<table border="0" align="center" width="95%" cellpadding="0">
 		<tr>
-			<td valign="left" colspan="3" style="text-align:justify;line-height:150%">Sehubungan dengan penyusunan tugas akhir mahasiswa dalam bentuk <?php echo "$a[tugas_akhir]"; ?> bagi Mahasiswa Prodi <?php echo "$a[prodi]"; ?>  Jurusan <?php echo "$a[jurusan]"; ?> Poltekkes Kemenkes Bengkulu Tahun Akademik <?php echo "$a[tahun_akademik]"; ?>  , maka bersama ini kami mohon Bapak/Ibu dapat memberikan izin pengambilan data untuk penelitian kepada:</td>
+			<td valign="left" colspan="3" style="text-align:justify;line-height:150%">&nbsp; &nbsp; &nbsp;Sehubungan penyusunan tugas akhir mahasiswa dalam bentuk <?php echo "$a[tugas_akhir]"; ?> Progam Studi <?php echo "$a[prodi]"; ?>  Jurusan <?php echo "$a[jurusan]"; ?> Politeknik Kesehatan Kemenkes Bengkulu Tahun Akademik <?php echo "$a[tahun_akademik]"; ?>  , dengan ini kami mohon Bapak/Ibu dapat memberikan izin pengambilan data untuk penelitian kepada:</td>
 		</tr>
 	</table>
 
@@ -128,24 +122,6 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>NIM </td>
 			<td>:</td>
 			<td><?php echo "$a[nim_mahasiswa]"; ?></td>
-		</tr>
-
-		<tr>
-			<td>Jurusan </td>
-			<td>:</td>
-			<td><?php echo "$a[jurusan]"; ?></td>
-		</tr>
-
-		<tr>
-			<td>Program Studi</td>
-			<td>:</td>
-			<td><?php echo "$a[prodi]"; ?></td>
-		</tr>
-
-		<tr>
-			<td>No Handphone </td>
-			<td>:</td>
-			<td><?php echo "$a[no_hp]"; ?></td>
 		</tr>
 
 		<tr>
@@ -167,7 +143,13 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td colspan="3" style="text-align:justify;line-height:150%" >Demikianlah, atas perhatian dan bantuan Bapak/Ibu diucapkan terimakasih.</td>
+			<td>No Handphone </td>
+			<td>:</td>
+			<td><?php echo "$a[no_hp]"; ?></td>
+		</tr>
+
+		<tr>
+			<td colspan="3" style="text-align:justify;line-height:150%" >&nbsp; &nbsp; &nbsp;Demikianlah, atas perhatian dan kesediaan Bapak/Ibu diucapkan terimakasih.</td>
 		</tr>
 	</table>
 
@@ -181,7 +163,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td width="40%">&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; an. Direktur Poltekkes Kemenkes Bengkulu</td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; an. Direktur Poltekkes Kemenkes Bengkulu</td>
 		</tr>
 
 		<tr>
@@ -214,21 +196,9 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Agung Riyadi, S.Kep.Ns.M.Kes</b></td>
 		</tr>
 
-		<tr>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-			<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NIP.196810071988031005</td>
-		</tr>
-
 	</table>
 
 	<table border="0" align="center" width="95%" cellpadding="0">
-		<tr>
-			<td style="font-size:12"> <b>Tembusan disampaikan kepada:</b> </td>
-		</tr>
-		<tr>
-			<td style="font-size:12"><?php echo "$a[tembusan]"; ?> </td>
-		</tr>
 	
 	</table>
 	<p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:

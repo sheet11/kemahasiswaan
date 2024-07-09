@@ -28,27 +28,7 @@
 <p class="MsoBodyText"><span style="mso-ignore:vglayout;position:
 relative;z-index:-1895824384"><span style="position:absolute;left:0px;
 top:-215px;width:794px;height:227px"><img width="794" height="227" src="../assets/images/kop2024.png" v:shapes="Picture_x0020_14"></span></span><!--[endif]--><span lang="id" style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><o:p></o:p></span></p>
-	<tr>
-		<td width="10%" valign="top" >Lampiran</td>
-		<td valign="top"> : </td>
-		<td style="text-align:justify;"> Surat Edaran Menteri Keuangan dan Kepala Badan Administrasi Kepegawaian Negara</td>
-	</tr>
 
-	<tr>
-		<td>Nomor</td>
-		<td>: </td>
-		<td> SE-1-38/DJA/1.7/80 (NO. SE/11780)</td>
-	</tr>
-	<tr>
-		<td>Nomor</td>
-		<td>: </td>
-		<td> 19/SE/1980<br/></td>
-	</tr>
-	<tr>
-		<td>Tanggal</td>
-		<td>: </td>
-		<td> 7 Juli 1980</td>
-	</tr>
 	<tr>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
@@ -62,7 +42,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td colspan="3" align="center" style='font-size:14.0pt;'><b><u>SURAT PERNYATAAN MASIH KULIAH</u></b><br></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><b>Nomor : DM.01.04/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/2/<?php echo date('Y'); ?> </b></td>
+			<td colspan="3" align="center"><b>Nomor : PP.01.01/F.XXXI.1/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/2/<?php echo date('Y'); ?> </b></td>
 		</tr>
 	</table>
 
@@ -180,7 +160,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;an. Direktur Poltekkes Kemenkes Bengkulu</td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;an. Direktur Poltekkes Kemenkes Bengkulu</td>
 		</tr>
 
 		<tr>
@@ -213,11 +193,6 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Agung Riyadi, S.Kep.Ns.M.Kes</b></td>
 		</tr>
 
-		<tr>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-			<td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;NIP.196810071988031005</td>
-		</tr>
 		<p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:
 absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:400px;
 width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span><!--[endif]--></span></p>

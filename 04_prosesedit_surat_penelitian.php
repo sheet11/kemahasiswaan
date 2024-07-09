@@ -19,7 +19,7 @@ if($_POST['halaman'] == 0)
 	
 	if(empty($nama_file))
 	{
-		$qr = mysql_query("update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
+		$qr = mysqli_query($kon, "update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
 														nim_mahasiswa = '$_POST[nim_mahasiswa]',
 														no_hp = '$_POST[no_hp]',
 														lama_penelitian = '$_POST[lama_penelitian]',
@@ -48,7 +48,7 @@ if($_POST['halaman'] == 0)
 			{
 				if(move_uploaded_file($tmp_file, $path))
 				{
-					$qr = mysql_query("update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
+					$qr = mysqli_query($kon, "update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
 														nim_mahasiswa = '$_POST[nim_mahasiswa]',
 														no_hp = '$_POST[no_hp]',
 														lama_penelitian = '$_POST[lama_penelitian]',
@@ -100,7 +100,7 @@ else
 	
 	if(empty($nama_file))
 	{
-		$qr = mysql_query("update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
+		$qr = mysqli_query($kon, "update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
 														nim_mahasiswa = '$_POST[nim_mahasiswa]',
 														no_hp = '$_POST[no_hp]',
 														lama_penelitian = '$_POST[lama_penelitian]',
@@ -129,7 +129,7 @@ else
 			{
 				if(move_uploaded_file($tmp_file, $path))
 				{
-					$qr = mysql_query("update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
+					$qr = mysqli_query($kon,"update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
 														nim_mahasiswa = '$_POST[nim_mahasiswa]',
 														no_hp = '$_POST[no_hp]',
 														lama_penelitian = '$_POST[lama_penelitian]',

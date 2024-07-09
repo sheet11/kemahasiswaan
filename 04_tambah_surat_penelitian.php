@@ -94,17 +94,11 @@
 					<tr>
 						<td>Tugas Akhir</td>
 						<td>:</td>
-                        <td><select name='tugas_akhir' class='form-control' >";
+                        <td><select name='tugas_akhir' class='form-control' >
                            	<option value="">..: Silahkan Dipilih :..</option>
-                            <?php include "../config/koneksi.php";
-                            $query = mysqli_query($kon,"SELECT * FROM tb_tugas_akhir ");
-                            while ($row = mysqli_fetch_array($query)) {
-                             echo"
-                            <option value='$row[tugas_akhir]'>$row[tugas_akhir]</option>
-                            ";
-                             }
-                            ?>
-                            echo"</select></td>
+                           	<option value="kripsi">Skripsi</option>
+                           	<option value="Karya Tulis Ilmiah(KTI)">Karya Tulis Ilmiah(KTI)</option>
+                            </select></td>
 					</tr>
 
 					<tr>
