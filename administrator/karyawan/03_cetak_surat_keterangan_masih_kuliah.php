@@ -167,7 +167,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;an. Direktur Poltekkes Kemenkes Bengkulu</td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; a.n. Direktur Poltekkes Kemenkes Bengkulu</td>
 		</tr>
 
 		<tr>
