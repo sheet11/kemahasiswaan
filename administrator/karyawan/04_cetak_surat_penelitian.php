@@ -18,6 +18,13 @@
     $tanggal2 = tgl_indo($a['tanggal_cetak']);
 ?>
 
+<style type="text/css">;
+    body { font-family: Arial; line-height:200%; font-size:11.0pt;}
+    p { font-family: Arial; line-height:200%; font-size:11.0pt;}
+    div { font-family: Arial; line-height:200%; font-size:11.0pt;}
+	table { font-family: Arial; line-height:200%; font-size:11.0pt;}
+</style>
+
 <table cellpadding="60">
 	<tr>
 		<td></td>
@@ -61,13 +68,13 @@
 relative;z-index:-1895824384"><span style="position:absolute;left:0px;
 top:-215px;width:794px;height:227px"><img width="794" height="227" src="../assets/images/kop2024.png" v:shapes="Picture_x0020_14"></span></span><!--[endif]--><span lang="id" style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><o:p></o:p></span></p>
 		<tr>
-	<table border="0" align="center" width="95%" cellpadding="0" style="text-align:justify;line-height:100%">
+	<table border="0" align="center" width="95%" cellpadding="0" style="text-align:justify; line-height:150%;">
 		<tr>
 			<td colspan="3" align="right"><?php echo "$tanggal2"; ?></td>
 		</tr>
 
 		<tr >
-			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/FXXXI.1/.…….../<?php echo date('Y'); ?></td>
+			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<?php echo date('Y'); ?></td>
 		</tr>
 
 		<tr>
@@ -107,7 +114,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 
 	<table border="0" align="center" width="95%" cellpadding="0">
 		<tr>
-			<td valign="left" colspan="3" style="text-align:justify;line-height:150%">&nbsp; &nbsp; &nbsp;Sehubungan penyusunan tugas akhir mahasiswa dalam bentuk <?php echo "$a[tugas_akhir]"; ?> Progam Studi <?php echo "$a[prodi]"; ?>  Jurusan <?php echo "$a[jurusan]"; ?> Politeknik Kesehatan Kemenkes Bengkulu Tahun Akademik <?php echo "$a[tahun_akademik]"; ?>  , dengan ini kami mohon Bapak/Ibu dapat memberikan izin pengambilan data untuk penelitian kepada:</td>
+			<td valign="left" colspan="3" style="text-align:justify;">&nbsp; &nbsp; &nbsp;Sehubungan penyusunan tugas akhir mahasiswa dalam bentuk <?php echo "$a[tugas_akhir]"; ?> Progam Studi <?php echo "$a[prodi]"; ?>  Jurusan <?php echo "$a[jurusan]"; ?> Politeknik Kesehatan Kemenkes Bengkulu Tahun Akademik <?php echo "$a[tahun_akademik]"; ?>  , dengan ini kami mohon Bapak/Ibu dapat memberikan izin pengambilan data untuk penelitian kepada:</td>
 		</tr>
 	</table>
 
@@ -139,7 +146,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td valign="top">Judul </td>
 			<td valign="top">:</td>
-			<td style="text-align:justify;line-height:150%"><?php echo "$a[judul_kti]"; ?> </td>
+			<td style="text-align:justify;"><?php echo "$a[judul_kti]"; ?> </td>
 		</tr>
 
 		<tr>
@@ -149,11 +156,11 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td colspan="3" style="text-align:justify;line-height:150%" >&nbsp; &nbsp; &nbsp;Demikianlah, atas perhatian dan kesediaan Bapak/Ibu diucapkan terimakasih.</td>
+			<td colspan="3" style="text-align:justify;" >&nbsp; &nbsp; &nbsp;Demikianlah, atas perhatian dan kesediaan Bapak/Ibu diucapkan terimakasih.</td>
 		</tr>
 	</table>
 
-	<table border="0" align="center" width="95%" cellpadding="0" style="text-align:justify;line-height:100%">
+	<table border="0" align="center" width="95%" cellpadding="0" style="text-align:justify;">
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
@@ -216,7 +223,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
   o:title=""/>
  <w:wrap anchorx="margin"/>
 </v:shape><![endif]--><!--[if !vml]--><span style="mso-ignore:vglayout;position:
-absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:240px;
+absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:120px;
 width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span><!--[endif]--></span></p>
 </body>
 

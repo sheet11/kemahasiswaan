@@ -8,6 +8,12 @@
 	mysqli_query($kon, "update tb_surat_pra_penelitian set status = 'Sudah Dicetak' where id_surat_pra_penelitian ='$_GET[id_surat_pra_penelitian]'");
 ?>
 
+<style type="text/css">;
+    body { font-family: Arial; line-height:200%; font-size:11.0pt;}
+    p { font-family: Arial; line-height:200%; font-size:11.0pt;}
+    div { font-family: Arial; line-height:200%; font-size:11.0pt;}
+	table { font-family: Arial; line-height:200%; font-size:11.0pt;}
+</style>
 
 <?php
 	include"../config/koneksi.php";
@@ -24,40 +30,8 @@
 <body>
 
 
-<table border="0" align="center" width="90%" cellpadding="0">
-<p class="MsoBodyText"><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
- coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
- filled="f" stroked="f">
- <v:stroke joinstyle="miter"/>
- <v:formulas>
-  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
-  <v:f eqn="sum @0 1 0"/>
-  <v:f eqn="sum 0 0 @1"/>
-  <v:f eqn="prod @2 1 2"/>
-  <v:f eqn="prod @3 21600 pixelWidth"/>
-  <v:f eqn="prod @3 21600 pixelHeight"/>
-  <v:f eqn="sum @0 0 1"/>
-  <v:f eqn="prod @6 1 2"/>
-  <v:f eqn="prod @7 21600 pixelWidth"/>
-  <v:f eqn="sum @8 21600 0"/>
-  <v:f eqn="prod @7 21600 pixelHeight"/>
-  <v:f eqn="sum @10 21600 0"/>
- </v:formulas>
- <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
- <o:lock v:ext="edit" aspectratio="t"/>
-</v:shapetype><v:shape id="Picture_x0020_14" o:spid="_x0000_s1026" type="#_x0000_t75"
- style='position:absolute;margin-left:-.25pt;margin-top:-77.3pt;width:595.3pt;
- height:170.15pt;z-index:-251657216;visibility:visible;mso-wrap-style:square;
- mso-width-percent:0;mso-height-percent:0;mso-wrap-distance-left:9pt;
- mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
- mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
- mso-position-horizontal-relative:page;mso-position-vertical:absolute;
- mso-position-vertical-relative:text;mso-width-percent:0;mso-height-percent:0;
- mso-width-relative:page;mso-height-relative:page'>
- <v:imagedata src="file:///C:/Users/labkom/AppData/Local/Temp/msohtmlclip1/01/clip_image001.png"
-  o:title=""/>
- <w:wrap anchorx="page"/>
-</v:shape><![endif]--><!--[if !vml]--><span style="mso-ignore:vglayout;position:
+<table border="0" align="center" width="90%" cellpadding="0" style="line-height:150%;">
+<p class="MsoBodyText"><span style="mso-ignore:vglayout;position:
 relative;z-index:-1895824384"><span style="position:absolute;left:0px;
 top:-227px;width:794px;height:227px"><img width="794" height="227" src="../assets/images/kop2024.png" v:shapes="Picture_x0020_14"></span></span><!--[endif]--><span lang="id" style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><o:p></o:p></span></p>
 		<tr>
@@ -65,7 +39,7 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/FXXXI.1/.…….../2024</td>
+			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2024</td>
 		</tr>
 
 		<tr>
@@ -215,7 +189,7 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
   o:title=""/>
  <w:wrap anchorx="margin"/>
 </v:shape><![endif]--><!--[if !vml]--><span style="mso-ignore:vglayout;position:
-absolute;z-index:251661312;left:0px;margin-left:720px;margin-top:390px;
+absolute;z-index:251661312;left:0px;margin-left:720px;margin-top:320px;
 width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span><!--[endif]--></span></p>
 	</table>
 

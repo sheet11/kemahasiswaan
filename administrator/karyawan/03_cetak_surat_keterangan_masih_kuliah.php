@@ -22,6 +22,13 @@
 
 ?>
 
+<style type="text/css">;
+    body { font-family: Arial; line-height:150%; font-size:11.0pt;}
+    p { font-family: Arial; line-height:150%; font-size:11.0pt;}
+    div { font-family: Arial; line-height:150%; font-size:11.0pt;}
+	table { font-family: Arial; line-height:150%; font-size:11.0pt;}
+</style>
+
 <table cellpadding="70"><tr><td></td></tr></table>
 
 <table border="0" width="100%" cellpadding="0" >
@@ -47,7 +54,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 	</table>
 
 
-<table border="0" width="100%" cellpadding="0" style="text-align:justify;line-height:100%" >
+<table border="0" width="100%" cellpadding="0" style="text-align:justify;line-height:150%" >
 
 		<tr>
 			<td width="40%">&nbsp; </td>
@@ -138,11 +145,11 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 
 		<table border="0" width="100%" >
 		<tr>
-			<td colspan="3" style="text-align:justify;line-height:100%">Adalah benar mahasiswa Program Studi <?php echo "$a[prodi]"; ?>  Jurusan <?php echo "$a[jurusan]"; ?> Poltekkes Kemenkes Bengkulu</td>
+			<td colspan="3" style="text-align:justify;">Adalah benar mahasiswa Program Studi <?php echo "$a[prodi]"; ?>  Jurusan <?php echo "$a[jurusan]"; ?> Poltekkes Kemenkes Bengkulu</td>
 		</tr>
 
 		<tr>
-			<td colspan="3" style="text-align:justify;line-height:100%" >Demikian Surat Keterangan ini dibuat dengan sesungguhnya agar dapat digunakan sebagaimana mestinya.</td>
+			<td colspan="3" style="text-align:justify;" >Demikian Surat Keterangan ini dibuat dengan sesungguhnya agar dapat digunakan sebagaimana mestinya.</td>
 		</tr>
 
 		<tr>
@@ -194,7 +201,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:
-absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:400px;
+absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:370px;
 width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span><!--[endif]--></span></p>
 </table>
 </body>
