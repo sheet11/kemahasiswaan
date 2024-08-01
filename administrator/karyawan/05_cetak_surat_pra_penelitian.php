@@ -31,9 +31,9 @@
 
 
 <table border="0" align="center" width="90%" cellpadding="0" style="line-height:150%;">
-<p class="MsoBodyText"><span style="mso-ignore:vglayout;position:
+<!-- <p class="MsoBodyText"><span style="mso-ignore:vglayout;position:
 relative;z-index:-1895824384"><span style="position:absolute;left:0px;
-top:-227px;width:794px;height:227px"><img width="794" height="227" src="../assets/images/kop2024.png" v:shapes="Picture_x0020_14"></span></span><!--[endif]--><span lang="id" style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><o:p></o:p></span></p>
+top:-227px;width:794px;height:227px"><img width="794" height="227" src="../assets/images/kop2024.png" v:shapes="Picture_x0020_14"></span></span><span lang="id" style="font-size:10.0pt;mso-bidi-font-size:12.0pt"><o:p></o:p></span></p> -->
 		<tr>
 			<td colspan="3" align="right"><?php echo "$tanggal2"; ?></td>
 		</tr>
@@ -174,23 +174,10 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Agung Riyadi, S.Kep.Ns.M.Kes</b></td>
 		</tr>
 
-		<p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:
-0cm;margin-left:262.55pt;margin-bottom:.0001pt"><!--[if gte vml 1]><v:shape
- id="Picture_x0020_1" o:spid="_x0000_s1026" type="#_x0000_t75" style='position:absolute;
- left:0;text-align:left;margin-left:-16.5pt;margin-top:87pt;width:45.6pt;
- height:45.4pt;z-index:251661312;visibility:visible;mso-wrap-style:square;
- mso-width-percent:0;mso-height-percent:0;mso-wrap-distance-left:9pt;
- mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
- mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
- mso-position-horizontal-relative:right-margin-area;mso-position-vertical:absolute;
- mso-position-vertical-relative:text;mso-width-percent:0;mso-height-percent:0;
- mso-width-relative:margin;mso-height-relative:margin'>
- <v:imagedata src="file:///C:/Users/labkom/AppData/Local/Temp/msohtmlclip1/01/clip_image003.png"
-  o:title=""/>
- <w:wrap anchorx="margin"/>
-</v:shape><![endif]--><!--[if !vml]--><span style="mso-ignore:vglayout;position:
+		<!-- <p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:
+0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:
 absolute;z-index:251661312;left:0px;margin-left:720px;margin-top:320px;
-width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span><!--[endif]--></span></p>
+width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span></span></p> -->
 	</table>
 
 
