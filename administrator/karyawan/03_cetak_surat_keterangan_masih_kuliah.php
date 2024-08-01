@@ -42,7 +42,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td colspan="3" align="center" style='font-size:14.0pt;'><b><u>SURAT PERNYATAAN MASIH KULIAH</u></b><br></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><b>Nomor : PP.01.01/F.XXXI.1/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/2/<?php echo date('Y'); ?> </b></td>
+			<td colspan="3" align="center"><b>Nomor : PP.01.01/F.XXXI.1/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/<?php echo date('Y'); ?> </b></td>
 		</tr>
 	</table>
 
