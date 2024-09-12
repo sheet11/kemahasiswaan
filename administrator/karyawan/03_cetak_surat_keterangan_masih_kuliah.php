@@ -46,10 +46,10 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 
 	<table border="0" width="100%" cellpadding="0">
 		<tr>
-			<td colspan="3" align="center" style='font-size:14.0pt;'><b><u>SURAT PERNYATAAN MASIH KULIAH</u></b><br></td>
+			<td colspan="3" align="center" style='font-size:14.0pt;'><b>SURAT PERNYATAAN MASIH KULIAH</b><br></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><b>Nomor : PP.01.01/F.XXXI.1/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/<?php echo date('Y'); ?> </b></td>
+			<td colspan="3" align="center">NOMOR : KH.06.01/F.XXXI.1/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/<?php echo date('Y'); ?> </td>
 		</tr>
 	</table>
 
@@ -67,19 +67,19 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td>Nama</td><td width="2%">:</td><td>Ns.Agung Riyadi, S.Kep, M.Kes</td>
+			<td>&emsp;&emsp;&emsp;Nama</td><td width="2%">:</td><td>Ns.Agung Riyadi, S.Kep., M.Kes</td>
 		</tr>
 
 		<tr>
-			<td>NIP	</td><td>:</td><td>196810071988031005</td>
+			<td>&emsp;&emsp;&emsp;NIP	</td><td>:</td><td>196810071988031005</td>
 		</tr>
 
 		<tr>
-			<td>Pangkat, Golongan/Ruang</td><td>:</td><td>Pembina/IV A</td>
+			<td>&emsp;&emsp;&emsp;Pangkat, Golongan/Ruang</td><td>:</td><td>Pembina/IV A</td>
 		</tr>
 
 		<tr>
-			<td>Jabatan	</td><td>:</td><td>Wakil Direktur Bidang Akademik</td>
+			<td>&emsp;&emsp;&emsp;Jabatan	</td><td>:</td><td>Wakil Direktur Bidang Akademik</td>
 		</tr>
 
 		<tr>
@@ -93,23 +93,23 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td>Nama</td><td>: </td> <td><?php echo "$a[nama_mahasiswa]"; ?></td>
+			<td>&emsp;&emsp;&emsp;Nama</td><td>: </td> <td><?php echo "$a[nama_mahasiswa]"; ?></td>
 		</tr>
 
 		<tr>
-			<td>NIM</td><td>	:</td><td>	<?php echo "$a[nim_mahasiswa]"; ?></td>
+			<td>&emsp;&emsp;&emsp;NIM</td><td>	:</td><td>	<?php echo "$a[nim_mahasiswa]"; ?></td>
 		</tr>
 
 		<tr>
-			<td>Perguruan Tinggi</td><td>:</td><td>Poltekkes Kemenkes Bengkulu</td>
+			<td>&emsp;&emsp;&emsp;Perguruan Tinggi</td><td>:</td><td>Poltekkes Kemenkes Bengkulu</td>
 		</tr>
 
 		<tr>
-			<td>Tingkat/Semester</td><td>:</td><td><?php echo "$a[tingkat]"; ?> / <?php echo "$a[semester]"; ?> </td>
+			<td>&emsp;&emsp;&emsp;Tingkat/Semester</td><td>:</td><td><?php echo "$a[tingkat]"; ?> / <?php echo "$a[semester]"; ?> </td>
 		</tr>
 
 		<tr>
-			<td>Tahun Akademik</td><td>:</td><td><?php echo "$a[tahun_akademik]"; ?></td>
+			<td>&emsp;&emsp;&emsp;Tahun Akademik</td><td>:</td><td><?php echo "$a[tahun_akademik]"; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp; </td>
@@ -121,19 +121,19 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td>Nama</td><td>: </td> <td><?php echo "$a[nama_orang_tua]"; ?></td>
+			<td>&emsp;&emsp;&emsp;Nama</td><td>: </td> <td><?php echo "$a[nama_orang_tua]"; ?></td>
 		</tr>
 
 		<tr>
-			<td>NIP/NRP</td><td>	:</td><td>	<?php echo "$a[nip]"; ?></td>
+			<td>&emsp;&emsp;&emsp;NIP/NRP</td><td>	:</td><td>	<?php echo "$a[nip]"; ?></td>
 		</tr>
 
 		<tr>
-			<td>Pangkat, Golongan/ruang</td><td>:	</td><td><?php echo "$a[pangkat]"; ?></td>
+			<td>&emsp;&emsp;&emsp;Pangkat, Golongan/ruang</td><td>:	</td><td><?php echo "$a[pangkat]"; ?></td>
 		</tr>
 
 		<tr>
-			<td valign="top" >Instansi</td><td valign="top">:	</td><td valign="top"><?php echo "$a[instansi]"; ?></td>
+			<td valign="top" >&emsp;&emsp;&emsp;Instansi</td><td valign="top">:	</td><td valign="top"><?php echo "$a[instansi]"; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp; </td>
@@ -164,22 +164,16 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Bengkulu, <?php echo "$tanggal2"; ?></td>
 		</tr>
 
-		<tr>
+		<!-- <tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; a.n. Direktur Poltekkes Kemenkes Bengkulu</td>
-		</tr>
+		</tr> -->
 
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Wakil Direktur Bidang Akademik,</td>
-		</tr>
-
-		<tr>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Wakil Direktur I Bidang Akademik,</td>
 		</tr>
 
 		<tr>
@@ -197,7 +191,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Agung Riyadi, S.Kep.Ns.M.Kes</b></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Ns.Agung Riyadi, S.Kep.,M.Kes</b></td>
 		</tr>
 
 		<!-- <p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:

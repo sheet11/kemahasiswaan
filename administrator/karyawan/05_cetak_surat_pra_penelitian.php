@@ -39,7 +39,7 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2024</td>
+			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP.06.03/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2024</td>
 		</tr>
 
 		<tr>
@@ -56,7 +56,7 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 
 
 		<tr>
-			<td>Yth,</td>
+			<td>Yth.</td>
 		</tr>
 
 		<tr>
@@ -82,44 +82,44 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<table border="0" align="center" width="90%" cellpadding="0">
 
 		<tr>
-			<td valign="left" colspan="3" style="text-align:justify;line-height:200%">&nbsp; &nbsp; &nbsp;Sehubungan penyusunan tugas akhir mahasiswa dalam bentuk <?php echo "$a[tugas_akhir]"; ?> bagi Mahasiswa Progam Studi <?php echo "$a[prodi]"; ?> Jurusan <?php echo "$a[jurusan]"; ?>  Politeknik Kesehatan Kemenkes Bengkulu Tahun Akademik <?php echo "$a[tahun_akademik]"; ?>, dengan ini mohon kiranya Bapak/Ibu dapat memberikan rekomendasi izin pengambilan data, untuk Pra Penelitian pada mahasiswa dibawah ini :</td>
+			<td valign="left" colspan="3" style="text-align:justify;line-height:200%">&nbsp; &nbsp; &nbsp;Sehubungan penyusunan tugas akhir dalam bentuk <?php echo "$a[tugas_akhir]"; ?> Mahasiswa Progam Studi <?php echo "$a[prodi]"; ?> Jurusan <?php echo "$a[jurusan]"; ?>  Politeknik Kesehatan Kemenkes Bengkulu Tahun Akademik <?php echo "$a[tahun_akademik]"; ?>, dengan ini mohon Bapak/Ibu dapat memberikan izin pengambilan data, Pra Penelitian pada mahasiswa dibawah ini :</td>
 		</tr>
 		</table>
 
 		<table border="0" align="center" width="90%" cellpadding="0">
 
 		<tr>
-			<td width="25%">Nama</td>
+			<td width="25%">&emsp;&emsp;&emsp;nama mahasiswa</td>
 			<td width="1%">: </td> 
 			<td style="text-transform:capitalize;text-align:justify;"><?php echo "$a[nama_mahasiswa]"; ?></td>
 		</tr>
 
 		<tr>
-			<td>NIM </td>
+			<td>&emsp;&emsp;&emsp;nim </td>
 			<td>:</td>
 			<td style="text-transform:uppercase;text-align:justify;"><?php echo "$a[nim_mahasiswa]"; ?></td>
 		</tr>
 
 		<tr>
-			<td valign="top">Lokasi</td>
+			<td valign="top">&emsp;&emsp;&emsp;tempat</td>
 			<td valign="top">:</td>
 			<td valign="top" style="text-transform:capitalize;text-align:justify;line-height:200%"><?php echo "$a[lokasi]"; ?> </td>
 		</tr>
 
 		<tr>
-			<td valign="top">Judul </td>
+			<td valign="top">&emsp;&emsp;&emsp;judul </td>
 			<td valign="top">:</td>
 			<td style="text-transform:capitalize;text-align:justify;line-height:200%"><?php echo "$a[judul_kti]"; ?> </td>
 		</tr>
 
 		<tr>
-			<td>No Handphone </td>
+			<td>&emsp;&emsp;&emsp;no handphone </td>
 			<td>:</td>
 			<td style="text-transform:uppercase;text-align:justify;"><?php echo "$a[no_hp]"; ?></td>
 		</tr>
 
 		<tr>
-			<td colspan="3" style="text-align:justify;line-height:150%" >&nbsp; &nbsp; &nbsp;Demikianlah, atas perhatian dan kesediaan Bapak/Ibu diucapkan terimakasih.</td>
+			<td colspan="3" style="text-align:justify;line-height:150%" >&nbsp; &nbsp; &nbsp;Demikianlah, atas perhatian dan kerjasamanya kami mengucapkan terimakasih.</td>
 		</tr>
 
 		</table>
@@ -131,16 +131,16 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp;</td>
 		</tr>
 
-		<tr>
+		<!-- <tr>
 			<td width="40%">&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;a.n. Direktur Poltekkes Kemenkes Bengkulu</td>
-		</tr>
+		</tr> -->
 
 		 <tr>
 			<td width="40%">&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	Wakil Direktur Bidang Akademik</td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;	Wakil Direktur I Bidang Akademik</td>
 		</tr>
 
 
@@ -157,21 +157,11 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 		</tr>
-			<tr>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-		</tr>
 
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-		</tr>
-		<tr>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Agung Riyadi, S.Kep.Ns.M.Kes</b></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Ns.Agung Riyadi, S.Kep.,M.Kes</b></td>
 		</tr>
 
 		<!-- <p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:
