@@ -37,11 +37,8 @@
 
 <p>&nbsp;</p><p>&nbsp;</p>
 
-
+<h2 align="center">Politeknik Kesehatan Kementerian Kesehatan Bengkulu</h2>
 <table border="0"  cellpadding="0.1" align="center">
-    <tr>
-    <td colspan="3" align="center"><h2>Politeknik Kesehatan Kementerian Kesehatan Bengkulu</h2></td>
-    </tr>
     <tr>
         <td>SK Akreditasi Perguruan Tinggi</td>
         <td>:</td>
@@ -57,31 +54,43 @@
 </table>
 
 </br>
-<table border="0"  cellpadding="7" width="100%" >
+<table border="1" align="center" cellpadding="7" >
      <tr>
-        <td width="30%" colspan ="2" style='font-size:14.0pt;line-height:14px;'>Diberikan Kepada </td>
-        <td colspan="2"></td> 
+        <td align="center" colspan ="4" style='font-size:14.0pt;line-height:14px;'>Memberikan Ijazah kepada: </td>
        </tr>
 
     <tr>
-        <td width="5%">&nbsp;</td>
-        <td width="30%" ><b>Nama</b></td>
-        <td width="2%"><b>:</b></td>
-        <td style='font-size:16.0pt;line-height:16px;'><b><?php echo "$a[nama_lengkap]"; ?></b></td>
-    </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td><b>Tempat, Tanggal Lahir</b></td>
-      <td><b>:</b></td>
-      <td><b><?php echo "$a[tempatdantgl_lahir]"; ?></b></td>
+        <td align="center" colspan="4" style='font-size:16.0pt;line-height:16px;'><b><?php echo "$a[nama_lengkap]"; ?></b></td>
     </tr>
 
     <tr>
-        <td>&nbsp;</td>
-        <td><b>Nomor Induk Mahasiswa (NIM)</b></td>
-        <td><b>:</b></td>
-        <td><b><?php echo "$a[nim]"; ?></b></td>
+        <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>NIM: <?php echo "$a[nim]"; ?></td>
       </td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>Lahir di <?php echo "$a[tempatdantgl_lahir]"; ?></b></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>karena telah menyelesaikan pendidikan dan dinyatakan lulus pada tanggal <?php echo "$a[tanggal_wisudah]"; ?> pada</td>
+    </tr>
+
+    <tr>
+      <td align="center" colspan="4" style='font-size:16.0pt;line-height:16px;'><b>Program Studi Gizi Program Diploma Tiga</b></td>
+    </tr>
+    <tr>
+      <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>dan kepadanya diberikan gelar</td>
+    </tr>
+
+    <tr>
+      <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'><b><?php echo "$a[gelar]"; ?></b></td>
+    </tr>
+
+    <tr>
+      <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>beserta segala hak, wewenang dan kewajiban yang melekat pada gelar tersebut.</td>
     </tr>
 
     <tr>
