@@ -34,27 +34,25 @@
     </tr>
   </table>
 
-
 <p>&nbsp;</p><p>&nbsp;</p>
 
-<h2 align="center">Politeknik Kesehatan Kementerian Kesehatan Bengkulu</h2>
-<table border="0"  cellpadding="0.1" align="center">
+<table border="0"  cellpadding="0.1" align="center" style="margin-right: 180px;">
+  <tr>
+    <td align="center" colspan="3" style='font-size:20.0pt;line-height:14px;'><b>Politeknik Kesehatan Kementerian Kesehatan Bengkulu</b></td>
+  </tr>
+  <tr><td></td></tr>
+  <tr><td></td></tr>
     <tr>
-        <td>SK Akreditasi Perguruan Tinggi</td>
-        <td>:</td>
-        <td>794/SK/BAN-PT/Ak.PPJ/PT/X/2020</td>
+        <td align="center" colspan="3">SK Akreditasi Perguruan Tinggi: 794/SK/BAN-PT/Ak.PPJ/PT/X/2020</td>
     </tr>
 
     <tr>
-        <td>SK Akreditasi Program Studi</td>
-        <td>:</td>
-        <td><?php echo "$a[no_akreditasi_prodi]"; ?></td>
+        <td align="center" colspan="3">SK Akreditasi Program Studi: <?php echo "$a[no_akreditasi_prodi]"; ?></td>
     </tr>
 
 </table>
-
-</br>
-<table border="1" align="center" cellpadding="7" style="margin-right: 150px;">
+<br>
+<table border="0" align="center" cellpadding="7" style="margin-right: 150px;">
      <tr>
         <td align="center" colspan ="4" style='font-size:14.0pt;line-height:14px;'>Memberikan Ijazah kepada: </td>
        </tr>
@@ -96,7 +94,7 @@
 
 </table>
 <br><br>
-<table border="1" align="center" style='line-height:13px; margin-right: 200px;'>
+<table border="0" align="center" style='line-height:13px; margin-right: 110px;'>
 
   <tr>
         <td><b>&nbsp;</b></td>
@@ -135,12 +133,12 @@
         <td>&nbsp;</td>
     </tr>
      <tr>
-        <td align="center"><?php echo "$a[direktur]"; ?></td>
-        <td width="220">&nbsp;</td>
-        <td align="center"><?php echo "$a[pudir]"; ?></td>
+        <td align="center" width="220"><?php echo "$a[direktur]"; ?></td>
+        <td width="260">&nbsp;</td>
+        <td width="240" align="center"><?php echo "$a[pudir]"; ?></td>
     </tr>
     <tr>
-        <td align="center"><?php echo "$a[nip_direktur]"; ?></td>
+        <td align="center" ><?php echo "$a[nip_direktur]"; ?></td>
         <td align="center">&nbsp;NIK: <?php echo "$a[nik]"; ?></td>
         <td align="center"><?php echo "$a[nip_pudir]"; ?></td>
     </tr>
