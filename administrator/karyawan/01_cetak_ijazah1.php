@@ -70,7 +70,7 @@
     </tr>
 
     <tr>
-      <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>Lahir di <?php echo "$a[tempatdantgl_lahir]"; ?></b></td>
+      <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>Lahir di <?php echo "$a[tempat]"; ?> tanggal <?php echo "$a[tgl_lahir]"; ?></b></td>
     </tr>
     <tr>
       <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>karena telah menyelesaikan pendidikan dan dinyatakan lulus pada tanggal <?php echo "$a[tanggal_wisudah]"; ?> pada</td>
