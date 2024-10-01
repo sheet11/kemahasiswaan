@@ -52,7 +52,7 @@
 
 </table>
 <br>
-<table border="0" align="center" cellpadding="7" style="margin-right: 150px;">
+<table border="0" align="center" cellpadding="7" style="margin-right: 215px;">
      <tr>
         <td align="center" colspan ="4" style='font-size:14.0pt;line-height:14px;'>Memberikan Ijazah kepada: </td>
        </tr>
@@ -77,7 +77,7 @@
     </tr>
 
     <tr>
-      <td align="center" colspan="4" style='font-size:16.0pt;line-height:16px;'><b>Program Studi Gizi Program Diploma Tiga</b></td>
+      <td align="center" colspan="4" style='font-size:16.0pt;line-height:16px;'><b>Program Studi <?php echo "$a[jurusan]"; ?> Program <?php echo "$a[program_pendidikan]"; ?></b></td>
     </tr>
     <tr>
       <td align="center" colspan="4" style='font-size:13.0pt;line-height:16px;'>dan kepadanya diberikan gelar</td>
