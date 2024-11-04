@@ -96,7 +96,9 @@ if($_SESSION['level'] == "karyawan"){ ?>
         <script src="../assets/js/dataTables.bootstrap.js"></script>	
         <script type="text/javascript">
             $(function() {
-                $('#example1').dataTable();
+                $('#example1').dataTable({
+					stateSave: true
+				});
             });
         </script>		
 <?php

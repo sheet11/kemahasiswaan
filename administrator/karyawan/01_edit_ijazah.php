@@ -38,6 +38,18 @@
 		</tr>
 
 		<tr>
+			<td>Tempat Lahir</td>
+			<td>:</td>
+			<td><input type="text" placeholder="Tempat Lahir" name="tempat" class="form-control" value="<?php echo "$a[tempat]"; ?>"></td>
+		</tr>
+
+		<tr>
+			<td>Tanggal Lahir</td>
+			<td>:</td>
+			<td><input type="text" placeholder="Tgl Lahir" name="tgl_lahir" class="form-control" value="<?php echo "$a[tgl_lahir]"; ?>"></td>
+		</tr>
+
+		<tr>
 			<td>NIK</td>
 			<td>:</td> 
 			<td><input type="text" name="nik" class="form-control" value="<?php echo "$a[nik]"; ?>"></td> 
@@ -52,7 +64,13 @@
 		<tr>
 			<td>Jurusan</td> 
 			<td>:</td>
-			<td><input type="text" placeholder="Jurusan" name="jurusan" class="form-control" value="<?php echo "$a[jurusan]"; ?>"></td> 
+			<td><input type="text" placeholder="Jurusan" name="prodi" class="form-control" value="<?php echo "$a[prodi]"; ?>"></td> 
+		</tr>
+
+		<tr>
+			<td>prodi</td> 
+			<td>:</td>
+			<td><input type="text" placeholder="Prodi" name="jurusan" class="form-control" value="<?php echo "$a[jurusan]"; ?>"></td> 
 		</tr>
 
 		<tr>

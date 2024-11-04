@@ -56,6 +56,7 @@ if(isset($_POST["import"]))
     $status = trim(mysqli_real_escape_string($connect, $worksheet->getCellByColumnAndRow(19, $row)->getValue())," ");
     $tempat = trim(mysqli_real_escape_string($connect, $worksheet->getCellByColumnAndRow(20, $row)->getValue())," ");
     $tgl_lahir = trim(mysqli_real_escape_string($connect, $worksheet->getCellByColumnAndRow(21, $row)->getValue())," ");
+    $prodi = trim(mysqli_real_escape_string($connect, $worksheet->getCellByColumnAndRow(22, $row)->getValue())," ");
     if(!empty($nim)) // if none of the data are empty
     {
       $query = mysqli_query($connect,"insert into tb_ijazah
@@ -80,7 +81,8 @@ if(isset($_POST["import"]))
         gambar_nilai,
         status,
         tempat,
-        tgl_lahir) values 
+        tgl_lahir,
+        prodi) values 
         ('$nama_lengkap',
         '$nim',
         '$tempatdantgl_lahir',
@@ -102,7 +104,8 @@ if(isset($_POST["import"]))
         '$gambar_nilai',
         '$status',
         '$tempat',
-        '$tgl_lahir')");
+        '$tgl_lahir',
+        '$prodi')");
       
         if($query)
         {

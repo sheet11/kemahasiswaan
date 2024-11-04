@@ -8,16 +8,21 @@ include "session.php"; ?>
 		$tipe_file = $_FILES['gambar']['type'];
 		$tmp_file = $_FILES['gambar']['tmp_name'];
 		$path = "../assets/img/".$nama_file;
-		$path = "../assets/img/".$nama_file2;		
+		$path = "../assets/img/".$nama_file2;	
+		$nama = addslashes($_POST["nama_lengkap"]);	
+		$tempat = addslashes($_POST["tempat"]);	
 		// Folder tempat menyimpan gambarny
 	
 	if(empty($nama_file))
 	{
-		$qr = mysqli_query($kon, "update tb_ijazah set nama_lengkap = '$_POST[nama_lengkap]',
+		$qr = mysqli_query($kon, "update tb_ijazah set nama_lengkap = '$nama',
 														nim = '$_POST[nim]',
 														tempatdantgl_lahir = '$_POST[tempatdantgl_lahir]',
+														tempat = '$tempat',
+														tgl_lahir = '$_POST[tgl_lahir]',
 														nik = '$_POST[nik]',
 														no_seri_ijazah = '$_POST[no_seri_ijazah]',
+														prodi = '$_POST[prodi]',
 														jurusan = '$_POST[jurusan]',
 														program_pendidikan = '$_POST[program_pendidikan]',
 														tanggal_wisudah = '$_POST[tanggal_wisudah]',
@@ -50,8 +55,11 @@ include "session.php"; ?>
 					$qr = mysqli_query($kon, "update tb_ijazah set nama_lengkap = '$_POST[nama_lengkap]',
 														nim = '$_POST[nim]',
 														tempatdantgl_lahir = '$_POST[tempatdantgl_lahir]',
+														tempat = '$_POST[tempat]',
+														tgl_lahir = '$_POST[tgl_lahir]',
 														nik = '$_POST[nik]',
 														no_seri_ijazah = '$_POST[no_seri_ijazah]',
+														prodi = '$_POST[prodi]',
 														jurusan = '$_POST[jurusan]',
 														program_pendidikan = '$_POST[program_pendidikan]',
 														tanggal_wisudah = '$_POST[tanggal_wisudah]',
