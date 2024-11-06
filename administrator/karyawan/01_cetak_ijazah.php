@@ -54,7 +54,11 @@
 <br>
 <table border="0" align="center" cellpadding="7" style="margin-right: 65px;">
      <tr>
-        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'>Memberikan Ijazah kepada: </td>
+        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'><?php if ($a['program_pendidikan'] == "Profesi" || $a['program_pendidikan'] == "Profesi Bidan") { ?>
+          Memberikan Sertifikat Kepada: 
+        <?php } else { ?>
+          Memberikan Ijazah Kepada: 
+        <?php } ?></td>
        </tr>
 
     <tr>
