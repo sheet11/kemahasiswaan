@@ -30,7 +30,11 @@
   <table border="0" width="100%">
     <tr>
       <td>&nbsp;</td>
-      <td align="right" style='font-size:10.0pt;'>Nomor Ijazah Nasional: <?php echo "$a[no_seri_ijazah]"; ?></td>
+      <td align="right" style='font-size:10.0pt;'><?php if ($a['program_pendidikan'] == "Profesi" || $a['program_pendidikan'] == "Profesi Bidan") { ?>
+          Nomor Sertifikat Nasional: 
+        <?php } else { ?>
+          Nomor Ijazah Nasional:  
+        <?php } ?> <?php echo "$a[no_seri_ijazah]"; ?></td>
     </tr>
   </table>
 
@@ -55,7 +59,7 @@
 <table border="0" align="center" cellpadding="7" style="margin-right: 65px;">
      <tr>
         <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'><?php if ($a['program_pendidikan'] == "Profesi" || $a['program_pendidikan'] == "Profesi Bidan") { ?>
-          Memberikan Sertifikat Kepada: 
+          Diberikan Sertifikat Kepada: 
         <?php } else { ?>
           Memberikan Ijazah Kepada: 
         <?php } ?></td>

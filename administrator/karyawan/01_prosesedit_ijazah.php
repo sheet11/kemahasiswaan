@@ -11,13 +11,14 @@ include "session.php"; ?>
 		$path = "../assets/img/".$nama_file2;	
 		$nama = addslashes($_POST["nama_lengkap"]);	
 		$tempat = addslashes($_POST["tempat"]);	
+		$tmpttgllahir = addslashes($_POST["tempatdantgl_lahir"]);
 		// Folder tempat menyimpan gambarny
 	
 	if(empty($nama_file))
 	{
 		$qr = mysqli_query($kon, "update tb_ijazah set nama_lengkap = '$nama',
 														nim = '$_POST[nim]',
-														tempatdantgl_lahir = '$_POST[tempatdantgl_lahir]',
+														tempatdantgl_lahir = '$tmpttgllahir',
 														tempat = '$tempat',
 														tgl_lahir = '$_POST[tgl_lahir]',
 														nik = '$_POST[nik]',
@@ -52,10 +53,10 @@ include "session.php"; ?>
 			{
 				if(move_uploaded_file($tmp_file, $path))
 				{
-					$qr = mysqli_query($kon, "update tb_ijazah set nama_lengkap = '$_POST[nama_lengkap]',
+					$qr = mysqli_query($kon, "update tb_ijazah set nama_lengkap = '$nama',
 														nim = '$_POST[nim]',
-														tempatdantgl_lahir = '$_POST[tempatdantgl_lahir]',
-														tempat = '$_POST[tempat]',
+														tempatdantgl_lahir = '$tmpttgllahir',
+														tempat = '$tempat',
 														tgl_lahir = '$_POST[tgl_lahir]',
 														nik = '$_POST[nik]',
 														no_seri_ijazah = '$_POST[no_seri_ijazah]',
