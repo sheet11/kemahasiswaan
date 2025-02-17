@@ -39,7 +39,7 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP.06.03/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2024</td>
+			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP.06.02/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<?php echo date('Y'); ?></td>
 		</tr>
 
 		<tr>

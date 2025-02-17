@@ -30,23 +30,24 @@
   <table border="0" width="100%">
     <tr>
       <td>&nbsp;</td>
-      <td align="right" style='font-size:10.0pt;'><?php if ($a['program_pendidikan'] == "Profesi" || $a['program_pendidikan'] == "Profesi Bidan") { ?>
+      <!-- <td align="right" style='font-size:10.0pt;'><?php if ($a['program_pendidikan'] == "Profesi" || $a['program_pendidikan'] == "Pendidikan Profesi Bidan" || $a['program_pendidikan'] == "Profesi Bidan") { ?>
           Nomor Sertifikat Nasional: 
         <?php } else { ?>
           Nomor Ijazah Nasional:  
-        <?php } ?> <?php echo "$a[no_seri_ijazah]"; ?></td>
+        <?php } ?> <?php echo "$a[no_seri_ijazah]"; ?></td> -->
+        <td align="right" style='font-size:10.0pt;'>Nomor Sertifikat Nasional: <?php echo "$a[no_seri_ijazah]"; ?></td>
     </tr>
   </table>
-
-<p>&nbsp;</p>
-
+<br>
+<br>
 <table border="0"  cellpadding="0.1" align="center" style="margin-right: 140px;">
   <tr>
     <td align="center" colspan="3" style='font-size:20.0pt;line-height:14px;'><b>Politeknik Kesehatan Kementerian Kesehatan Bengkulu</b></td>
   </tr>
-  <tr><td><br></td></tr>
+  <tr><td>&nbsp;</td></tr>
   <tr><td></td></tr>
-    <tr>
+    <tr>      
+      
         <td align="center" colspan="3">SK Akreditasi Perguruan Tinggi: 794/SK/BAN-PT/Ak.PPJ/PT/X/2020</td>
     </tr>
 
@@ -58,12 +59,13 @@
 <br>
 <table border="0" align="center" cellpadding="7" style="margin-right: 65px;">
      <tr>
-        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'><?php if ($a['program_pendidikan'] == "Profesi" || $a['program_pendidikan'] == "Profesi Bidan") { ?>
+        <!-- <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'><?php if ($a['program_pendidikan'] == "Profesi" || $a['program_pendidikan'] == "Pendidikan Profesi Bidan" || $a['program_pendidikan'] == "Profesi Bidan") { ?>
           Diberikan Sertifikat Kepada: 
         <?php } else { ?>
           Memberikan Ijazah Kepada: 
-        <?php } ?></td>
-       </tr>
+        <?php } ?></td> -->
+        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'> Diberikan Sertifikat Kepada: </td>
+      </tr>
 
     <tr>
         <td align="center" colspan="4" style='text-transform: ; font-size:24.0pt;line-height:18px;'><b><?php echo "$a[nama_lengkap]"; ?></b></td>
