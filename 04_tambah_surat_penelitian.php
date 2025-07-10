@@ -96,7 +96,7 @@
 						<td>:</td>
                         <td><select name='tugas_akhir' class='form-control' >
                            	<option value="">..: Silahkan Dipilih :..</option>
-                           	<option value="kripsi">Skripsi</option>
+                           	<option value="Skripsi">Skripsi</option>
                            	<option value="Karya Tulis Ilmiah(KTI)">Karya Tulis Ilmiah(KTI)</option>
                             </select></td>
 					</tr>

@@ -42,7 +42,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr >
-			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<?php echo date('Y'); ?></td>
+			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP. 01.01/F.XXIII.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<?php echo date('Y'); ?></td>
 		</tr>
 
 		<tr>
@@ -144,7 +144,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td width="40%">&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Wakil Direktur Bidang Akademik</td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Wakil Direktur I Bidang Akademik</td>
 		</tr>
 
 		<tr>
@@ -168,7 +168,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Agung Riyadi, S.Kep.Ns.M.Kes</b></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Septiyanti, S.Kep, Ners, M.Pd</b></td>
 		</tr>
 
 	</table>

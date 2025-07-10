@@ -39,7 +39,7 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP.06.02/FXXXI.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<?php echo date('Y'); ?></td>
+			<td  width="25%">Nomor	: </td><td width="2%">:</td><td>PP.06.02/F.XXIII.1/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/<?php echo date('Y'); ?></td>
 		</tr>
 
 		<tr>
@@ -89,31 +89,31 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<table border="0" align="center" width="90%" cellpadding="0">
 
 		<tr>
-			<td width="25%">&emsp;&emsp;&emsp;nama mahasiswa</td>
+			<td width="25%">&emsp;&emsp;&emsp;Nama Mahasiswa</td>
 			<td width="1%">: </td> 
 			<td style="text-transform:capitalize;text-align:justify;"><?php echo "$a[nama_mahasiswa]"; ?></td>
 		</tr>
 
 		<tr>
-			<td>&emsp;&emsp;&emsp;nim </td>
+			<td>&emsp;&emsp;&emsp;Nim </td>
 			<td>:</td>
 			<td style="text-transform:uppercase;text-align:justify;"><?php echo "$a[nim_mahasiswa]"; ?></td>
 		</tr>
 
 		<tr>
-			<td valign="top">&emsp;&emsp;&emsp;tempat</td>
+			<td valign="top">&emsp;&emsp;&emsp;Tempat</td>
 			<td valign="top">:</td>
 			<td valign="top" style="text-transform:capitalize;text-align:justify;line-height:200%"><?php echo "$a[lokasi]"; ?> </td>
 		</tr>
 
 		<tr>
-			<td valign="top">&emsp;&emsp;&emsp;judul </td>
+			<td valign="top">&emsp;&emsp;&emsp;Judul </td>
 			<td valign="top">:</td>
 			<td style="text-transform:capitalize;text-align:justify;line-height:200%"><?php echo "$a[judul_kti]"; ?> </td>
 		</tr>
 
 		<tr>
-			<td>&emsp;&emsp;&emsp;no handphone </td>
+			<td>&emsp;&emsp;&emsp;No Handphone </td>
 			<td>:</td>
 			<td style="text-transform:uppercase;text-align:justify;"><?php echo "$a[no_hp]"; ?></td>
 		</tr>
@@ -161,7 +161,7 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Ns.Agung Riyadi, S.Kep.,M.Kes</b></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Septiyanti, S.Kep, Ners, M.Pd</b></td>
 		</tr>
 
 		<!-- <p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:

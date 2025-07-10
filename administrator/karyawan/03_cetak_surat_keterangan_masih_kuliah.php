@@ -49,7 +49,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td colspan="3" align="center" style='font-size:14.0pt;'><b>SURAT PERNYATAAN MASIH KULIAH</b><br></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center">NOMOR : KH.06.01/F.XXXI.1/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/<?php echo date('Y'); ?> </td>
+			<td colspan="3" align="center">NOMOR : KH.06.01/F.XXIII.1/&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;/<?php echo date('Y'); ?> </td>
 		</tr>
 	</table>
 
@@ -67,11 +67,11 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td>&emsp;&emsp;&emsp;Nama</td><td width="2%">:</td><td>Ns.Agung Riyadi, S.Kep., M.Kes</td>
+			<td>&emsp;&emsp;&emsp;Nama</td><td width="2%">:</td><td>Septiyanti, S.Kep, Ners, M.Pd</td>
 		</tr>
 
 		<tr>
-			<td>&emsp;&emsp;&emsp;NIP	</td><td>:</td><td>196810071988031005</td>
+			<td>&emsp;&emsp;&emsp;NIP	</td><td>:</td><td>197409161997032001</td>
 		</tr>
 
 		<tr>
@@ -191,7 +191,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Ns.Agung Riyadi, S.Kep.,M.Kes</b></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Septiyanti, S.Kep, Ners, M.Pd</b></td>
 		</tr>
 
 		<!-- <p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:

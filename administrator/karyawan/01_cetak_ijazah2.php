@@ -37,10 +37,14 @@
 
 <p>&nbsp;</p><p>&nbsp;</p>
 
-
+<br>
+<br>
+<br>
+<br>
+<br>
 <table border="0"  cellpadding="0.1" align="center">
     <tr>
-    <td colspan="3" align="center"><h2>Politeknik Kesehatan Kementerian Kesehatan Bengkulu</h2></td>
+    <td colspan="3" align="center"><h2></h2></td>
     </tr>
     <tr>
         <td>SK Akreditasi Perguruan Tinggi</td>
