@@ -76,6 +76,7 @@
 						<td><select name="tugas_akhir" type="select" class="form-control" required="yes" >
 			    			<option value="">-- Silahkan Dipilih --</option>
 							<option value="Karya Tulis Ilmiah (KTI)">Karya Tulis Ilmiah (KTI)</option>
+							<option value="Laporan Tugas Akhir (LTA)">Laporan Tugas Akhir (LTA)</option>
 							<option value="Skripsi">Skripsi</option>
 			          		</select></td>
 					</tr>

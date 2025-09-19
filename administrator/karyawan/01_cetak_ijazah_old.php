@@ -48,11 +48,11 @@
   <tr><td></td></tr>
     <tr>      
       
-        <td align="center" colspan="3">Nomor Pokok Perguruan Tinggi : 405006</td>
+        <td align="center" colspan="3">SK Akreditasi Perguruan Tinggi: 794/SK/BAN-PT/Ak.PPJ/PT/X/2020</td>
     </tr>
 
     <tr>
-        <td align="center" colspan="3">Nomor Pokok Program Studi : <?php echo "$a[kd_prodi]"; ?></td>
+        <td align="center" colspan="3">SK Akreditasi Program Studi: <?php echo "$a[no_akreditasi_prodi]"; ?></td>
     </tr>
 
 </table>
