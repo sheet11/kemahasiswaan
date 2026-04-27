@@ -35,7 +35,7 @@
         <?php } else { ?>
           Nomor Ijazah Nasional:  
         <?php } ?> <?php echo "$a[no_seri_ijazah]"; ?></td> -->
-        <td align="right" style='font-size:10.0pt;'>Nomor Ijazah Nasional: <?php echo "$a[no_seri_ijazah]"; ?></td>
+        <td align="right" style='font-size:10.0pt;'>Nomor Sertifikat Nasional: <?php echo "$a[no_seri_ijazah]"; ?></td>
     </tr>
   </table>
 <br>
@@ -64,7 +64,7 @@
         <?php } else { ?>
           Memberikan Ijazah Kepada: 
         <?php } ?></td> -->
-        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'> Memberikan Ijazah Kepada:  </td>
+        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'> Diberikan Sertifikat Kepada:  </td>
       </tr>
 
     <tr>

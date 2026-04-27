@@ -128,9 +128,9 @@
 		</tr>
 
 		<tr>
-			<td>No Registrasi</td>
+			<td>No Pokok Prodi</td>
 			<td>:</td>
-			<td><input type="text" placeholder="No Registrasi" name="no_akreditasi_prodi" class="form-control" value="<?php echo "$a[no_akreditasi_prodi]"; ?>"></td>				
+			<td><input type="text" placeholder="No Pokok Prodi" name="kd_prodi" class="form-control" value="<?php echo "$a[kd_prodi]"; ?>"></td>				
 		</tr>
 
 		<tr>

@@ -34,7 +34,7 @@ include "session.php"; ?>
 														nip_pudir = '$_POST[nip_pudir]',
 														direktur = '$_POST[direktur]',
 														nip_direktur = '$_POST[nip_direktur]',
-														no_akreditasi_prodi = '$_POST[no_akreditasi_prodi]'											
+														kd_prodi = '$_POST[kd_prodi]'											
 												  		where id_ijazah= '$_POST[id_ijazah]'");
 		if($qr)
 		{
@@ -71,7 +71,7 @@ include "session.php"; ?>
 														nip_pudir = '$_POST[nip_pudir]',
 														direktur = '$_POST[direktur]',
 														nip_direktur = '$_POST[nip_direktur]',
-														no_akreditasi_prodi = '$_POST[no_akreditasi_prodi]'															
+														kd_prodi = '$_POST[kd_prodi]'															
 														
 												  		where id_ijazah= '$_POST[id_ijazah]'");
 					if($qr)

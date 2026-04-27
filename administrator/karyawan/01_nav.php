@@ -121,6 +121,10 @@
                                 <i class="fa fa-circle-o"></i>
                                 <span>Cetak Ijazah</span>
                             </a>
+                            <!-- <a href="01_daftar_ijazah_semua.php">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Cetak Ijazah (Campuran)</span>
+                            </a> -->
                         </li>  
 
 	                    <li class="treeview">

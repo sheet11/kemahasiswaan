@@ -75,7 +75,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 
 		<tr>
-			<td>&emsp;&emsp;&emsp;Pangkat, Golongan/Ruang</td><td>:</td><td>Pembina/IV A</td>
+			<td>&emsp;&emsp;&emsp;Pangkat, Golongan/Ruang</td><td>:</td><td>Pembina/IV B</td>
 		</tr>
 
 		<tr>
