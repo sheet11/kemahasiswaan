@@ -148,7 +148,7 @@
     </tr>
     <tr>
         <td align="center" width="240"><?php echo "$a[direktur]"; ?></td>
-        <td width="320">&nbsp;</td>
+        <td width="280">&nbsp;</td>
         <td width="260" align="center"><?php echo "$a[pudir]"; ?></td>
     </tr>
     <tr>
