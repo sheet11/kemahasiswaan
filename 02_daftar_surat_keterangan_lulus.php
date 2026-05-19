@@ -1,207 +1,327 @@
 <?php 
-	include "01_nav.php";
-	include "config/class_paging.php";
+include "01_nav.php";
+include "config/class_paging.php";
+include "config/koneksi.php";
+
+$p      = new Paging;
+$batas  = 10;
+$posisi = $p->cariPosisi($batas);
+
+$nim = $_SESSION['nim'];
 ?>
+
 <aside class="right-side">
-    <section class="content-header">
-    	<div class="container-fluid" style="margin:10px;">	
-    		<table width="100%">
-	    		<tr class="info">
-            		<td colspan="6"><b><h4>Daftar Surat Keterangan Lulus</b></h4></td>   
-	        	</tr>
-	            <tr><td width="20%">
-		                     <a href="02_tambah_surat_keterangan_lulus.php" class="btn btn-info">Tambah Surat</a> 
-		                </td> 
-	                <td width="20%"><label>Pencarian Berdasarkan</label></td>               
-	                    <form method="post" action="" enctype="multipart/form-data">                    
-	                        <td width="25%">
-	                            <select name="cariid" class="form-control">
-	                                <option value="nim_mahasiswa">NIM</option>
-	                                <option value="nama_mahasiswa">Nama Mahasiswa</option>
-	                            </select>
-	                        </td>
-	                        <td width="5%"></td>
-	                        <td>
-	                            <div class="form-group input-group" style="margin-top:15px;">
-	                            <span class="input-group-btn">
-	                                <input type="text" name="cari" placeholder="Cari" class="form-control">
-	                                <button class="btn btn-default" type="submit" name="submit"><i class="fa fa-search"></i></button>
-	                            </span>
-	                            </div>  
-	                        </td>
-	                        <td width="5%">
-	                        </td>   
-	                    </form>
-	                
-		                <td>
-		                    <a href="02_daftar_surat_keterangan_lulus.php" class="btn btn-info">ALL</a>
-		                </td>                   
-	            </tr>
-	            <tr>
-	                <td>&nbsp;</td>
-	            </tr>
-	        </table>
 
-        <table style="width:100%;" class="table table-bordered">    
-            <tr class="info">
-							<th>No.</th><th>Nama Mahasiswa</th><th>NIM</th><th>Jurusan</th><th>Tempat</th><th>Tgl Lahir</th><th>Status</th><th width="50">Aksi</th>
-						</tr>
-            <?php 
-            	include "config/koneksi.php";
-                if(isset($_POST['submit'])){
-                    $cariid = $_POST['cariid'];
-                    $cari = $_POST['cari'];
-                    $query=mysqli_query($kon, "select * from tb_surat_keterangan_lulus where $cariid = '$cari' or $cariid = '0' "); 
-                    $i = $posisi+1;      
-                while($a=mysqli_fetch_array($query)){
-            echo"
-                <tr>
-                    <td>$i</td>
-							<td>$a[nama_mahasiswa]</td>
-							<td>$a[nimir]</td>
-							     
-                    <td>";
-										
-										if($a['status'] == 'Belum Dicetak')
-											{
-											echo "<button type='button' class='btn btn-danger'>Belum Dicetak</button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Dicetak')
-						          			{
-								            echo "<button type='button' class='btn btn-warning'>Sudah Dicetak</button>
-								            ";
-								          	}
-								        if($a['status'] == 'Sudah Selesai')
-											{
-											echo "<button type='button' class='btn btn-success'>Sudah Selesai</button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Diambil')
-						          			{
-								            echo "<button type='button' class='btn btn-info'>Sudah Diambil</button>
-								            ";
-								          	}
-										echo"</td>";
+<section class="content-header">
 
-											echo"<td>
-                        <a href='02_edit_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-info'>
-                            <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
-                        </a> 
+<div class="container-fluid" style="margin:10px;">
+	
+	<!-- POPUP STATUS -->
 
-                    </td>
-                </tr>";
-                $i++;
-            }
-                }
-                elseif(!empty($_GET['id_surat_keterangan_lulus'])){
-                    $query=mysqli_query($kon, "select * from tb_surat_keterangan_lulus where id_surat_keterangan_lulus='$_GET[id_surat_keterangan_lulus]'"); 
-                    $i = $posisi+1;      
-                while($a=mysqli_fetch_array($query)){
-            echo"
-                <tr>    
-                    <td>$i</td>
-							<td>$a[nama_mahasiswa]</td>
-							<td>$a[nim_mahasiswa]</td>
-							<td>$a[jurusan]</td>
-							<td>$a[tempat_lahir]</td>
-							<td>$a[tanggal_lahir]</td>
-							    
-                    <td>";
-										
-										if($a['status'] == 'Belum Dicetak')
-											{
-											echo "<button type='button' class='btn btn-danger'>Belum Dicetak</button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Dicetak')
-						          			{
-								            echo "<button type='button' class='btn btn-warning'>Sudah Dicetak</button>
-								            ";
-								          	}
-								        if($a['status'] == 'Sudah Selesai')
-											{
-											echo "<button type='button' class='btn btn-success'>Sudah Selesai</button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Diambil')
-						          			{
-								            echo "<button type='button' class='btn btn-info'>Sudah Diambil</button>
-								            ";
-								          	}
-										echo"</td>";
+<div id="popupStatus" 
+     style="
+        display:none;
+        position:fixed;
+        z-index:9999;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.6);
+     ">
 
-											echo"<td>   
-                        <a href='02_edit_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-info'>
-                            <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
-                        </a>  
-                    </td>
-                </tr>";
-                $i++;
-                }
-                }
+    <div style="
+        background:#fff;
+        width:500px;
+        max-width:90%;
+        margin:8% auto;
+        padding:20px;
+        border-radius:10px;
+        box-shadow:0 0 10px rgba(0,0,0,0.3);
+    ">
 
-                else{
-                    $p      = new Paging;
-                    $batas  = 10;
-                    $posisi = $p->cariPosisi($batas);               
-                    $query=mysqli_query($kon, "select * from tb_surat_keterangan_lulus order by id_surat_keterangan_lulus desc LIMIT $posisi,$batas");
-                
-                    $i = $posisi+1;     
-                while($a=mysqli_fetch_array($query)){
+        <h3 style="margin-top:0; color:#17a2b8;">
+            Informasi Status Surat
+        </h3>
 
-                echo"
-                <tr>
-                    <td>$i</td>
-							<td>$a[nama_mahasiswa]</td>
-							<td>$a[nim_mahasiswa]</td>
-							<td>$a[jurusan]</td>
-							<td>$a[tempat_lahir]</td>
-							<td>$a[tanggal_lahir]</td>   
-							   
-                    <td>";
-										
-										if($a['status'] == 'Belum Dicetak')
-											{
-											echo "<button type='button' class='btn btn-danger'>Belum Dicetak</button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Dicetak')
-						          			{
-								            echo "<button type='button' class='btn btn-warning'>Sudah Dicetak</button>
-								            ";
-								          	}
-								        if($a['status'] == 'Sudah Selesai')
-											{
-											echo "<button type='button' class='btn btn-success'>Sudah Selesai</button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Diambil')
-						          			{
-								            echo "<button type='button' class='btn btn-info'>Sudah Diambil</button>
-								            ";
-								          	}
-										echo"</td>";
+        <hr>
 
-											echo"<td>
-                        <a href='02_edit_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]&halaman=$_GET[halaman]' class='btn btn-info'>
-                            <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
-                        </a> 
-                    </td>
-                </tr>";
-                $i++;
-            }
-            
+        <div style="
+            background:#f8d7da;
+            padding:15px;
+            border-radius:5px;
+            margin-bottom:15px;
+        ">
 
-    $jmldata = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM tb_surat_keterangan_lulus "));
-      
-    $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
-    $linkHalaman = $p->navHalaman($_GET['halaman'], $jmlhalaman);
+            <b>Belum Dicetak</b><br><br>
 
-echo "</table><div class=\"paginationw\">$linkHalaman</div>";
+            Data surat masih terdapat kesalahan.<br>
+            Silakan mengajukan surat ulang.
+
+        </div>
+
+        <div style="
+            background:#fff3cd;
+            padding:15px;
+            border-radius:5px;
+        ">
+
+            <b>Sudah Dicetak</b><br><br>
+
+            Surat sudah selesai dicetak dan dapat diambil di resepsionis.
+
+        </div>
+
+        <div style="text-align:right; margin-top:20px;">
+
+            <button 
+                onclick="tutupPopup()"
+                style="
+                    background:#17a2b8;
+                    color:white;
+                    border:none;
+                    padding:10px 20px;
+                    border-radius:5px;
+                    cursor:pointer;
+                "
+            >
+                Mengerti
+            </button>
+
+        </div>
+
+    </div>
+
+</div>    
+
+<table width="100%">
+
+    <tr class="info">
+        <td colspan="6">
+            <b><h4>Daftar Surat Keterangan Lulus</h4></b>
+        </td>   
+    </tr>
+
+    <tr>
+
+        <td width="20%">
+            <a href="02_tambah_surat_keterangan_lulus.php" class="btn btn-info">
+                Tambah Surat
+            </a> 
+        </td> 
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+</table>
+
+<table style="width:100%;" class="table table-bordered">    
+
+<tr class="info">
+
+    <th>No.</th>
+    <th>Nama Mahasiswa</th>
+    <th>NIM</th>
+    <th>Jurusan</th>
+    <th>Tempat</th>
+    <th>Tgl Lahir</th>
+    <th>Status</th>
+    <th width="50">Aksi</th>
+
+</tr>
+
+<?php
+
+/* =========================
+   PENCARIAN
+========================= */
+
+if(isset($_POST['submit'])){
+
+    $cariid = $_POST['cariid'];
+    $cari   = $_POST['cari'];
+
+    $query = mysqli_query(
+        $kon,
+        "SELECT * FROM tb_surat_keterangan_lulus
+         WHERE nim_mahasiswa='$nim'
+         AND $cariid LIKE '%$cari%'"
+    );
 }
-            ?>
 
+/* =========================
+   DETAIL BERDASARKAN ID
+========================= */
 
+elseif(!empty($_GET['id_surat_keterangan_lulus'])){
 
+    $id = $_GET['id_surat_keterangan_lulus'];
 
+    $query = mysqli_query(
+        $kon,
+        "SELECT * FROM tb_surat_keterangan_lulus
+         WHERE id_surat_keterangan_lulus='$id'
+         AND nim_mahasiswa='$nim'"
+    );
+}
+
+/* =========================
+   SEMUA DATA
+========================= */
+
+else{
+
+    $query = mysqli_query(
+        $kon,
+        "SELECT * FROM tb_surat_keterangan_lulus
+         WHERE nim_mahasiswa='$nim'
+         ORDER BY id_surat_keterangan_lulus DESC
+         LIMIT $posisi, $batas"
+    );
+}
+
+/* =========================
+   TAMPILKAN DATA
+========================= */
+
+$i = $posisi + 1;
+
+while($a = mysqli_fetch_array($query)){
+
+echo "
+
+<tr>
+
+    <td>$i</td>
+
+    <td>{$a['nama_mahasiswa']}</td>
+
+    <td>{$a['nim_mahasiswa']}</td>
+
+    <td>{$a['jurusan']}</td>
+
+    <td>{$a['tempat_lahir']}</td>
+
+    <td>{$a['tanggal_lahir']}</td>
+
+    <td>
+
+";
+
+/* =========================
+   STATUS
+========================= */
+
+if($a['status'] == 'Belum Dicetak'){
+
+    echo "
+    <button type='button' class='btn btn-danger'>
+        Belum Dicetak
+    </button>
+    ";
+}
+
+elseif($a['status'] == 'Sudah Dicetak'){
+
+    echo "
+    <button type='button' class='btn btn-warning'>
+        Sudah Dicetak
+    </button>
+    ";
+}
+
+elseif($a['status'] == 'Sudah Selesai'){
+
+    echo "
+    <button type='button' class='btn btn-success'>
+        Sudah Selesai
+    </button>
+    ";
+}
+
+elseif($a['status'] == 'Sudah Diambil'){
+
+    echo "
+    <button type='button' class='btn btn-info'>
+        Sudah Diambil
+    </button>
+    ";
+}
+
+echo "
+
+    </td>
+
+    <td>
+
+        <a 
+            href='02_edit_surat_keterangan_lulus.php?id_surat_keterangan_lulus={$a['id_surat_keterangan_lulus']}&halaman=" . (isset($_GET['halaman']) ? $_GET['halaman'] : 1) . "'
+            class='btn btn-info'
+        >
+
+            <span class='glyphicon glyphicon-pencil'></span>
+
+        </a>
+
+    </td>
+
+</tr>
+
+";
+
+$i++;
+
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+$result = mysqli_query(
+    $kon,
+    "SELECT * FROM tb_surat_keterangan_lulus
+     WHERE nim_mahasiswa='$nim'"
+);
+
+$jmldata = mysqli_num_rows($result);
+
+$jmlhalaman = $p->jumlahHalaman($jmldata, $batas);
+
+$halaman = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
+
+$linkHalaman = $p->navHalaman($halaman, $jmlhalaman);
+
+echo "
+
+</table>
+
+<div class='paginationw'>
+
+    $linkHalaman
+
+</div>
+
+";
+
+?>
+
+</div>
+
+</section>
+<script>
+
+window.onload = function(){
+
+    document.getElementById('popupStatus').style.display = 'block';
+
+}
+
+function tutupPopup(){
+
+    document.getElementById('popupStatus').style.display = 'none';
+
+}
+
+</script>
+
+</aside>

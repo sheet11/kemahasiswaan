@@ -98,9 +98,11 @@
 
 
 											echo"<td>
-						<a href='02_cetak_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-info btn-xs'>
+						".(($a['status_persetujuan'] == 'Disetujui') ? "
+<a href='02_cetak_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-info btn-xs'>
 							<span class='glyphicon glyphicon-print' aria-hidden='true'></span>
 						</a>
+" : "<span class='label label-warning' title='Menunggu persetujuan Wakil Direktur'><i class='fa fa-lock'></i> Belum Disetujui</span>")."
 						<a href='02_edit_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-success btn-xs'>
 							<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
 						</a> 
@@ -142,9 +144,11 @@
 
 
 											echo"<td>   
-                        <a href='02_cetak_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-info btn-xs'>
+                        ".(($a['status_persetujuan'] == 'Disetujui') ? "
+<a href='02_cetak_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-info btn-xs'>
 							<span class='glyphicon glyphicon-print' aria-hidden='true'></span>
 						</a>
+" : "<span class='label label-warning' title='Menunggu persetujuan Wakil Direktur'><i class='fa fa-lock'></i> Belum Disetujui</span>")."
 						<a href='02_edit_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]' class='btn btn-success btn-xs'>
 							<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
 						</a> 
@@ -192,9 +196,11 @@
 
 
 											echo"<td>
-                        <a href='02_cetak_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]&halaman=$_GET[halaman]' class='btn btn-info btn-xs'>
+                        ".(($a['status_persetujuan'] == 'Disetujui') ? "
+<a href='02_cetak_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]&halaman=$_GET[halaman]' class='btn btn-info btn-xs'>
 							<span class='glyphicon glyphicon-print' aria-hidden='true'></span>
 						</a>
+" : "<span class='label label-warning' title='Menunggu persetujuan Wakil Direktur'><i class='fa fa-lock'></i> Belum Disetujui</span>")."
 						<a href='02_edit_surat_keterangan_lulus.php?id_surat_keterangan_lulus=$a[id_surat_keterangan_lulus]&halaman=$_GET[halaman]' class='btn btn-success btn-xs'>
 							<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
 						</a> 

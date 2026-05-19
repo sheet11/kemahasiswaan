@@ -47,6 +47,17 @@ if ($ada > 0) {
 		$_SESSION['level'] = $row['level'];
 		header("location:administrator/index.php"); // jika berhasil login, maka masuk ke file home.php
 	}
+	elseif($row['level'] == "wakil_direktur")
+	{
+		session_start(); // memulai fungsi session
+		$_SESSION['username'] = $username;
+		$_SESSION['nama_lengkap'] = $row['nama_lengkap'];
+		$_SESSION['unit_kerja'] = $row['unit_kerja'];
+		$_SESSION['jabatan'] = $row['jabatan'];
+		$_SESSION['grade'] = $row['grade'];
+		$_SESSION['level'] = $row['level'];
+		header("location:wakil_direktur/index.php");
+	}
 	else
 	{
 		session_start(); // memulai fungsi session

@@ -99,17 +99,17 @@
                             </a>
                         </li>
 
-                        <li>
+                        <!-- <li>
                             <a href="02_daftar_surat_keterangan_lulus.php">
                                 <i class="fa fa-laptop"></i>
                                 <span>Surat Keterangan Lulus</span>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li>
                             <a href="03_daftar_surat_keterangan_masih_kuliah.php">
                                 <i class="fa fa-laptop"></i>
-                                <span>Surat Izin Masih Kuliah</span>
+                                <span>Surat Ket Masih Kuliah</span>
                             </a>
                         </li>
                         <li>

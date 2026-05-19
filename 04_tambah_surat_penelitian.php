@@ -115,7 +115,17 @@
 					<tr>
 						<td colspan="2">:</td>	
 						<td><input type="submit" name="submit" value="Simpan"  class="btn btn-primary">
-							<input type="reset" name="reset" value="Hapus" class="btn btn-danger">
+							<!-- <input type="reset" name="reset" value="Hapus" class="btn btn-danger"> -->
+							<div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+
+								<button 
+									onclick="history.back()" 
+									class="btn btn-light border"
+								>
+									Kembali
+								</button>
+
+							</div>
 						</td>
 					</tr>
 

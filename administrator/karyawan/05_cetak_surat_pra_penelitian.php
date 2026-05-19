@@ -145,24 +145,35 @@ top:-227px;width:794px;height:227px"><img width="794" height="227" src="../asset
 
 
 
-		<tr>
+		<!-- <tr>
 			<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-		</tr>
+		</tr> -->
 
-		<tr>
+		<!-- <tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-		</tr>
+		</tr> -->
 
-		<tr>
+		<!-- <tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Septiyanti, S.Kep, Ners, M.Pd</b></td>
-		</tr>
+		</tr> -->
+
+			<tr>
+    <td colspan="3" style="text-align:right; padding-right:85px;">
+        
+        <div class="ttd-img">
+            <img src="../../assets/img/13.JPEG" style="padding-right:50px; width:90;"><br>
+            <b>Septiyanti, S.Kep, Ners, M.Pd</b>
+        </div>
+
+    </td>
+</tr>
 
 		<!-- <p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:
 0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:

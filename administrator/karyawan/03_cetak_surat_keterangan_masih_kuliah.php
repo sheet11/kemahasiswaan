@@ -176,23 +176,63 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Wakil Direktur I Bidang Akademik,</td>
 		</tr>
 
-		<tr>
+		<!-- <tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-		</tr>
-
-		<tr>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="../../assets\img\12.jpg" width='110'></td>
 		</tr>
 
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Septiyanti, S.Kep, Ners, M.Pd</b></td>
-		</tr>
+		</tr> -->
+
+		<tr>
+    <td colspan="3" style="text-align:right; padding-right:125px;">
+        
+        <div class="ttd-img">
+            <img src="../../assets/img/12.JPEG" style="padding-right:60px; width:70;"><br>
+
+            <b>Septiyanti, S.Kep, Ners, M.Pd</b>
+        </div>
+
+    </td>
+</tr>
+<!-- <tr>
+    <td colspan="3" style="text-align:right; padding-right:120px;">
+        
+        <style>
+        .ttd-box {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            width: 260px;
+        }
+
+        .ttd-img {
+            position: absolute;
+            top: 25px;      /* atur naik turun */
+            left: 10px;     /* atur kiri kanan */
+            width: 120px;
+            opacity: 0.9;
+            z-index: 2;
+            transform: rotate(-4deg); /* efek realistis */
+        }
+        </style> -->
+
+        <!-- <div class="ttd-box">
+            Bengkulu, <?php echo $tanggal2; ?><br>
+            Wakil Direktur I Bidang Akademik,<br><br><br> -->
+
+            <!-- TTD -->
+            <!-- <img src="../../assets/img/12.jpg" class="ttd-img">
+
+            <b><u>Septiyanti, S.Kep, Ners, M.Pd</u></b><br>
+        </div> -->
+
+    <!-- </td>
+</tr> -->
 
 		<!-- <p class="MsoBodyText" style="margin-top:1.2pt;margin-right:0cm;margin-bottom:0cm;margin-left:262.55pt;margin-bottom:.0001pt"><span style="mso-ignore:vglayout;position:
 absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:370px;

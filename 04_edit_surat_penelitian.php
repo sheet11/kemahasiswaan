@@ -1,10 +1,16 @@
 <?php 
-	include"01_nav.php";    
-?>
+include "01_nav.php";
+include "config/koneksi.php";
 
-<?php
-	$query=mysql_query("select * from tb_surat_penelitian where id_surat_penelitian='$_GET[id_surat_penelitian]'");
-	$a=mysql_fetch_array($query);	
+$id = $_GET['id_surat_penelitian'];
+
+$query = mysqli_query(
+    $kon,
+    "SELECT * FROM tb_surat_penelitian 
+     WHERE id_surat_penelitian='$id'"
+);
+
+$a = mysqli_fetch_array($query);
 ?>
 	
 <aside class="right-side">
@@ -59,14 +65,20 @@
 						<td>:</td>
 						<td><select name='jurusan' class='form-control' >";
                             <option value="<?php echo $a['jurusan']; ?>"><?php echo $a['jurusan']; ?></option>
-                            <?php include "../config/koneksi.php";
-                            $query = mysql_query("SELECT * FROM tb_jurusan ");
-                            while ($row = mysql_fetch_array($query)) {
-                             echo"
-                            <option value='$row[nama_jurusan]'>$row[nama_jurusan]</option>
-                            ";
-                             }
-                            ?>
+            <?php
+
+            $qJurusan = mysqli_query($kon, "SELECT * FROM tb_jurusan");
+
+            while($row = mysqli_fetch_array($qJurusan)){
+
+                echo "
+                <option value='$row[nama_jurusan]'>
+                    $row[nama_jurusan]
+                </option>
+                ";
+            }
+
+            ?>
                             echo"</select></td>
 					</tr>
 
@@ -75,14 +87,20 @@
 						<td>:</td>
 						<td><select name='prodi' class='form-control' >";
                             <option value="<?php echo $a['prodi']; ?>"><?php echo $a['prodi']; ?></option>
-                            <?php include "../config/koneksi.php";
-                            $query = mysql_query("SELECT * FROM tb_prodi ");
-                            while ($row = mysql_fetch_array($query)) {
-                             echo"
-                            <option value='$row[program_studi]'>$row[program_studi]</option>
-                            ";
-                             }
-                            ?>
+            <?php
+
+            $qProdi = mysqli_query($kon, "SELECT * FROM tb_prodi");
+
+            while($row = mysqli_fetch_array($qProdi)){
+
+                echo "
+                <option value='$row[program_studi]'>
+                    $row[program_studi]
+                </option>
+                ";
+            }
+
+            ?>
                             echo"</select></td>
 					</tr>
 
@@ -91,14 +109,20 @@
                         <td>:</td>
                         <td><select name='tahun_akademik' class='form-control' >";
                             <option value="<?php echo $a['tahun_akademik']; ?>"><?php echo $a['tahun_akademik']; ?></option>
-                            <?php include "../config/koneksi.php";
-                            $query = mysql_query("SELECT * FROM tb_tahun_akademik ");
-                            while ($row = mysql_fetch_array($query)) {
-                             echo"
-                            <option value='$row[tahun_akademik]'>$row[tahun_akademik]</option>
-                            ";
-                             }
-                            ?>
+            <?php
+
+            $qTahun = mysqli_query($kon, "SELECT * FROM tb_tahun_akademik");
+
+            while($row = mysqli_fetch_array($qTahun)){
+
+                echo "
+                <option value='$row[tahun_akademik]'>
+                    $row[tahun_akademik]
+                </option>
+                ";
+            }
+
+            ?>
                             echo"</select></td>
                     </tr>
 
@@ -107,14 +131,20 @@
 						<td>:</td>
                         <td><select name='tugas_akhir' class='form-control' >";
                             <option value="<?php echo $a['tugas_akhir']; ?>"><?php echo $a['tugas_akhir']; ?></option>
-                            <?php include "../config/koneksi.php";
-                            $query = mysql_query("SELECT * FROM tb_tugas_akhir ");
-                            while ($row = mysql_fetch_array($query)) {
-                             echo"
-                            <option value='$row[tugas_akhir]'>$row[tugas_akhir]</option>
-                            ";
-                             }
-                            ?>
+							            <?php
+
+            $qTahun = mysqli_query($kon, "SELECT * FROM tb_tugas_akhir");
+
+            while($row = mysqli_fetch_array($qTahun)){
+
+                echo "
+                <option value='$row[tugas_akhir]'>
+                    $row[tugas_akhir]
+                </option>
+                ";
+            }
+
+            ?>
                             echo"</select></td>
 					</tr>
 
@@ -138,7 +168,19 @@
 
 					<tr><td colspan="2">&nbsp;</td> 	
 						<td><input type="submit" name="submit" value="Simpan" class="btn btn-danger">
-							<input type="reset" name="submit" value="Hapus" class="btn btn-success"></td>
+							<input type="reset" name="submit" value="Hapus" class="btn btn-success">
+							<div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+
+								<button 
+									type="button"
+									onclick="history.back()" 
+									class="btn btn-light border"
+								>
+									Kembali
+								</button>
+
+							</div>
+						</td>
 					</tr>
 				</table>
 			</form>

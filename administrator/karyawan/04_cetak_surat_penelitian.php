@@ -129,11 +129,11 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 	</table>
 
 	<table border="0" align="center" width="95%" cellpadding="0" style="text-align:justify;">
-		<tr>
+		<!-- <tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp;</td>
-		</tr>
+		</tr> -->
 
 		<tr>
 			<td width="40%">&nbsp; </td>
@@ -147,7 +147,7 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Wakil Direktur I Bidang Akademik</td>
 		</tr>
 
-		<tr>
+		<!-- <tr>
 			<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
@@ -169,7 +169,15 @@ top:-215px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b>Septiyanti, S.Kep, Ners, M.Pd</b></td>
-		</tr>
+		</tr> -->
+
+			<tr>
+    <td colspan="3" style="text-align:right; padding-right:85px;">
+        
+        <div class="ttd-img">
+            <img src="../../assets/img/14.JPEG" style="padding-right:80px; width:70;"><br>
+            <b>Septiyanti, S.Kep, Ners, M.Pd</b>
+        </div>
 
 	</table>
 

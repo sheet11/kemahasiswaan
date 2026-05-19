@@ -21,7 +21,7 @@ include"01_nav.php";
 
                     <!-- Small boxes (Stat box) -->
                     <div class="row">
-                        <div class="col-lg-6 col-xs-6">
+                        <div class="col-lg-7 col-xs-7">
                             <!-- small box -->
                             <div class="small-box bg-green">
                                 <div class="inner">
@@ -32,9 +32,9 @@ include"01_nav.php";
                                         Terima Kasih Telah Berkunjung di Aplikasi Administrasi Kemahasiswaan
                                     </p>
                                 </div>
-                                <div class="icon">
+                                <!-- <div class="icon">
                                     <i class="ion ion-stats-bars"></i>
-                                </div>
+                                </div> -->
                                 
                             </div>
                         </div><!-- ./col -->

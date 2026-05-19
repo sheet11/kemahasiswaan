@@ -1,222 +1,130 @@
 <?php 
-	include"01_nav.php";
-	error_reporting(0);
-	include"../config/class_paging.php";
+    include"01_nav.php";
+    error_reporting(0);
+    include"../config/class_paging.php";
 ?>
 <aside class="right-side">
     <section class="content-header">
-    	<div class="container-fluid" style="margin:10px;">	
-    		<table style="width:100%;">
-	    		<tr class="info">
-            		<td align="left" colspan="6"><b><h4>Daftar Surat Penelitian</b></h4></td>   
-	        	</tr>
-
-	            <tr>
-	                <td width="20%"><label>Pencarian Berdasarkan</label></td>               
-	                    <form method="post" action="" enctype="multipart/form-data">                    
-	                        <td width="25%">
-	                            <select name="cariid" class="form-control">
-	                                <option value="nim_mahasiswa">NIM</option>
-	                                <option value="nama_mahasiswa">Nama Mahasiswa</option>
-	                                <option value="status">Status</option>
-	                            </select>
-	                        </td>
-	                        <td width="5%"></td>
-	                        <td>
-	                            <div class="form-group input-group" style="margin-top:15px;">
-	                            <span class="input-group-btn">
-	                                <input type="text" name="cari" placeholder="Cari" class="form-control">
-	                                <button class="btn btn-default" type="submit" name="submit"><i class="fa fa-search"></i></button>
-	                            </span>
-	                            </div>  
-	                        </td>
-	                        <td width="5%">
-	                        </td>   
-	                    </form>
-	                
-		                <td>
-		                    <a href="04_daftar_surat_penelitian.php" class="btn btn-info">ALL</a>
-		                </td>                   
-	            </tr>
-	            <tr >
-	                <td colspan="6"><a href="04_tambah_surat_penelitian.php" class="btn btn-primary">Tambah data + </a>
-					<a class="btn btn-info" > <i class="fa fa-cloud fa-sm"></i> | Jumlah : <?php
-			                                                        require_once("../config/koneksi.php");
-			                                                        $query = mysqli_query ($kon, "SELECT * from tb_surat_penelitian");
-			                                                        $jumlah = mysqli_num_rows ($query); ?>
-			                                                        <?php echo $jumlah; ?> </a>
-			        <a class="btn btn-success" > <i class="fa fa-spinner fa-sm"></i> | Belum Di Proses : <?php
-			                                                        require_once("../config/koneksi.php");
-			                                                        $query = mysqli_query ($kon, "SELECT * from tb_surat_penelitian where status='Belum Dicetak' ");
-			                                                        $jumlah = mysqli_num_rows ($query); ?>
-			                                                        <?php echo $jumlah; ?> </a>
-
-			        <a class="btn btn-danger" > <i class="fa fa-spinner fa-sm"></i> | Sudah Di Proses : <?php
-			                                                        require_once("../config/koneksi.php");
-			                                                        $query = mysqli_query ($kon, "SELECT * from tb_surat_penelitian where status='Sudah Dicetak' ");
-			                                                        $jumlah = mysqli_num_rows ($query); ?>
-			                                                        <?php echo $jumlah; ?> </a></td>
-	            </tr>
-	            <tr>
-                    <td>&nbsp;</td>
+        <div class="container-fluid" style="margin:10px;">   
+            <table style="width:100%;">
+                <tr class="info">
+                    <td align="left" colspan="6"><b><h4>Daftar Surat Penelitian</h4></b></td>   
                 </tr>
-	        </table>
-
-        <table style="width:100%;" class="table table-bordered">    
-            <tr class="info">
-                <th>No.</th><th>Nama Mahasiswa</th><th>NIM</th><th>Prodi</th><th>Judul</th><th>Tujuan</th><th>Status</th><th width="10%">Aksi</th>
-            </tr>
-            <?php 
-            	include "config/koneksi.php";
-                if(isset($_POST['submit'])){
-                    $cariid = $_POST['cariid'];
-                    $cari = $_POST['cari'];
-                    $query=mysqli_query($kon, "SELECT * from tb_surat_penelitian where $cariid = '$cari' or $cariid = '0' "); 
-                    $i = $posisi+1;      
-                while($a=mysqli_fetch_array($query)){
-            echo"
                 <tr>
-                    <td>$i</td>
-					<td>$a[nama_mahasiswa]</td>
-					<td>$a[nim_mahasiswa]</td>
-					<td>$a[prodi]</td>
-					<td>$a[judul_kti]</td>
-					<td>$a[tujuan]</td>      
-                    <td>";
-										
-										if($a['status'] == 'Belum Dicetak')
-											{
-											echo "<a href='04_proses_cetak.php?id_surat_penelitian=$a[id_surat_penelitian]'>
-												  <button type='button' class='btn btn-danger btn-xs'>
-												  <i class='glyphicon glyphicon-ok'></i></button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Dicetak')
-						          			{
-								            echo "<button type='button' class='btn btn-info  btn-xs'> <i class='glyphicon glyphicon-ok'></i></button>
-								            ";
-								          	}
-										echo"</td>";
-
-											echo"<td>
-                       <a href='04_cetak_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]' class='btn btn-info btn-xs'>
-							<span class='glyphicon glyphicon-print' aria-hidden='true'></span>
-						</a>
-						<a href='04_edit_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]' class='btn btn-success btn-xs'>
-							<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
-						</a> 
-						<a href='04_delete_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]' onclick='return confirm(\"Anda yakin akan menghapus $a[nama_mahasiswa] ?\")' class='btn btn-danger btn-xs'>
-							<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
-						</a>
-
+                    <td colspan="6">
+                        <a href="04_tambah_surat_penelitian.php" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah data</a>
+                        <a class="btn btn-info"><i class="fa fa-cloud fa-sm"></i> | Jumlah : <?php
+                            require_once("../config/koneksi.php");
+                            echo mysqli_num_rows(mysqli_query($kon,"SELECT * FROM tb_surat_penelitian")); ?></a>
+                        <a class="btn btn-success"><i class="fa fa-spinner fa-sm"></i> | Belum Di Proses : <?php
+                            echo mysqli_num_rows(mysqli_query($kon,"SELECT * FROM tb_surat_penelitian WHERE status='Belum Dicetak'")); ?></a>
+                        <a class="btn btn-danger"><i class="fa fa-spinner fa-sm"></i> | Sudah Di Proses : <?php
+                            echo mysqli_num_rows(mysqli_query($kon,"SELECT * FROM tb_surat_penelitian WHERE status='Sudah Dicetak'")); ?></a>
                     </td>
-                </tr>";
-                $i++;
-            }
-                }
-                elseif(!empty($_GET['id_surat_penelitian'])){
-                    $query=mysqli_query($kon, "SELECT * from tb_surat_penelitian where id_surat_penelitian='$_GET[id_surat_penelitian]'"); 
-                    $i = $posisi+1;      
-                while($a=mysqli_fetch_array($query)){
-            echo"
-                <tr>    
-                    <td>$i</td>
-					<td>$a[nama_mahasiswa]</td>
-					<td>$a[nim_mahasiswa]</td>
-					<td>$a[prodi]</td>
-					<td>$a[judul_kti]</td>
-					<td>$a[tujuan]</td>      
-                    <td>";
-										
-										if($a['status'] == 'Belum Dicetak')
-											{
-											echo "<a href='04_proses_cetak.php?id_surat_penelitian=$a[id_surat_penelitian]'>
-												  <button type='button' class='btn btn-danger btn-xs'>
-												  <i class='glyphicon glyphicon-ok'></i></button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Dicetak')
-						          			{
-								            echo "<button type='button' class='btn btn-info  btn-xs'> <i class='glyphicon glyphicon-ok'></i></button>
-								            ";
-								          	}
-										echo"</td>";
-
-											echo"<td>   
-<a href='04_cetak_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]' class='btn btn-info btn-xs'>
-							<span class='glyphicon glyphicon-print' aria-hidden='true'></span>
-						</a>
-						<a href='04_edit_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]' class='btn btn-success btn-xs'>
-							<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
-						</a> 
-						<a href='04_delete_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]' onclick='return confirm(\"Anda yakin akan menghapus $a[nama_mahasiswa] ?\")' class='btn btn-danger btn-xs'>
-							<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
-						</a>
+                    <td colspan="6">
+                        <div class="input-group" style="max-width:450px;">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" id="keyword_pen" class="form-control" placeholder="Cari nama, NIM, jurusan, judul, status..." autocomplete="off">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" id="btn_reset_pen" type="button" title="Reset"><i class="fa fa-times"></i></button>
+                            </span>
+                        </div>
+                        <small id="info_pen" class="text-muted"></small>
+                        <span id="loading_pen" style="display:none; color:#888; margin-left:8px;"><i class="fa fa-spinner fa-spin"></i></span>
                     </td>
-                </tr>";
-                $i++;
-                }
-                }
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+            </table>
 
-                else{
-                    $p      = new Paging;
-                    $batas  = 10;
-                    $posisi = $p->cariPosisi($batas);               
-                    $query=mysqli_query($kon, "SELECT * from tb_surat_penelitian order by id_surat_penelitian desc LIMIT $posisi,$batas");
-                
-                    $i = $posisi+1;     
-                while($a=mysqli_fetch_array($query)){
-
-                echo"
-                <tr>
-                    <td>$i</td>
-					<td>$a[nama_mahasiswa]</td>
-					<td>$a[nim_mahasiswa]</td>
-					<td>$a[prodi]</td>
-					<td>$a[judul_kti]</td>
-					<td>$a[tujuan]</td>      
-                    <td>";
-										
-										if($a['status'] == 'Belum Dicetak')
-											{
-											echo "<a href='04_proses_cetak.php?id_surat_penelitian=$a[id_surat_penelitian]'>
-												  <button type='button' class='btn btn-danger btn-xs'>
-												  <i class='glyphicon glyphicon-ok'></i></button>
-						            			 ";
-											}
-										elseif($a['status'] == 'Sudah Dicetak')
-						          			{
-								            echo "<button type='button' class='btn btn-info  btn-xs'> <i class='glyphicon glyphicon-ok'></i></button>
-								            ";
-								          	}
-										echo"</td>";
-
-											echo"<td>
-
-                        <a href='04_cetak_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]&halaman=$_GET[halaman]' class='btn btn-info btn-xs'>
-							<span class='glyphicon glyphicon-print' aria-hidden='true'></span>
-						</a>
-						<a href='04_edit_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]&halaman=$_GET[halaman]' class='btn btn-success btn-xs'>
-							<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
-						</a> 
-						<a href='04_delete_surat_penelitian.php?id_surat_penelitian=$a[id_surat_penelitian]&halaman=$_GET[halaman]' onclick='return confirm(\"Anda yakin akan menghapus $a[nama_mahasiswa] ?\")' class='btn btn-danger btn-xs'>
-							<span class='glyphicon glyphicon-remove' aria-hidden='true'></span>
-						</a>
-                    </td>
-                </tr>";
-                $i++;
-            }
-            
-
-    $jmldata = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM tb_surat_penelitian "));
-      
-    $jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
-    $linkHalaman = $p->navHalaman($_GET[halaman], $jmlhalaman);
-
-echo "</table><div class=\"paginationw\">$linkHalaman</div>";
-}
+            <table style="width:100%;" class="table table-bordered">    
+                <thead>
+                    <tr class="info">
+                        <th>No.</th><th>Nama Mahasiswa</th><th>NIM</th><th>Jurusan</th><th>Judul KTI</th><th>Tempat Penelitian</th><th>Status</th><th width="10%">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_pen">
+                <?php 
+                    include "../config/koneksi.php";
+                    function kolomStatus($a){
+                        $sp=$a['status_persetujuan'];$st=$a['status'];
+                        $catatan=!empty($a['catatan_penolakan'])?htmlspecialchars($a['catatan_penolakan']):'';
+                        if($st=='Sudah Dicetak') return "<span class='label label-primary' style='font-size:12px;'><i class='fa fa-print'></i> Sudah Dicetak</span>";
+                        if($sp=='Disetujui')     return "<span class='label label-success' style='font-size:12px;'><i class='fa fa-check'></i> Disetujui</span>";
+                        if($sp=='Ditolak'){$h="<span class='label label-danger' style='font-size:12px;'><i class='fa fa-times'></i> Ditolak</span>";if($catatan)$h.="<br><small style='color:#dd4b39;'><i class='fa fa-comment-o'></i> <i>$catatan</i></small>";return $h;}
+                        return "<span class='label label-warning' style='font-size:12px;'><i class='fa fa-clock-o'></i> Menunggu</span>";
+                    }
+                    function kolomAksi($a,$id,$hal=''){
+                        $p=$hal?"&halaman=$hal":'';$h='';
+                        if($a['status_persetujuan']=='Disetujui') $h.="<a href='04_cetak_surat_penelitian.php?id_surat_penelitian=$id$p' class='btn btn-info btn-xs'><span class='glyphicon glyphicon-print'></span></a> ";
+                        $h.="<a href='04_edit_surat_penelitian.php?id_surat_penelitian=$id$p' class='btn btn-success btn-xs'><span class='glyphicon glyphicon-pencil'></span></a> ";
+                        $h.="<a href='04_delete_surat_penelitian.php?id_surat_penelitian=$id$p' onclick='return confirm(\"Hapus {$a['nama_mahasiswa']}?\")' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span></a>";
+                        return $h;
+                    }
+                    $p=new Paging;$batas=10;$posisi=$p->cariPosisi($batas);
+                    $query=mysqli_query($kon,"SELECT * FROM tb_surat_penelitian ORDER BY id_surat_penelitian DESC LIMIT $posisi,$batas");
+                    $i=$posisi+1;
+                    while($a=mysqli_fetch_array($query)){
+                        $id=$a['id_surat_penelitian'];$hal=$_GET['halaman']??'';
+                        echo "<tr><td>$i</td><td>$a[nama_mahasiswa]</td><td>$a[nim_mahasiswa]</td><td>$a[jurusan]</td><td>$a[judul_kti]</td><td>$a[tempat_penelitian]</td><td>".kolomStatus($a)."</td><td>".kolomAksi($a,$id,$hal)."</td></tr>";
+                        $i++;
+                    }
+                ?>
+                </tbody>
+            </table>
+            <div id="pagination_pen">
+            <?php
+                $jml=$p->jumlahHalaman(mysqli_num_rows(mysqli_query($kon,"SELECT * FROM tb_surat_penelitian")),$batas);
+                echo "<div class='paginationw'>".$p->navHalaman($_GET['halaman']??1,$jml)."</div>";
             ?>
+            </div>
+        </div>
+    </section>
+</aside>
 
-
-
-
+<script>
+(function(){
+    var timer=null,DELAY=350,MIN_CHARS=2;
+    var elInput=document.getElementById('keyword_pen'),elTbody=document.getElementById('tbody_pen'),
+        elPaging=document.getElementById('pagination_pen'),elInfo=document.getElementById('info_pen'),
+        elLoad=document.getElementById('loading_pen'),elReset=document.getElementById('btn_reset_pen');
+    function escHtml(s){if(!s)return '';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+    function renderStatus(r){
+        var sp=r.status_persetujuan,st=r.status,c=r.catatan_penolakan||'';
+        if(st==='Sudah Dicetak') return "<span class='label label-primary' style='font-size:12px;'><i class='fa fa-print'></i> Sudah Dicetak</span>";
+        if(sp==='Disetujui')     return "<span class='label label-success' style='font-size:12px;'><i class='fa fa-check'></i> Disetujui</span>";
+        if(sp==='Ditolak'){var h="<span class='label label-danger' style='font-size:12px;'><i class='fa fa-times'></i> Ditolak</span>";if(c)h+="<br><small style='color:#dd4b39;'><i class='fa fa-comment-o'></i> <i>"+escHtml(c)+"</i></small>";return h;}
+        return "<span class='label label-warning' style='font-size:12px;'><i class='fa fa-clock-o'></i> Menunggu</span>";
+    }
+    function renderAksi(r){
+        var id=r.id_surat_penelitian,nama=escHtml(r.nama_mahasiswa),h='';
+        if(r.status_persetujuan==='Disetujui') h+="<a href='04_cetak_surat_penelitian.php?id_surat_penelitian="+id+"' class='btn btn-info btn-xs'><span class='glyphicon glyphicon-print'></span></a> ";
+        h+="<a href='04_edit_surat_penelitian.php?id_surat_penelitian="+id+"' class='btn btn-success btn-xs'><span class='glyphicon glyphicon-pencil'></span></a> ";
+        h+="<a href='04_delete_surat_penelitian.php?id_surat_penelitian="+id+"' onclick=\"return confirm('Hapus "+nama+"?')\" class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span></a>";
+        return h;
+    }
+    function doSearch(kw){
+        if(kw.length===0){reset();return;}if(kw.length<MIN_CHARS)return;
+        elLoad.style.display='inline';
+        var xhr=new XMLHttpRequest();
+        xhr.open('GET','ajax_search_surat.php?tabel=penelitian&keyword='+encodeURIComponent(kw),true);
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState!==4)return;elLoad.style.display='none';
+            if(xhr.status!==200){elTbody.innerHTML="<tr><td colspan='8' class='text-center text-danger'>Gagal memuat data.</td></tr>";return;}
+            var resp;try{resp=JSON.parse(xhr.responseText);}catch(e){elTbody.innerHTML="<tr><td colspan='8' class='text-center text-danger'>Response tidak valid.</td></tr>";return;}
+            if(resp.error){elTbody.innerHTML="<tr><td colspan='8' class='text-center text-danger'>"+escHtml(resp.error)+"</td></tr>";return;}
+            elPaging.style.display='none';
+            var rows=resp.data;
+            if(rows.length===0){elTbody.innerHTML="<tr><td colspan='8' class='text-center'>Data tidak ditemukan.</td></tr>";elInfo.textContent='0 hasil';return;}
+            var html='';
+            for(var i=0;i<rows.length;i++){var r=rows[i];
+                html+="<tr><td>"+(i+1)+"</td><td>"+escHtml(r.nama_mahasiswa)+"</td><td>"+escHtml(r.nim_mahasiswa)+"</td><td>"+escHtml(r.jurusan)+"</td><td>"+escHtml(r.judul_kti)+"</td><td>"+escHtml(r.tempat_penelitian)+"</td><td>"+renderStatus(r)+"</td><td>"+renderAksi(r)+"</td></tr>";
+            }
+            elTbody.innerHTML=html;elInfo.textContent=resp.total+' hasil ditemukan';
+        };xhr.send();
+    }
+    function reset(){elInfo.textContent='';elPaging.style.display='';window.location.href=window.location.pathname;}
+    elInput.addEventListener('input',function(){clearTimeout(timer);var kw=this.value.trim();timer=setTimeout(function(){doSearch(kw);},DELAY);});
+    elReset.addEventListener('click',function(){elInput.value='';reset();});
+    elInput.addEventListener('keydown',function(e){if(e.key==='Enter'){clearTimeout(timer);doSearch(this.value.trim());}});
+}());
+</script>

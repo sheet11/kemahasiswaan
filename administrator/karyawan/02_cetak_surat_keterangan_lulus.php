@@ -119,17 +119,21 @@ top:-190px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; </td>
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Direktur,</td>
 		</tr>
-			<tr>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-		</tr>
 
-		<tr>
+		
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; </td>
-		</tr>	
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="../../assets\img\11.jpg" width='150'></td>
+
+<!-- <div class="ttd-area">
+    Direktur,<br><br><br>
+
+    <img src="../../administrator/assets\img\gratis.png" class="ttd-img">
+
+    <b><u>Linda, SST, M.Kes</u></b><br>
+    NIP.196909011989032001
+</div> -->
+			
 
 		<tr>
 			<td>&nbsp; </td>
@@ -146,7 +150,23 @@ top:-190px;width:794px;height:227px"><img width="794" height="227" src="../asset
 absolute;z-index:251661312;left:0px;margin-left:700px;margin-top:500px;
 width:61px;height:61px"><img width="61" height="61" src="..//assets/images/blu.png" v:shapes="Picture_x0020_1"></span></span></p> -->
 	</table>
+	<!-- <style>
+.ttd-area {
+    position: relative;
+    height: 120px;
+}
+
+.ttd-img {
+    position: absolute;
+    top: -0px;      /* atur naik turun */
+    left: -10px;      /* atur geser kiri kanan */
+    width: 120px;
+    opacity: 0.9;    /* biar natural */
+    z-index: 10;
+}
+</style> -->
 </body>
+
 
 <script>
   window.print();

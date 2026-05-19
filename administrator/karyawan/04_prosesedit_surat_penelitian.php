@@ -109,6 +109,7 @@ else
 														no_hp = '$_POST[no_hp]',
 														lama_penelitian = '$_POST[lama_penelitian]',
 														tempat_penelitian = '$_POST[tempat_penelitian]',
+														tujuan = '$_POST[tujuan]',
 														judul_kti = '$_POST[judul_kti]',
 														jurusan = '$_POST[jurusan]',
 														prodi = '$_POST[prodi]',

@@ -90,10 +90,10 @@
                         </li>
 
                         <li>
-                            <a href="02_daftar_surat_keterangan_lulus.php">
+                            <!-- <a href="02_daftar_surat_keterangan_lulus.php">
                                 <i class="fa fa-circle-o"></i>
                                 <span>Surat Keterangan Lulus</span>
-                            </a>
+                            </a> -->
                         </li>
 
                         <li>
@@ -117,10 +117,10 @@
                         </li> 
 
                         <li>
-                            <a href="01_daftar_ijazah.php">
+                            <!-- <a href="01_daftar_ijazah.php">
                                 <i class="fa fa-circle-o"></i>
                                 <span>Cetak Ijazah</span>
-                            </a>
+                            </a> -->
                             <!-- <a href="01_daftar_ijazah_semua.php">
                             <i class="fa fa-circle-o"></i>
                             <span>Cetak Ijazah (Campuran)</span>
@@ -151,7 +151,13 @@
                                     <a href="user_edit.php"><i class="fa fa-desktop"></i> User</a>
                                 </li>
                             </ul>
-                        </li> 
+                        </li>
+                        <li>
+                            <a href="logout.php">
+                                <i class="fa fa-sign-out"></i>
+                                <span>Log Out</span>
+                            </a> 
+                        </li>
 
                     </ul>
                 </section>
