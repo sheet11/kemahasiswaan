@@ -83,7 +83,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <li class="image-center">
-                        <img src="assets/img/logo.png" class="user-image img-responsive"/>
+                        <img src="assets/img/logo.polkeslu.png" class="user-image img-responsive" />
                     </li>
                         
                     </div>

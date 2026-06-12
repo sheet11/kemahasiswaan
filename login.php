@@ -27,18 +27,15 @@
                             $gnim=mysqli_query($kon,"select * from tb_user where username='$nim' and password='$pw' and level='mahasiswa'");
                             if(mysqli_num_rows($gnim)>0)
                             {
+                                $data = mysqli_fetch_array($gnim);
+
                                 session_start();
-                                $_SESSION['nim']=$nim;
-                                $_SESSION['level']='mahasiswa';
+
+                                $_SESSION['nim']   = $data['username'];
+                                $_SESSION['nama']  = $data['nama_lengkap'];
+                                $_SESSION['level'] = $data['level'];
+
                                 header("location:index.php");
-                            }
-                            else
-                            {
-                                ?>
-                                <div class="alert alert-danger">
-                                    <b>Gagal</b> Username atau Password tidak sesuai. Atau anda belum terdaftar
-                                </div>
-                                <?php
                             }
                         }
 

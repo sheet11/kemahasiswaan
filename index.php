@@ -1,6 +1,6 @@
 <?php
-include"01_nav.php";
-
+include"01_nav.php";  
+session_start();
 ?>
 
 <aside class="right-side">
@@ -19,30 +19,26 @@ include"01_nav.php";
                 <!-- Main content -->
                 <section class="content">
 
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row">
-                        <div class="col-lg-7 col-xs-7">
-                            <!-- small box -->
-                            <div class="small-box bg-green">
-                                <div class="inner">
-                                    <h3>
-                                       Selamat Datang Di Aplikasi Kemahasiswaan
-                                    </h3>
-                                    <p>
-                                        Terima Kasih Telah Berkunjung di Aplikasi Administrasi Kemahasiswaan
-                                    </p>
-                                </div>
-                                <!-- <div class="icon">
-                                    <i class="ion ion-stats-bars"></i>
-                                </div> -->
-                                
-                            </div>
-                        </div><!-- ./col -->
-                        
+                    <div class="small-box bg-green" style="height:auto;">
 
+                        <div class="inner">
 
-                        </section><!-- right col -->
-                    </div><!-- /.row (main row) -->
+                            <h3 style="
+                                font-size:24px;
+                                white-space:normal;
+                                word-wrap:break-word;
+                            ">
+                                Selamat Datang 
+                                <?php echo $_SESSION['nama']; ?>
+                            </h3>
+
+                            <p>
+                                Terima Kasih Telah Berkunjung di Aplikasi Administrasi Kemahasiswaan
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->

@@ -73,7 +73,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <li class="image-center">
-                        <img src="../assets/img/logo-poltekkes-bengkulu.png" class="user-image img-responsive" />
+                        <img src="../assets/img/logo.polkeslu.png" class="user-image img-responsive" />
                     </li>
                         
                     </div>
@@ -117,10 +117,10 @@
                         </li> 
 
                         <li>
-                            <!-- <a href="01_daftar_ijazah.php">
+                            <a href="01_daftar_ijazah.php">
                                 <i class="fa fa-circle-o"></i>
                                 <span>Cetak Ijazah</span>
-                            </a> -->
+                            </a>
                             <!-- <a href="01_daftar_ijazah_semua.php">
                             <i class="fa fa-circle-o"></i>
                             <span>Cetak Ijazah (Campuran)</span>

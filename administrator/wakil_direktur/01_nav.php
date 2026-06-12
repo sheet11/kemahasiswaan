@@ -50,7 +50,7 @@
                 <section class="sidebar">
                     <div class="user-panel">
                         <li class="image-center">
-                        <img src="../assets/img/logo-poltekkes-bengkulu.png" class="user-image img-responsive" />
+                        <img src="../assets/img/logo.polkeslu.png" class="user-image img-responsive" />
                     </li>
                     </div>
                     <ul class="sidebar-menu">
