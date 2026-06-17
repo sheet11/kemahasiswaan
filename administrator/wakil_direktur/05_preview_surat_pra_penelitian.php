@@ -64,10 +64,10 @@ $tanggal2 = tgl_indo($a['tanggal_cetak']);
            onclick="return confirm('Setujui surat ini?')" class="btn btn-success btn-sm">
             <i class="fa fa-check"></i> Setujui
         </a>
-        <a href="proses_persetujuan.php?aksi=tolak&jenis=pra_penelitian&id=<?php echo $id; ?>&return=<?php echo urlencode($return); ?>"
+        <!-- <a href="proses_persetujuan.php?aksi=tolak&jenis=pra_penelitian&id=<?php echo $id; ?>&return=<?php echo urlencode($return); ?>"
            class="btn btn-danger btn-sm">
             <i class="fa fa-times"></i> Tolak
-        </a>
+        </a> -->
     <?php elseif ($sp == 'Disetujui'): ?>
         <span class="label label-success" style="font-size:13px;padding:6px 12px;">
             <i class="fa fa-check-circle"></i> Sudah Disetujui

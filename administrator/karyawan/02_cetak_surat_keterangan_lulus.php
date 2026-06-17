@@ -119,11 +119,17 @@ top:-190px;width:794px;height:227px"><img width="794" height="227" src="../asset
 			<td>&nbsp; </td>
 			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Direktur,</td>
 		</tr>
+		<tr>
+			<td>&nbsp; </td>
+			<td>&nbsp; </td>
+		
+		</tr>
 
 		
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="../../assets\img\11.jpg" width='150'></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+			
 
 <!-- <div class="ttd-area">
     Direktur,<br><br><br>
