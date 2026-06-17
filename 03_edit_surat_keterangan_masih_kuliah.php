@@ -2,181 +2,234 @@
 include "01_nav.php";
 include "config/koneksi.php";
 
-$id = $_GET['id_surat_keterangan_masih_kuliah'];
+$id = (int)$_GET['id_surat_keterangan_masih_kuliah'];
 
-$query = mysqli_query(
-    $kon,
-    "SELECT * FROM tb_surat_keterangan_masih_kuliah 
+$a = mysqli_fetch_array(mysqli_query($kon,
+    "SELECT * FROM tb_surat_keterangan_masih_kuliah
      WHERE id_surat_keterangan_masih_kuliah='$id'"
-);
+));
 
-$a = mysqli_fetch_array($query);
+if (!$a) {
+    echo "<script>alert('Data tidak ditemukan!'); window.history.back();</script>";
+    exit;
+}
+
+$sp      = $a['status_persetujuan'];
+$catatan = !empty($a['catatan_penolakan']) ? htmlspecialchars($a['catatan_penolakan']) : '';
+
+// Mode revisi: surat sedang butuh diperbaiki oleh mahasiswa
+$is_revisi = ($sp == 'Perlu_Revisi');
 ?>
-	
+
 <aside class="right-side">
     <section class="content-header">
-    	<div class="container-fluid" style="margin:10px;">
-		<form method="post" action="03_prosesedit_surat_keterangan_masih_kuliah.php" enctype="multipart/form-data">	
-			<table width="100%" border="0" class="table table-hover">
-				<input type="hidden" name="id_surat_keterangan_masih_kuliah" value="<?php echo "$a[id_surat_keterangan_masih_kuliah]"; ?>">
-				<input type="hidden" name="halaman" value="<?php if(!empty($_GET['halaman'])){ echo "$_GET[halaman]";}else{ echo "0";} ?>">
-				<tr>
-					<td colspan="3"><h2>Edit Surat Keterangan Masih Kuliah</h2></td> 
-				</tr>
-				<tr>
-					<td colspan="3" ><b>&nbsp;</b></td> 
-				</tr>
+        <div class="container-fluid" style="margin:10px;">
 
-				<tr>
-					<td colspan="3" class="success"><b>Data Mahasiswa</b></td> 
-				</tr>
+            <?php if ($is_revisi): ?>
+            <!-- Banner catatan revisi dari resepsionis -->
+            <div class="alert alert-warning" style="border-left: 5px solid #f39c12;">
+                <h4><i class="fa fa-edit"></i> Surat Perlu Direvisi</h4>
+                <p><strong>Catatan dari resepsionis:</strong></p>
+                <p style="font-style:italic;"><?php echo $catatan ?: '(tidak ada catatan)'; ?></p>
+                <p class="text-muted" style="margin-bottom:0;">
+                    Perbaiki data di bawah lalu klik <strong>"Update & Kirim Ulang"</strong>
+                    agar surat kembali direview oleh resepsionis.
+                </p>
+            </div>
+            <?php endif; ?>
 
-				<tr>
-					<td width="15%">Nama Mahasiswa</td>
-					<td width="2%">:</td> 
-					<td><input type="text" placeholder="Nama Mahasiswa " name="nama_mahasiswa" required="yes" class="form-control" value="<?php echo "$a[nama_mahasiswa]"; ?>"></td>
-				</tr>
-				
-				<tr>
-					<td>NIM Mahasiswa</td> 
-					<td>:</td> 
-					<td colspan="2"><input type="text" placeholder="NIM Mahasiswa" name="nim_mahasiswa" class="form-control" value="<?php echo "$a[nim_mahasiswa]"; ?>" required="yes"></td> 
-				</tr>
-				<tr>
-						<td>Keperluan</td> 
-						<td width="2%">:</td>
-						<td><select name="keperluan" type="select" class="form-control" required="yes">
-								<option value="<?php echo "$a[keperluan]"; ?>"> <?php echo "$a[keperluan]"; ?></option>
-				    			<option value="Slip Gaji/Tunjangan/Pensiun">Slip Gaji/Tunjangan/Pensiun</option>
-								<option value="Pembuatan Askes/BPJS">Pembuatan Askes/BPJS</option>
-								<option value="Lainnya">Lainnya</option>
-			          		</select></td>
-					</tr>
+            <form method="post"
+                  action="03_prosesedit_surat_keterangan_masih_kuliah.php"
+                  enctype="multipart/form-data">
 
-					<tr>
-						<td>Tingkat</td>
-						<td width="2%">:</td>
-						<td><select name="tingkat" type="select" class="form-control" required="yes">
-								<option value="<?php echo "$a[tingkat]"; ?>"> <?php echo "$a[tingkat]"; ?></option>
-				    			<option value="I">I</option>
-								<option value="II">II</option>
-								<option value="III">III</option>
-								<option value="III">III</option>
-								<option value="IV">IV</option>
-							</select></td>
-					</tr>
+                <input type="hidden" name="id_surat_keterangan_masih_kuliah"
+                       value="<?php echo $a['id_surat_keterangan_masih_kuliah']; ?>">
+                <input type="hidden" name="halaman"
+                       value="<?php echo !empty($_GET['halaman']) ? $_GET['halaman'] : '0'; ?>">
+                <!-- Flag: apakah ini pengiriman ulang setelah revisi -->
+                <input type="hidden" name="is_revisi" value="<?php echo $is_revisi ? '1' : '0'; ?>">
 
-					<tr>
-						<td>Semester</td>
-						<td width="2%">:</td>
-						<td><select name="semester" type="select" class="form-control" required="yes">
-								<option value="<?php echo "$a[semester]"; ?>"> <?php echo "$a[semester]"; ?></option>
-				    			<option value="I">I</option>
-								<option value="II">II</option>
-								<option value="III">III</option>
-								<option value="III">III</option>
-								<option value="IV">IV</option>
-								<option value="V">V</option>
-								<option value="VI">VI</option>
-								<option value="VII">VII</option>
-								<option value="VIII">VIII</option>
-							</select></td>
-					</tr>
-
-
-					<tr>
-                        <td>Tahun Akademik </td>
-                        <td>:</td>
-                        <td><select name='tahun_akademik' class='form-control' >";
-                            <option value="<?php echo $a['tahun_akademik']; ?>"><?php echo $a['tahun_akademik']; ?></option>
-                            <?php include "../config/koneksi.php";
-                            $query = mysqli_query($kon,"SELECT * FROM tb_tahun_akademik ");
-                            while ($row = mysqli_fetch_array($query)) {
-                             echo"
-                            <option value='$row[tahun_akademik]'>$row[tahun_akademik]</option>
-                            ";
-                             }
-                            ?>
-                            echo"</select></td>
+                <table width="100%" border="0" class="table table-hover">
+                    <tr>
+                        <td colspan="3">
+                            <h2>Edit Surat Keterangan Masih Kuliah</h2>
+                        </td>
                     </tr>
 
+                    <tr>
+                        <td colspan="3" class="success"><b>Data Mahasiswa</b></td>
+                    </tr>
 
-				<tr>
-					<td>Jurusan</td>
-					<td>:</td> 
-					<td><select name="jurusan" type="select" class="form-control" required="yes">
-			    		<option value="<?php echo "$a[jurusan]"; ?>"> <?php echo "$a[jurusan]"; ?></option>
-						<option value="Teknologik Laboratorium Medis">Teknologi Laboratorium Medis</option>
-						<option value="Sanitasi">Sanitasi</option>
-						<option value="Kebidanan">Kebidanan</option>
-						<option value="Gizi">Gizi</option>
-						<option value="Keperawatan">Keperawatan</option>
-						<option value="Promosi Kesehatan">Promosi Kesehatan</option>
-			          	</select></td>
-				</tr>
+                    <tr>
+                        <td width="15%">Nama Mahasiswa</td>
+                        <td width="2%">:</td>
+                        <td><input type="text" name="nama_mahasiswa" required
+                                   class="form-control"
+                                   value="<?php echo htmlspecialchars($a['nama_mahasiswa']); ?>"></td>
+                    </tr>
 
-				<tr>
-						<td>Prodi</td>
-						<td>:</td>
-						<td><select name='prodi' class='form-control' >";
-                            <option value="<?php echo $a['prodi']; ?>"><?php echo $a['prodi']; ?></option>
-                            <?php include "../config/koneksi.php";
-                            $query = mysqli_query($kon,"SELECT * FROM tb_prodi ");
-                            while ($row = mysqli_fetch_array($query)) {
-                             echo"
-                            <option value='$row[program_studi]'>$row[program_studi]</option>
-                            ";
-                             }
-                            ?>
-                            echo"</select></td>
-					</tr>
+                    <tr>
+                        <td>NIM Mahasiswa</td>
+                        <td>:</td>
+                        <td><input type="text" name="nim_mahasiswa" required
+                                   class="form-control"
+                                   value="<?php echo htmlspecialchars($a['nim_mahasiswa']); ?>"></td>
+                    </tr>
 
-				<tr>
-					<td colspan="3" class="success"><b>Data Orang Tua/Wali</b></td> 
-				</tr>
+                    <tr>
+                        <td>Keperluan</td>
+                        <td>:</td>
+                        <td>
+                            <select name="keperluan" class="form-control" required>
+                                <option value="<?php echo htmlspecialchars($a['keperluan']); ?>">
+                                    <?php echo htmlspecialchars($a['keperluan']); ?>
+                                </option>
+                                <option value="Slip Gaji/Tunjangan/Pensiun">Slip Gaji/Tunjangan/Pensiun</option>
+                                <option value="Pembuatan Askes/BPJS">Pembuatan Askes/BPJS</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </td>
+                    </tr>
 
-				<tr>
-					<td>Nama Orang Tua</td> 
-					<td>:</td> 
-					<td><input type="text" placeholder="Nama Mahasiswa " name="nama_orang_tua" required="yes" class="form-control" value="<?php echo "$a[nama_orang_tua]"; ?>"></td>
-				</tr>
-				
-				<tr>
-					<td>NIP</td> 
-					<td>:</td> 
-					<td><input type="text" placeholder="NIP" name="nip" class="form-control" value="<?php echo "$a[nip]"; ?>" required="yes"></td> 
-				</tr>
+                    <tr>
+                        <td>Tingkat</td>
+                        <td>:</td>
+                        <td>
+                            <select name="tingkat" class="form-control" required>
+                                <option value="<?php echo $a['tingkat']; ?>"><?php echo $a['tingkat']; ?></option>
+                                <option value="I">I</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
+                            </select>
+                        </td>
+                    </tr>
 
-				<tr>
-					<td>Pangkat, Golongan</td> 
-					<td>:</td> 
-					<td><input type="text" placeholder="Contoh: Melamar Pekerjaan" name="pangkat" class="form-control" value="<?php echo "$a[pangkat]"; ?>" required="yes"></td>
-				</tr>
+                    <tr>
+                        <td>Semester</td>
+                        <td>:</td>
+                        <td>
+                            <select name="semester" class="form-control" required>
+                                <option value="<?php echo $a['semester']; ?>"><?php echo $a['semester']; ?></option>
+                                <?php foreach (['I','II','III','IV','V','VI','VII','VIII'] as $s): ?>
+                                <option value="<?php echo $s; ?>"><?php echo $s; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                    </tr>
 
-				<tr>
-					<td>Instansi</td> 
-					<td>:</td> 
-					<td><input type="text" placeholder="Contoh :" name="instansi" value="<?php echo "$a[instansi]"; ?>" class="form-control"></td>
-				</tr>
+                    <tr>
+                        <td>Tahun Akademik</td>
+                        <td>:</td>
+                        <td>
+                            <select name="tahun_akademik" class="form-control">
+                                <option value="<?php echo $a['tahun_akademik']; ?>"><?php echo $a['tahun_akademik']; ?></option>
+                                <?php
+                                $qTA = mysqli_query($kon, "SELECT * FROM tb_tahun_akademik");
+                                while ($row = mysqli_fetch_array($qTA)):
+                                ?>
+                                <option value="<?php echo $row['tahun_akademik']; ?>">
+                                    <?php echo $row['tahun_akademik']; ?>
+                                </option>
+                                <?php endwhile; ?>
+                            </select>
+                        </td>
+                    </tr>
 
-				<tr>
-					<td colspan="2">&nbsp;</td> 	
-					<td><input type="submit" name="submit" value="Simpan" class="btn btn-danger">
-						<input type="reset" name="submit" value="Hapus" class="btn btn-success">
-							<div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+                    <tr>
+                        <td>Jurusan</td>
+                        <td>:</td>
+                        <td>
+                            <select name="jurusan" class="form-control" required>
+                                <option value="<?php echo $a['jurusan']; ?>"><?php echo $a['jurusan']; ?></option>
+                                <?php
+                                $qJ = mysqli_query($kon, "SELECT * FROM tb_jurusan");
+                                while ($row = mysqli_fetch_array($qJ)):
+                                ?>
+                                <option value="<?php echo $row['nama_jurusan']; ?>"><?php echo $row['nama_jurusan']; ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </td>
+                    </tr>
 
-								<button 
-									type="button"
-									onclick="history.back()" 
-									class="btn btn-light border"
-								>
-									Kembali
-								</button>
+                    <tr>
+                        <td>Prodi</td>
+                        <td>:</td>
+                        <td>
+                            <select name="prodi" class="form-control">
+                                <option value="<?php echo $a['prodi']; ?>"><?php echo $a['prodi']; ?></option>
+                                <?php
+                                $qP = mysqli_query($kon, "SELECT * FROM tb_prodi");
+                                while ($row = mysqli_fetch_array($qP)):
+                                ?>
+                                <option value="<?php echo $row['program_studi']; ?>"><?php echo $row['program_studi']; ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </td>
+                    </tr>
 
-							</div>
-					</td>
-				</tr>
-			</table>
-		</form>
-	</div>
-</div>
+                    <tr>
+                        <td colspan="3" class="success"><b>Data Orang Tua/Wali</b></td>
+                    </tr>
+
+                    <tr>
+                        <td>Nama Orang Tua</td>
+                        <td>:</td>
+                        <td><input type="text" name="nama_orang_tua" required
+                                   class="form-control"
+                                   value="<?php echo htmlspecialchars($a['nama_orang_tua']); ?>"></td>
+                    </tr>
+
+                    <tr>
+                        <td>NIP</td>
+                        <td>:</td>
+                        <td><input type="text" name="nip" required
+                                   class="form-control"
+                                   value="<?php echo htmlspecialchars($a['nip']); ?>"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Pangkat, Golongan</td>
+                        <td>:</td>
+                        <td><input type="text" name="pangkat" required
+                                   class="form-control"
+                                   value="<?php echo htmlspecialchars($a['pangkat']); ?>"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Instansi</td>
+                        <td>:</td>
+                        <td><input type="text" name="instansi"
+                                   class="form-control"
+                                   value="<?php echo htmlspecialchars($a['instansi']); ?>"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+                        <td>
+                            <?php if ($is_revisi): ?>
+                            <!-- Mode revisi: tombol khusus kirim ulang -->
+                            <button type="submit" name="submit" class="btn btn-warning">
+                                <i class="fa fa-paper-plane"></i> Update & Kirim Ulang
+                            </button>
+                            <?php else: ?>
+                            <!-- Mode edit biasa -->
+                            <button type="submit" name="submit" class="btn btn-primary">
+                                <i class="fa fa-save"></i> Simpan
+                            </button>
+                            <?php endif; ?>
+
+                            <div style="position:fixed; bottom:20px; right:20px; z-index:999;">
+                                <button type="button" onclick="history.back()"
+                                        class="btn btn-default border">
+                                    Kembali
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+    </section>
+</aside>

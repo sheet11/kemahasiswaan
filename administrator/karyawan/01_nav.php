@@ -25,6 +25,8 @@
         <link href="../assets/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="../assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -90,10 +92,10 @@
                         </li>
 
                         <li>
-                            <!-- <a href="02_daftar_surat_keterangan_lulus.php">
+                            <a href="02_daftar_surat_keterangan_lulus.php">
                                 <i class="fa fa-circle-o"></i>
                                 <span>Surat Keterangan Lulus</span>
-                            </a> -->
+                            </a>
                         </li>
 
                         <li>

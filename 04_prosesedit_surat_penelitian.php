@@ -1,169 +1,65 @@
-
 <?php 
-	error_reporting(0);
-	include "session.php"; 
-?>
-<?php
-if($_POST['halaman'] == 0)
-{
-	
-		require_once("config/koneksi.php");
-			// Untuk foto
-		$nama_file = $_FILES['gambar']['name'];
-		$ukuran_file = $_FILES['gambar']['size'];
-		$tipe_file = $_FILES['gambar']['type'];
-		$tmp_file = $_FILES['gambar']['tmp_name'];
-		
-		// Folder tempat menyimpan gambarnya
-		$path = "assets/img/".$nama_file;
-	
-	if(empty($nama_file))
-	{
-		$qr = mysqli_query($kon, "update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
-														nim_mahasiswa = '$_POST[nim_mahasiswa]',
-														no_hp = '$_POST[no_hp]',
-														lama_penelitian = '$_POST[lama_penelitian]',
-														tujuan = '$_POST[tujuan]',
-														judul_kti = '$_POST[judul_kti]',
-														jurusan = '$_POST[jurusan]',
-														prodi = '$_POST[prodi]',
-														tahun_akademik = '$_POST[tahun_akademik]',
-														tembusan = '$_POST[tembusan]',
-														tugas_akhir = '$_POST[tugas_akhir]'	
-												  		where id_surat_penelitian= '$_POST[id_surat_penelitian]'");
-		if($qr)
-		{
-			echo "<script>alert('Data berhasil diperbarui');window.location='04_daftar_surat_penelitian.php?username=$_POST[username]'</script>";
-		}
-		else
-		{
-			echo "<script>alert('Mohon maaf, data gagal diperbarui.');window.location='04_daftar_surat_penelitian.php?username=$_POST[username]'</script>";
-		}
-	}
-	else
-	{
-		if($tipe_file == "image/jpeg" || $tipe_file == "image/png" || $tipe_file == "image/jpg")
-		{
-			if($ukuran_file <= 3000000)
-			{
-				if(move_uploaded_file($tmp_file, $path))
-				{
-					$qr = mysqli_query($kon, "update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
-														nim_mahasiswa = '$_POST[nim_mahasiswa]',
-														no_hp = '$_POST[no_hp]',
-														lama_penelitian = '$_POST[lama_penelitian]',
-														tujuan = '$_POST[tujuan]',
-														judul_kti = '$_POST[judul_kti]',
-														jurusan = '$_POST[jurusan]',
-														prodi = '$_POST[prodi]',
-														tahun_akademik = '$_POST[tahun_akademik]',
-														tembusan = '$_POST[tembusan]',
-														tugas_akhir = '$_POST[tugas_akhir]'	
-												  	where id_surat_penelitian= '$_POST[id_surat_penelitian]'");
-					if($qr)
-					{
-						echo "<script>alert('Data berhasil diperbarui.');window.location='04_daftar_surat_penelitian.php?username=$_POST[username]'</script>";
-					}
-					else
-					{
-						echo "<script>alert('Mohon maaf, data gagal diperbarui.');window.location='04_daftar_surat_penelitian.php?username=$_POST[username]'</script>";
-					}
-				}
-				else
-				{
-					echo "<script>alert('Mohon maaf, Gambar gagal diupload.');window.location='04_daftar_surat_penelitian.php?username=$_POST[username]'</script>";
-				}
-			}
-			else
-			{
-				echo "<script>alert('Mohon maaf, Gambar tidak boleh melebihi 1 Mb.');window.location='04_daftar_surat_penelitian.php?username=$_POST[username]'</script>";
-			}
-		}
-		else
-		{
-			echo "<script>alert('Mohon maaf, type gambar yang diperbolehkan .jpg , .jpeg , .png');window.location='04_daftar_surat_penelitian.php?username=$_POST[username]'</script>";
-		}
-	}
+error_reporting(0);
+include "session.php";
+require_once("config/koneksi.php");
+
+$id           = (int)$_POST['id_surat_penelitian'];
+$halaman      = $_POST['halaman'];
+$is_revisi    = isset($_POST['is_revisi']) && $_POST['is_revisi'] == '1';
+
+$nama_mahasiswa  = mysqli_real_escape_string($kon, $_POST['nama_mahasiswa']);
+$nim_mahasiswa   = mysqli_real_escape_string($kon, $_POST['nim_mahasiswa']);
+$no_hp           = mysqli_real_escape_string($kon, $_POST['no_hp']);
+$lama_penelitian = mysqli_real_escape_string($kon, $_POST['lama_penelitian']);
+$tempat_penelitian = mysqli_real_escape_string($kon, $_POST['tempat_penelitian']);
+$judul_kti       = mysqli_real_escape_string($kon, $_POST['judul_kti']);
+$jurusan         = mysqli_real_escape_string($kon, $_POST['jurusan']);
+$prodi           = mysqli_real_escape_string($kon, $_POST['prodi']);
+$tahun_akademik  = mysqli_real_escape_string($kon, $_POST['tahun_akademik']);
+$tugas_akhir     = mysqli_real_escape_string($kon, $_POST['tugas_akhir']);
+$tujuan          = mysqli_real_escape_string($kon, $_POST['tujuan']);
+$tembusan        = mysqli_real_escape_string($kon, $_POST['tembusan']);
+
+// Jika revisi → ubah status ke Telah_Direvisi dan kosongkan catatan
+$status_sql = '';
+if ($is_revisi) {
+    $status_sql = ", status_persetujuan = 'Telah_Direvisi', catatan_penolakan = ''";
 }
-else
-{
-	
-		require_once("config/koneksi.php");
-			// Untuk foto
-		$nama_file = $_FILES['gambar']['name'];
-		$ukuran_file = $_FILES['gambar']['size'];
-		$tipe_file = $_FILES['gambar']['type'];
-		$tmp_file = $_FILES['gambar']['tmp_name'];
-		
-		// Folder tempat menyimpan gambarnya
-		$path = "assets/img/".$nama_file;
-	
-	if(empty($nama_file))
-	{
-		$qr = mysqli_query($kon, "update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
-														nim_mahasiswa = '$_POST[nim_mahasiswa]',
-														no_hp = '$_POST[no_hp]',
-														lama_penelitian = '$_POST[lama_penelitian]',
-														tujuan = '$_POST[tujuan]',
-														judul_kti = '$_POST[judul_kti]',
-														jurusan = '$_POST[jurusan]',
-														prodi = '$_POST[prodi]',
-														tahun_akademik = '$_POST[tahun_akademik]',
-														tembusan = '$_POST[tembusan]',
-														tugas_akhir = '$_POST[tugas_akhir]'	
-												  		where id_surat_penelitian= '$_POST[id_surat_penelitian]'");
-		if($qr)
-		{
-			echo "<script>alert('Data berhasil diperbarui');window.location='04_daftar_surat_penelitian.php?halaman=$_POST[halaman]'</script>";
-		}
-		else
-		{
-			echo "<script>alert('Mohon maaf, data gagal diperbarui.');window.location='04_daftar_surat_penelitian.php?halaman=$_POST[halaman]'</script>";
-		}
-	}
-	else
-	{
-		if($tipe_file == "image/jpeg" || $tipe_file == "image/png" || $tipe_file == "image/jpg")
-		{
-			if($ukuran_file <= 3000000)
-			{
-				if(move_uploaded_file($tmp_file, $path))
-				{
-					$qr = mysqli_query($kon,"update tb_surat_penelitian set nama_mahasiswa = '$_POST[nama_mahasiswa]',
-														nim_mahasiswa = '$_POST[nim_mahasiswa]',
-														no_hp = '$_POST[no_hp]',
-														lama_penelitian = '$_POST[lama_penelitian]',
-														tujuan = '$_POST[tujuan]',
-														judul_kti = '$_POST[judul_kti]',
-														jurusan = '$_POST[jurusan]',
-														prodi = '$_POST[prodi]',
-														tahun_akademik = '$_POST[tahun_akademik]',
-														tembusan = '$_POST[tembusan]',
-														tugas_akhir = '$_POST[tugas_akhir]'
-												  	where id_surat_penelitian= '$_POST[id_surat_penelitian]'");
-					if($qr)
-					{
-						echo "<script>alert('Data berhasil diperbarui.');window.location='04_daftar_surat_penelitian.php?halaman=$_POST[halaman]'</script>";
-					}
-					else
-					{
-						echo "<script>alert('Mohon maaf, data gagal diperbarui.');window.location='04_daftar_surat_penelitian.php?halaman=$_POST[halaman]'</script>";
-					}
-				}
-				else
-				{
-					echo "<script>alert('Mohon maaf, Gambar gagal diupload.');window.location='04_daftar_surat_penelitian.php?halaman=$_POST[halaman]'</script>";
-				}
-			}
-			else
-			{
-				echo "<script>alert('Mohon maaf, Gambar tidak boleh melebihi 1 Mb.');window.location='04_daftar_surat_penelitian.php?halaman=$_POST[halaman]'</script>";
-			}
-		}
-		else
-		{
-			echo "<script>alert('Mohon maaf, type gambar yang diperbolehkan .jpg , .jpeg , .png');window.location='04_daftar_surat_penelitian.php?halaman=$_POST[halaman]'</script>";
-		}
-	}
+
+$sql = "UPDATE tb_surat_penelitian SET
+            nama_mahasiswa    = '$nama_mahasiswa',
+            nim_mahasiswa     = '$nim_mahasiswa',
+            no_hp             = '$no_hp',
+            lama_penelitian   = '$lama_penelitian',
+            tempat_penelitian = '$tempat_penelitian',
+            judul_kti         = '$judul_kti',
+            jurusan           = '$jurusan',
+            prodi             = '$prodi',
+            tahun_akademik    = '$tahun_akademik',
+            tugas_akhir       = '$tugas_akhir',
+            tujuan            = '$tujuan',
+            tembusan          = '$tembusan'
+            $status_sql
+        WHERE id_surat_penelitian = $id";
+
+$qr = mysqli_query($kon, $sql);
+
+if ($qr) {
+    if ($is_revisi) {
+        echo "<script>
+                alert('Surat berhasil diperbarui dan dikirim ulang ke resepsionis.');
+                window.location='04_daftar_surat_penelitian.php?pesan=revisi_terkirim&halaman=$halaman';
+              </script>";
+    } else {
+        echo "<script>
+                alert('Data berhasil diperbarui.');
+                window.location='04_daftar_surat_penelitian.php?halaman=$halaman';
+              </script>";
+    }
+} else {
+    echo "<script>
+            alert('Gagal menyimpan data: " . mysqli_error($kon) . "');
+            window.history.back();
+          </script>";
 }
 ?>

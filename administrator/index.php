@@ -6,6 +6,8 @@
     <link href="assets/css/font-awesome.css" rel="stylesheet">
     
     <link rel="stylesheet" href="assets/css/reset.css">
+        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
 
     
         <style>
@@ -333,7 +335,7 @@ body {
   </div> <!--/ Login-->
 
 <div class="copyright">
-    <p>Copyright &copy; 2016. Created by <a href="" target="_blank">Poltekkes Kemenkes Bengkulu</a></p>
+    <p>Copyright &copy; 2026. Created by <a href="" target="_blank">Poltekkes Kemenkes Bengkulu</a></p>
     
     
     

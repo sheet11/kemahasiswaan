@@ -35,6 +35,10 @@
         <link href="assets/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <!-- Favicon Kemenkes -->
+        <!-- Favicon Kemenkes -->
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -148,9 +152,6 @@
                 </section>
                 <!-- /.sidebar -->
             </aside>
-
-    
-
 
         <!-- jQuery 2.0.2 -->
         <script src="assets/js/jquery.min.js"></script>

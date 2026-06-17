@@ -1,5 +1,4 @@
 <?php 
-
 include "01_nav.php";
 include "config/class_paging.php";
 include "config/koneksi.php";
@@ -7,311 +6,165 @@ include "config/koneksi.php";
 $p      = new Paging;
 $batas  = 10;
 $posisi = $p->cariPosisi($batas);
-
-$nim = $_SESSION['nim'];
+$nim    = $_SESSION['nim'];
 ?>
 
 <aside class="right-side">
 <section class="content-header">
-
 <div class="container-fluid" style="margin:10px;">
-	
-	<!-- POPUP STATUS -->
-
-<div id="popupStatus" 
-     style="
-        display:none;
-        position:fixed;
-        z-index:9999;
-        left:0;
-        top:0;
-        width:100%;
-        height:100%;
-        background:rgba(0,0,0,0.6);
-     ">
-
-    <div style="
-        background:#fff;
-        width:500px;
-        max-width:90%;
-        margin:8% auto;
-        padding:20px;
-        border-radius:10px;
-        box-shadow:0 0 10px rgba(0,0,0,0.3);
-    ">
-
-        <h3 style="margin-top:0; color:#17a2b8;">
-            Informasi Status Surat
-        </h3>
-
-        <hr>
-
-        <div style="
-            background:#f8d7da;
-            padding:15px;
-            border-radius:5px;
-            margin-bottom:15px;
-        ">
-
-            <b>Belum Dicetak</b><br><br>
-
-            Data surat masih terdapat kesalahan.<br>
-            Silakan mengajukan surat ulang.
-
-        </div>
-
-        <div style="
-            background:#fff3cd;
-            padding:15px;
-            border-radius:5px;
-        ">
-
-            <b>Sudah Dicetak</b><br><br>
-
-            Surat sudah selesai dicetak dan dapat diambil di resepsionis.
-
-        </div>
-
-        <div style="text-align:right; margin-top:20px;">
-
-            <button 
-                onclick="tutupPopup()"
-                style="
-                    background:#17a2b8;
-                    color:white;
-                    border:none;
-                    padding:10px 20px;
-                    border-radius:5px;
-                    cursor:pointer;
-                "
-            >
-                Mengerti
-            </button>
-
-        </div>
-
-    </div>
-
-</div>    
 
 <table style="width:100%;">
-
     <tr class="info">
         <td align="left" colspan="6">
             <b><h4>Surat Izin Penelitian</h4></b>
-        </td>   
+        </td>
     </tr>
-
     <tr>
-
-        <td width="20%">
+        <td>
             <a href="04_tambah_surat_penelitian.php" class="btn btn-info">
-                Tambah Surat
-            </a> 
-        </td> 
+                <i class="fa fa-plus"></i> Tambah Surat
+            </a>
+        </td>
     </tr>
-
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
-
+    <tr><td>&nbsp;</td></tr>
 </table>
 
-<table style="width:100%;" class="table table-bordered">    
+<?php if (isset($_GET['pesan']) && $_GET['pesan'] == 'revisi_terkirim'): ?>
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <i class="fa fa-check"></i> <strong>Berhasil!</strong> Surat telah diperbarui dan dikirim ulang ke resepsionis untuk direview.
+    </div>
+<?php endif; ?>
 
-<tr class="info">
-    <th>No.</th>
-    <th>Nama Mahasiswa</th>
-    <th>NIM</th>
-    <th>Prodi</th>
-    <th>Judul</th>
-    <th>Tujuan</th>
-    <th>Status</th>
-    <th width="5%">Aksi</th>
-</tr>
-
-<?php
-
-/* =========================
-   PENCARIAN
-========================= */
-
-if(isset($_POST['submit'])){
-
-    $cariid = $_POST['cariid'];
-    $cari   = $_POST['cari'];
-
-    $query = mysqli_query(
-        $kon,
-        "SELECT * FROM tb_surat_penelitian
-         WHERE nim_mahasiswa='$nim'
-         AND $cariid LIKE '%$cari%'"
-    );
-}
-
-/* =========================
-   DETAIL BERDASARKAN ID
-========================= */
-
-elseif(!empty($_GET['id_surat_penelitian'])){
-
-    $id = $_GET['id_surat_penelitian'];
-
-    $query = mysqli_query(
-        $kon,
-        "SELECT * FROM tb_surat_penelitian
-         WHERE id_surat_penelitian='$id'
-         AND nim_mahasiswa='$nim'"
-    );
-}
-
-/* =========================
-   SEMUA DATA
-========================= */
-
-else {
-
-    $query = mysqli_query(
-        $kon,
+<table style="width:100%;" class="table table-bordered">
+    <thead>
+        <tr class="info">
+            <th>No.</th>
+            <th>Nama Mahasiswa</th>
+            <th>NIM</th>
+            <th>Prodi</th>
+            <th>Judul</th>
+            <th>Tujuan</th>
+            <th>Status</th>
+            <th width="8%">Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    $query = mysqli_query($kon,
         "SELECT * FROM tb_surat_penelitian
          WHERE nim_mahasiswa='$nim'
          ORDER BY id_surat_penelitian DESC
          LIMIT $posisi, $batas"
     );
-}
 
-/* =========================
-   TAMPILKAN DATA
-========================= */
+    $i = $posisi + 1;
 
-$i = $posisi + 1;
+    while ($a = mysqli_fetch_array($query)):
+        $sp      = $a['status_persetujuan'];
+        $st      = $a['status'];
+        $catatan = !empty($a['catatan_penolakan']) ? htmlspecialchars($a['catatan_penolakan']) : '';
+        $id      = $a['id_surat_penelitian'];
+        $hal     = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
+    ?>
+    <tr>
+        <td><?php echo $i++; ?></td>
+        <td><?php echo htmlspecialchars($a['nama_mahasiswa']); ?></td>
+        <td><?php echo htmlspecialchars($a['nim_mahasiswa']); ?></td>
+        <td><?php echo htmlspecialchars($a['prodi']); ?></td>
+        <td><?php echo htmlspecialchars($a['judul_kti']); ?></td>
+        <td><?php echo htmlspecialchars($a['tujuan']); ?></td>
 
-while($a = mysqli_fetch_array($query)){
+        <!-- Kolom Status -->
+        <td>
+        <?php if ($sp == 'Perlu_Revisi'): ?>
+            <span class="label label-warning" style="font-size:12px;">
+                <i class="fa fa-edit"></i> Perlu Revisi
+            </span>
+            <?php if ($catatan): ?>
+            <br>
+            <small style="color:#d68910; display:block; margin-top:4px;">
+                <i class="fa fa-comment-o"></i>
+                <i><?php echo $catatan; ?></i>
+            </small>
+            <?php endif; ?>
 
-echo "
+        <?php elseif ($sp == 'Telah_Direvisi'): ?>
+            <span class="label label-info" style="font-size:12px;">
+                <i class="fa fa-refresh"></i> Telah Direvisi
+            </span>
+            <br>
+            <small class="text-muted">Menunggu review resepsionis</small>
 
-<tr>
+        <?php elseif ($sp == 'Disetujui_Resepsionis'): ?>
+            <span class="label label-info" style="font-size:12px;">
+                <i class="fa fa-arrow-up"></i> Sedang Diproses Wadir
+            </span>
 
-		<td>$i</td>
-		<td>$a[nama_mahasiswa]</td>
-		<td>$a[nim_mahasiswa]</td>
-		<td>$a[prodi]</td>
-		<td>$a[judul_kti]</td>
-		<td>$a[tujuan]</td>
+        <?php elseif ($sp == 'Disetujui'): ?>
+            <span class="label label-success" style="font-size:12px;">
+                <i class="fa fa-check-circle"></i> Disetujui
+            </span>
+            <?php if ($st == 'Sudah Dicetak'): ?>
+            <br>
+            <small class="text-success">
+                <i class="fa fa-print"></i> Sudah Dicetak — silakan ambil di resepsionis
+            </small>
+            <?php else: ?>
+            <br>
+            <small class="text-muted">Menunggu dicetak oleh resepsionis</small>
+            <?php endif; ?>
 
-    	<td>
+        <?php elseif ($sp == 'Ditolak_Wadir'): ?>
+            <span class="label label-danger" style="font-size:12px;">
+                <i class="fa fa-times-circle"></i> Ditolak Wadir
+            </span>
+            <?php if ($catatan): ?>
+            <br>
+            <small style="color:#dd4b39; display:block; margin-top:4px;">
+                <i class="fa fa-comment-o"></i>
+                <i><?php echo $catatan; ?></i>
+            </small>
+            <?php endif; ?>
+            <br>
+            <small class="text-danger">Silakan ajukan surat baru.</small>
 
-";
+        <?php else: // Menunggu ?>
+            <span class="label label-default" style="font-size:12px;">
+                <i class="fa fa-clock-o"></i> Menunggu Review
+            </span>
+        <?php endif; ?>
+        </td>
 
-/* =========================
-   STATUS
-========================= */
+        <!-- Kolom Aksi -->
+        <td>
+        <?php if ($sp == 'Menunggu' || $sp == 'Perlu_Revisi' || $sp == 'Telah_Direvisi'): ?>
+            <a href="04_edit_surat_penelitian.php?id_surat_penelitian=<?php echo $id; ?>&halaman=<?php echo $hal; ?>"
+               class="btn btn-info btn-xs" title="Edit Surat">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </a>
 
-$sp      = $a['status_persetujuan'];
-$catatan = !empty($a['catatan_penolakan']) ? htmlspecialchars($a['catatan_penolakan']) : '';
+        <?php elseif ($sp == 'Disetujui' && $st == 'Sudah Dicetak'): ?>
+            <span class="text-success" style="font-size:11px;">
+                <i class="fa fa-check-circle"></i> Selesai
+            </span>
 
-if ($sp == 'Ditolak') {
-    echo "
-    <span class='label label-danger' style='font-size:12px;'>
-        <i class='fa fa-times'></i> Ditolak
-    </span>
-    ";
-    if ($catatan) {
-        echo "
-    <br><small style='color:#dd4b39;'>
-        <i class='fa fa-comment-o'></i> <i>$catatan</i>
-    </small>
-        ";
-    }
-}
-elseif($a['status'] == 'Belum Dicetak'){
-    echo "
-    <button type='button' class='btn btn-danger'>
-        Belum Dicetak
-    </button>
-    ";
-}
-elseif($a['status'] == 'Sudah Dicetak'){
-    echo "
-    <button type='button' class='btn btn-warning'>
-        Sudah Dicetak
-    </button>
-    ";
-}
-
-echo "
-
-    </td>
-
-    <td>
-
-        <a 
-            href='04_edit_surat_penelitian.php?id_surat_penelitian={$a['id_surat_penelitian']}&halaman=" . (isset($_GET['halaman']) ? $_GET['halaman'] : 1) . "'
-            class='btn btn-info'
-        >
-
-            <span class='glyphicon glyphicon-pencil'></span>
-
-        </a>
-
-    </td>
-
-</tr>
-
-";
-
-$i++;
-
-}
-
-/* =========================
-   PAGINATION
-========================= */
-
-$result = mysqli_query(
-    $kon,
-    "SELECT * FROM id_surat_penelitian
-     WHERE nim_mahasiswa='$nim'"
-);
-
-$jmldata = mysqli_num_rows($result);
-
-$jmlhalaman = $p->jumlahHalaman($jmldata, $batas);
-
-$halaman = isset($_GET['halaman']) ? $_GET['halaman'] : 1;
-
-$linkHalaman = $p->navHalaman($halaman, $jmlhalaman);
-
-echo "
-
+        <?php else: ?>
+            <span class="text-muted" style="font-size:11px;">-</span>
+        <?php endif; ?>
+        </td>
+    </tr>
+    <?php endwhile; ?>
+    </tbody>
 </table>
 
-<div class='paginationw'>
-    $linkHalaman
-</div>
-
-";
-
+<?php
+$jmldata     = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM tb_surat_penelitian WHERE nim_mahasiswa='$nim'"));
+$jmlhalaman  = $p->jumlahHalaman($jmldata, $batas);
+$linkHalaman = $p->navHalaman(isset($_GET['halaman']) ? $_GET['halaman'] : 1, $jmlhalaman);
+echo "<div class='paginationw'>$linkHalaman</div>";
 ?>
 
 </div>
-
 </section>
-
-<script>
-
-window.onload = function(){
-
-    document.getElementById('popupStatus').style.display = 'block';
-
-}
-
-function tutupPopup(){
-
-    document.getElementById('popupStatus').style.display = 'none';
-
-}
-
-</script>
-
 </aside>

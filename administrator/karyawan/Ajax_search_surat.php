@@ -23,6 +23,11 @@ $allowed = [
         'pk'    => 'id_surat_pra_penelitian',
         'kolom' => ['nim_mahasiswa','nama_mahasiswa','prodi','judul_kti','tujuan','lokasi','keterangan','tahun_akademik','status','status_persetujuan','catatan_penolakan'],
     ],
+    'keterangan_lulus' => [
+        'table' => 'tb_surat_keterangan_lulus',
+        'pk'    => 'id_surat_keterangan_lulus',
+        'kolom' => ['nim_mahasiswa','nama_mahasiswa','jurusan','prodi','tempat_lahir','tanggal_lahir','tahun_akademik','status'],
+    ],
 ];
 
 if (!isset($allowed[$tabel])) {
@@ -35,6 +40,14 @@ $tableName = $cfg['table'];
 $pkName    = $cfg['pk'];
 $safe_kw   = '%' . mysqli_real_escape_string($kon, $keyword) . '%';
 
+// Filter status jika ada (opsional)
+$filter      = $_GET['filter'] ?? 'semua';
+$where_filter = '';
+if ($tabel === 'keterangan_lulus' && $filter !== 'semua') {
+    $safe_filter  = mysqli_real_escape_string($kon, $filter);
+    $where_filter = "AND `status` = '$safe_filter'";
+}
+
 // Cari di semua kolom sekaligus
 $where_parts = [];
 foreach ($cfg['kolom'] as $kol) {
@@ -42,7 +55,7 @@ foreach ($cfg['kolom'] as $kol) {
 }
 $where = implode(' OR ', $where_parts);
 
-$sql = "SELECT * FROM `$tableName` WHERE $where ORDER BY `$pkName` DESC LIMIT 200";
+$sql = "SELECT * FROM `$tableName` WHERE ($where) $where_filter ORDER BY `$pkName` DESC LIMIT 200";
 $res = mysqli_query($kon, $sql);
 
 if (!$res) {

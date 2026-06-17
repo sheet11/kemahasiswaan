@@ -16,6 +16,8 @@
         <link href="../assets/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
         <link href="../assets/css/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
         <style>
             .badge-menunggu  { background-color: #f39c12; }
             .badge-disetujui { background-color: #00a65a; }
@@ -50,8 +52,8 @@
                 <section class="sidebar">
                     <div class="user-panel">
                         <li class="image-center">
-                        <img src="../assets/img/logo.polkeslu.png" class="user-image img-responsive" />
-                    </li>
+                            <img src="../assets/img/logo.polkeslu.png" class="user-image img-responsive" />
+                        </li>
                     </div>
                     <ul class="sidebar-menu">
                         <li class="header">
@@ -66,38 +68,23 @@
                             </a>
                         </li>
 
-                        <li class="treeview">
-                            <a href=""><i class="fa fa-envelope"></i> Persetujuan Surat
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
+                        <li>
+                            <a href="03_persetujuan_surat_keterangan_masih_kuliah.php">
+                                <i class="fa fa-circle-o"></i>
+                                <span>Surat Masih Kuliah</span>
                             </a>
-                            <ul class="treeview-menu">
-                                <!-- <li>
-                                    <a href="02_persetujuan_surat_keterangan_lulus.php">
-                                        <i class="fa fa-circle-o"></i>
-                                        <span>Surat Keterangan Lulus</span>
-                                    </a>
-                                </li> -->
-                                <li>
-                                    <a href="03_persetujuan_surat_keterangan_masih_kuliah.php">
-                                        <i class="fa fa-circle-o"></i>
-                                        <span>Surat Masih Kuliah</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="05_persetujuan_surat_pra_penelitian.php">
-                                        <i class="fa fa-circle-o"></i>
-                                        <span>Surat Pra Penelitian</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="04_persetujuan_surat_penelitian.php">
-                                        <i class="fa fa-circle-o"></i>
-                                        <span>Surat Penelitian</span>
-                                    </a>
-                                </li>
-                            </ul>
+                        </li>
+                        <li>
+                            <a href="05_persetujuan_surat_pra_penelitian.php">
+                                <i class="fa fa-circle-o"></i>
+                                <span>Surat Pra Penelitian</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="04_persetujuan_surat_penelitian.php">
+                                <i class="fa fa-circle-o"></i>
+                                <span>Surat Penelitian</span>
+                            </a>
                         </li>
 
                         <li>

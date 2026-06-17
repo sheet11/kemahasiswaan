@@ -25,17 +25,29 @@ if ($ada > 0) {
 		$_SESSION['level'] = $row['level'];
 		header("location:karyawan/index.php"); // jika berhasil login, maka masuk ke file home.php
 	}
-	elseif($row['level'] == "penilai")
+	// elseif($row['level'] == "penilai")
+	// {
+	// 	session_start(); // memulai fungsi session
+	// 	$_SESSION['username'] = $username;
+	// 	$_SESSION['nama_lengkap'] = $row['nama_lengkap'];
+	// 	$_SESSION['unit_kerja'] = $row['unit_kerja'];
+	// 	$_SESSION['jabatan'] = $row['jabatan'];
+	// 	$_SESSION['grade'] = $row['grade'];
+	// 	$_SESSION['level'] = $row['level'];
+	// 	header("location:penilai/index.php"); // jika berhasil login, maka masuk ke file home.php
+	// }
+	elseif($row['level'] == "resepsionis")
 	{
-		session_start(); // memulai fungsi session
-		$_SESSION['username'] = $username;
-		$_SESSION['nama_lengkap'] = $row['nama_lengkap'];
-		$_SESSION['unit_kerja'] = $row['unit_kerja'];
-		$_SESSION['jabatan'] = $row['jabatan'];
-		$_SESSION['grade'] = $row['grade'];
-		$_SESSION['level'] = $row['level'];
-		header("location:penilai/index.php"); // jika berhasil login, maka masuk ke file home.php
+    session_start();
+    $_SESSION['username']     = $username;
+    $_SESSION['nama_lengkap'] = $row['nama_lengkap'];
+    $_SESSION['unit_kerja']   = $row['unit_kerja'];
+    $_SESSION['jabatan']      = $row['jabatan'];
+    $_SESSION['grade']        = $row['grade'];
+    $_SESSION['level']        = $row['level'];
+    header("location:resepsionis/index.php");
 	}
+	
 	elseif($row['level'] == "administrator")
 	{
 		session_start(); // memulai fungsi session
@@ -45,7 +57,7 @@ if ($ada > 0) {
 		$_SESSION['jabatan'] = $row['jabatan'];
 		$_SESSION['grade'] = $row['grade'];
 		$_SESSION['level'] = $row['level'];
-		header("location:administrator/index.php"); // jika berhasil login, maka masuk ke file home.php
+		header("location:admin/index.php"); // jika berhasil login, maka masuk ke file home.php
 	}
 	elseif($row['level'] == "wakil_direktur")
 	{
