@@ -46,6 +46,103 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
+        <style>
+            /* ===== Perbaikan header agar tidak tabrakan dengan tombol sidebar-toggle di HP ===== */
+
+            /* Pastikan header tidak overflow, dan logo tidak mendorong elemen lain */
+            .header {
+                position: relative;
+            }
+
+            .header .logo {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Teks panjang "Sistem Informasi Kemahasiswaan..." */
+            .navbar-right .user-menu > a > span {
+                white-space: nowrap;
+            }
+
+            /* Beri sedikit padding kanan agar tidak mepet ujung layar */
+            .navbar-static-top {
+                padding-right: 10px;
+            }
+
+            /* ===== Tampilan khusus HP/tablet kecil ===== */
+            @media (max-width: 767px) {
+                /* Header dibuat boleh tinggi menyesuaikan (tidak fixed height) agar teks bisa wrap */
+                .header {
+                    height: auto;
+                    min-height: 50px;
+                }
+
+                .navbar-static-top {
+                    height: auto;
+                    min-height: 50px;
+                }
+
+                /* Logo: kecilkan font supaya tidak makan banyak tempat */
+                .header .logo {
+                    font-size: 15px;
+                    max-width: 55%;
+                    padding: 12px 8px;
+                }
+
+                /* Pastikan tombol sidebar-toggle tetap punya ruang sendiri, tidak tertindih */
+                .sidebar-toggle {
+                    position: relative;
+                    z-index: 10;
+                    float: left;
+                }
+
+                /* Teks panjang tetap tampil, tapi diperkecil & boleh wrap ke baris baru */
+                .navbar-right {
+                    float: none;
+                    display: block;
+                    width: 100%;
+                    text-align: right;
+                    margin: 0;
+                    padding: 4px 10px 6px;
+                    clear: both;
+                }
+
+                .navbar-right .user-menu > a {
+                    padding: 0;
+                    display: inline-block;
+                }
+
+                .navbar-right .user-menu > a > span {
+                    display: inline-block;
+                    font-size: 11px;
+                    line-height: 1.3;
+                    white-space: normal;
+                    text-align: right;
+                }
+            }
+
+            /* ===== Tampilan untuk layar sangat kecil (HP kecil) ===== */
+            @media (max-width: 420px) {
+                .header .logo {
+                    font-size: 13px;
+                    max-width: 50%;
+                }
+
+                .navbar-right .user-menu > a > span {
+                    font-size: 10px;
+                }
+            }
+
+            /* ===== Sinkronisasi: saat sidebar di-toggle/hide di HP, logo & teks navbar ikut hilang ===== */
+            @media (max-width: 767px) {
+                body.sidebar-hidden-mode .header .logo,
+                body.sidebar-hidden-mode .header .navbar-right {
+                    display: none !important;
+                }
+            }
+        </style>
     </head>
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
@@ -183,6 +280,31 @@
         
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="assets/js/AdminLTE/dashboard.js" type="text/javascript"></script>        
+
+        <!-- ===== Script tambahan: sinkronkan tampilan logo/teks header dengan status toggle sidebar di HP ===== -->
+        <script>
+            (function () {
+                var toggleBtn = document.querySelector('.sidebar-toggle');
+                if (!toggleBtn) return;
+
+                toggleBtn.addEventListener('click', function () {
+                    // beri waktu sedikit agar class dari plugin offcanvas AdminLTE sempat terpasang
+                    setTimeout(function () {
+                        if (window.innerWidth > 767) return; // hanya berlaku di HP/tablet kecil
+
+                        var sidebarTerbuka =
+                            document.body.classList.contains('sidebar-open') ||
+                            document.querySelector('.row-offcanvas.active') !== null;
+
+                        if (sidebarTerbuka) {
+                            document.body.classList.add('sidebar-hidden-mode');
+                        } else {
+                            document.body.classList.remove('sidebar-hidden-mode');
+                        }
+                    }, 50);
+                });
+            })();
+        </script>
 
     </body>
 </html>

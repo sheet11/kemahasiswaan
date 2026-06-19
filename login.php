@@ -1,167 +1,440 @@
 <!DOCTYPE html>
 <?php
+    session_start();
     include "config/koneksi.php";
     include "assets/js/date.php";
     error_reporting(0);
+
+    $error = '';
+
+    if (isset($_POST['login'])) {
+        $username = addslashes($_POST['username']);
+        $password = addslashes($_POST['password']);
+
+        $cek = mysqli_query($kon, "SELECT * FROM tb_user WHERE username='$username' AND password='$password'");
+
+        if (mysqli_num_rows($cek) > 0) {
+            $row = mysqli_fetch_array($cek);
+            $level = $row['level'];
+
+            // Session umum (dipakai di semua sisi)
+            $_SESSION['username'] = $row['username'];
+            $_SESSION['nama_lengkap'] = $row['nama_lengkap'];
+            $_SESSION['level'] = $level;
+
+            // Session khusus karyawan/staf (sesuai proseslogin.php lama)
+            $_SESSION['unit_kerja'] = $row['unit_kerja'] ?? null;
+            $_SESSION['jabatan']    = $row['jabatan'] ?? null;
+            $_SESSION['grade']      = $row['grade'] ?? null;
+
+            // Session khusus mahasiswa (sesuai halaman mahasiswa lama, supaya 01_nav.php dkk tetap berfungsi)
+            $_SESSION['nim']  = $row['username'];
+            $_SESSION['nama'] = $row['nama_lengkap'];
+
+            // ===== Redirect sesuai level =====
+            if ($level == 'mahasiswa') {
+                header("location: index.php");
+                exit;
+            } elseif ($level == 'karyawan') {
+                header("location: administrator/karyawan/index.php");
+                exit;
+            } elseif ($level == 'resepsionis') {
+                header("location: resepsionis/index.php");
+                exit;
+            } elseif ($level == 'administrator') {
+                header("location: admin/index.php");
+                exit;
+            } elseif ($level == 'wakil_direktur') {
+                header("location: administrator/wakil_direktur/index.php");
+                exit;
+            } else {
+                $error = "Level akun tidak dikenali. Hubungi administrator.";
+            }
+        } else {
+            $error = "Username atau password tidak valid. Silakan coba lagi.";
+        }
+    }
 ?>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Login — Poltekkes Kemenkes Bengkulu</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <style>
-        body {
-             min-height: 100vh;
-            background: linear-gradient(135deg, #eaf3f8 0%, #f0f7f4 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', sans-serif;
-        }
-        .login-wrapper { width: 100%; max-width: 420px; padding: 1.5rem; }
-        .logo-circle {
-            width: 80px; height: 80px;
-            background: #fff;
-            border-radius: 50%;
-            border: 1px solid #c8dfe9;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 1rem;
-        }
-        .login-card { border: 1px solid #b2dfd0; border-radius: 12px; overflow: hidden; }
-        .login-card-header {
-            background: #0F6E56;
-            padding: 1rem 1.5rem;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .login-card-body { padding: 1.75rem 1.5rem 1.5rem; }
-        .form-label { font-size: 13px; font-weight: 500; color: #444441; }
-        .form-control {
-            font-size: 14px;
-            background: #F6FBF9;
-            border: 1px solid #9FE1CB;
-            border-radius: 8px;
-            padding: 10px 12px;
-        }
-        .form-control:focus {
-            border-color: #1D9E75;
-            box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
-            background: #fff;
-        }
-        .pw-wrapper { position: relative; }
-        .pw-toggle {
-            position: absolute; right: 10px; top: 50%;
-            transform: translateY(-50%);
-            background: none; border: none;
-            cursor: pointer; color: #888780; padding: 0;
-        }
-        .btn-login {
-            width: 100%; padding: 11px;
-            background: #0F6E56; color: #fff;
-            border: none; border-radius: 8px;
-            font-size: 14px; font-weight: 500;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            transition: background 0.2s;
-        }
-        .btn-login:hover { background: #085041; color: #fff; }
-        .login-card-footer {
-            border-top: 1px solid #E1F5EE;
-            background: #f7fbf9;
-            padding: 1rem 1.5rem;
-            text-align: center;
-            font-size: 13px; color: #5F5E5A;
-        }
-        .login-card-footer a { color: #0F6E56; font-weight: 500; text-decoration: none; }
-        .alert-danger { border-radius: 8px; font-size: 13px; padding: 10px 14px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Sistem Informasi Kemahasiswaan</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --ink:#1b2420;
+    --ink-soft:#5b665f;
+    --paper:#f3f1ea;
+    --panel:#ffffff;
+    --line:#e4dfd2;
+
+    --kemenkes-green:#00824a;
+    --kemenkes-green-deep:#005c34;
+    --kemenkes-blue:#0067ac;
+    --gold:#c9a24a;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    font-family:'Inter', -apple-system, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+  }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:24px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0,130,74,0.08), transparent 45%),
+      radial-gradient(circle at 85% 85%, rgba(0,103,172,0.07), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .card{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:380px;
+    background:var(--panel);
+    border-radius:6px;
+    box-shadow: 0 26px 54px -20px rgba(0,60,40,0.28);
+    overflow:hidden;
+  }
+
+  .card-top{
+    background:linear-gradient(155deg, var(--kemenkes-green) 0%, var(--kemenkes-green-deep) 100%);
+    padding:38px 40px 32px;
+    text-align:center;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .card-top::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:3px;
+    background:linear-gradient(90deg, var(--kemenkes-blue), var(--gold));
+  }
+
+  .mark-glyph{
+    width:64px;
+    height:64px;
+    margin:0 0 16px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.12);
+    border:1.5px solid rgba(255,255,255,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .mark-glyph img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:6px;
+  }
+
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:#cdeede;
+    margin:0 0 8px;
+  }
+
+  .title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:21px;
+    line-height:1.3;
+    color:#ffffff;
+    margin:0;
+    letter-spacing:0.01em;
+    max-width:260px;
+  }
+
+  .card-body{
+    padding:36px 40px 40px;
+  }
+
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .alert-box{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#fdecea;
+    border:1px solid #f3c4be;
+    color:#9a3b32;
+    font-size:13px;
+    padding:10px 14px;
+    border-radius:8px;
+    margin-bottom:-4px;
+  }
+
+  .alert-box svg{ width:16px; height:16px; flex-shrink:0; }
+
+  .field{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .field label{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+
+  .field input{
+    width:100%;
+    height:44px;
+    font-family:'Inter', sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+    background:#f7f5ef;
+    border:1.5px solid var(--line);
+    border-radius:9px;
+    padding:0 14px;
+    transition:border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .field input#password{
+    padding-right:44px;
+  }
+
+  .toggle-eye{
+    position:absolute;
+    right:8px;
+    bottom:0;
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:none;
+    border:none;
+    padding:0;
+    cursor:pointer;
+    color:#a8a294;
+    transition:color 0.2s ease;
+  }
+
+  .toggle-eye:hover{
+    color:var(--kemenkes-green-deep);
+  }
+
+  .toggle-eye:focus-visible{
+    outline:2px solid var(--kemenkes-blue);
+    outline-offset:2px;
+    border-radius:6px;
+  }
+
+  .toggle-eye svg{
+    width:18px;
+    height:18px;
+    pointer-events:none;
+  }
+
+  .toggle-eye .eye-off{
+    display:none;
+  }
+
+  .toggle-eye.is-visible .eye-on{
+    display:none;
+  }
+
+  .toggle-eye.is-visible .eye-off{
+    display:block;
+  }
+
+  .field input::placeholder{
+    color:#bdb6a4;
+  }
+
+  .field input:focus{
+    outline:none;
+    border-color:var(--kemenkes-green);
+    background:#ffffff;
+    box-shadow: 0 0 0 3px rgba(0,130,74,0.10);
+  }
+
+  .submit{
+    margin-top:4px;
+    width:100%;
+    height:46px;
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:#ffffff;
+    background:var(--kemenkes-green-deep);
+    border:none;
+    border-radius:9px;
+    cursor:pointer;
+    transition:background 0.25s ease, transform 0.15s ease;
+  }
+
+  .submit:hover{
+    background:var(--kemenkes-green);
+  }
+
+  .submit:active{
+    transform:translateY(1px);
+  }
+
+  .submit:focus-visible{
+    outline:2px solid var(--kemenkes-blue);
+    outline-offset:3px;
+  }
+
+  .footer-link{
+    margin-top:18px;
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+
+  .footer-link a{
+    color:var(--kemenkes-green-deep);
+    font-weight:600;
+    text-decoration:none;
+  }
+
+  .copyright{
+    margin-top:18px;
+    text-align:center;
+    font-size:11px;
+    color:#8b8576;
+    position:relative;
+    z-index:1;
+  }
+
+  .copyright a{
+    color:#8b8576;
+    text-decoration:none;
+  }
+
+  @media (max-width: 420px){
+    .card-top{ padding:32px 28px 28px; }
+    .card-body{ padding:32px 28px 36px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
 </head>
 <body>
 
-<?php
-if (isset($_POST['login'])) {
-    $nim = addslashes($_POST['nim']);
-    $pw  = addslashes($_POST['password']);
+  <div>
+    <div class="card">
 
-    $gnim = mysqli_query($kon, "SELECT * FROM tb_user WHERE username='$nim' AND password='$pw' AND level='mahasiswa'");
-    if (mysqli_num_rows($gnim) > 0) {
-        $data = mysqli_fetch_array($gnim);
-        session_start();
-        $_SESSION['nim']   = $data['username'];
-        $_SESSION['nama']  = $data['nama_lengkap'];
-        $_SESSION['level'] = $data['level'];
-        header("location: index.php");
-        exit;
-    } else {
-        $error = "NIM atau password tidak valid. Silakan coba lagi.";
-    }
-}
-?>
-
-<div class="login-wrapper">
-
-    <div class="text-center mb-4">
-        <img src="assets/img/logo.polkeslu.png" alt="Logo Poltekkes" style="width: 110px; height: auto; margin-bottom: 0.75rem;">
-        <h1 style="font-size: 17px; font-weight: 600; color: #1D9E75; margin: 0 0 4px;">Sistem Informasi Kemahasiswaan</h1>
-        <!-- <p style="font-size: 13px; color: #5F5E5A; margin: 0;">Sistem Informasi Kemahasiswaan</p> -->
-    </div>
-
-    <div class="login-card">
-
-        <div class="login-card-header">
-            <i class="ti ti-login" style="font-size: 18px; color: #B5D4F4;"></i>
-            <span style="font-size: 15px; font-weight: 500; color: #fff;">Masuk ke Akun Anda</span>
+      <div class="card-top">
+        <div class="mark-glyph">
+          <img src="assets/img/logo.polkeslu.png" alt="Logo Poltekkes Kemenkes Bengkulu">
         </div>
+        <p class="eyebrow">Poltekkes Kemenkes Bengkulu</p>
+        <h1 class="title">Sistem Informasi Kemahasiswaan</h1>
+      </div>
 
-        <div class="login-card-body">
+      <div class="card-body">
 
-            <?php if (!empty($error)): ?>
-                <div class="alert alert-danger d-flex align-items-center gap-2 mb-3">
-                    <i class="ti ti-alert-circle" style="font-size: 16px;"></i>
-                    <?= $error ?>
-                </div>
-            <?php endif; ?>
-
-            <form method="post">
-                <div class="mb-3">
-                    <label class="form-label">
-                        <i class="ti ti-id-badge" style="font-size: 14px; vertical-align: -2px; margin-right: 4px; color: #1D9E75;"></i>NIM
-                    </label>
-                    <input type="text" name="nim" class="form-control" placeholder="Masukkan NIM Anda" autofocus required>
-                </div>
-
-                <div class="mb-4">
-                    <label class="form-label">
-                        <i class="ti ti-lock" style="font-size: 14px; vertical-align: -2px; margin-right: 4px; color: #1D9E75;"></i>Password
-                    </label>
-                    <div class="pw-wrapper">
-                        <input type="password" name="password" id="pw-input" class="form-control pe-5" placeholder="Masukkan password Anda" required>
-                        <button type="button" class="pw-toggle" onclick="var el=document.getElementById('pw-input');el.type=el.type==='password'?'text':'password';this.querySelector('i').className='ti '+(el.type==='password'?'ti-eye':'ti-eye-off')">
-                            <i class="ti ti-eye" style="font-size: 16px;"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <button type="submit" name="login" class="btn-login">
-                    <i class="ti ti-login-2" style="font-size: 16px;"></i> Login
-                </button>
-            </form>
+        <?php if (!empty($error)): ?>
+        <div class="alert-box" style="margin-bottom:18px;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="12" y1="8" x2="12" y2="13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="12" cy="16" r="0.8" fill="currentColor"/>
+          </svg>
+          <span><?= htmlspecialchars($error) ?></span>
         </div>
+        <?php endif; ?>
 
-        <div class="login-card-footer">
-            <i class="ti ti-user-plus" style="font-size: 14px; vertical-align: -2px; margin-right: 4px; color: #1D9E75;"></i>
-            Belum punya akun? <a href="daftar.php">Daftar di sini</a>
-        </div>
+        <form method="post">
+
+          <div class="field">
+            <label for="username">Username / NIM</label>
+            <input type="text" id="username" name="username" placeholder="Masukkan username atau NIM" autofocus required>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+            <button type="button" class="toggle-eye" id="toggleEye" aria-label="Tampilkan password" aria-pressed="false">
+              <svg class="eye-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <svg class="eye-off" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="3.5" y1="20.5" x2="20.5" y2="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <button type="submit" name="login" class="submit">Login</button>
+
+        </form>
+
+        <p class="footer-link">
+          Belum punya akun? <a href="daftar.php">Daftar di sini</a>
+        </p>
+
+      </div>
 
     </div>
 
-    <p class="text-center mt-3" style="font-size: 12px; color: #888780;">
-        &copy; <?= date('Y') ?> Poltekkes Kemenkes Bengkulu &mdash; Hak cipta dilindungi
-    </p>
+    <p class="copyright">&copy; <?= date('Y') ?> Poltekkes Kemenkes Bengkulu &mdash; Hak cipta dilindungi</p>
+  </div>
 
-</div>
+  <script>
+    const pwdInput = document.getElementById('password');
+    const eyeBtn = document.getElementById('toggleEye');
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    eyeBtn.addEventListener('click', function(){
+      const isVisible = pwdInput.type === 'text';
+      pwdInput.type = isVisible ? 'password' : 'text';
+      eyeBtn.classList.toggle('is-visible', !isVisible);
+      eyeBtn.setAttribute('aria-pressed', String(!isVisible));
+      eyeBtn.setAttribute('aria-label', isVisible ? 'Tampilkan password' : 'Sembunyikan password');
+    });
+  </script>
+
 </body>
 </html>

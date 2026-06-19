@@ -59,11 +59,11 @@ top:-190px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		</tr>
 		
 		<tr>
-			<td>Nama</td><td width="2%">:</td><td>	Eliana, SKM, M.PH</td>
+			<td>Nama</td><td width="2%">:</td><td>	Linda, SST.,M.Kes</td>
 		</tr>
 
 		<tr>
-			<td>NIP	</td><td>:</td><td>196505091989032001</td>
+			<td>NIP	</td><td>:</td><td>196909011989032001</td>
 		</tr>
 
 		<tr>
@@ -144,7 +144,7 @@ top:-190px;width:794px;height:227px"><img width="794" height="227" src="../asset
 		<tr>
 			<td>&nbsp; </td>
 			<td>&nbsp; </td>
-			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b><u>Linda, SST, M.Kes</u></b></td>
+			<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<b><u>Linda, SST.,M.Kes</u></b></td>
 		</tr>
 
 		<tr>

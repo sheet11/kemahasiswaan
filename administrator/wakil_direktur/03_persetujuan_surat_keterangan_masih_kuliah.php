@@ -5,6 +5,113 @@ include "../config/class_paging.php";
 error_reporting(0);
 ?>
 
+<style>
+    /* ===== Responsive styling tambahan (tidak mengubah logika PHP/JS) ===== */
+    .content-header h1 small {
+        font-size: 14px;
+    }
+
+    .nav-tabs-custom .nav-tabs > li > a {
+        font-weight: 500;
+    }
+
+    .search-bar-wrap {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .search-bar-wrap .input-group {
+        margin-bottom: 0;
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .table-responsive-wrap {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-responsive-wrap table {
+        margin-bottom: 0;
+    }
+
+    .table-responsive-wrap th,
+    .table-responsive-wrap td {
+        white-space: nowrap;
+        vertical-align: middle !important;
+    }
+
+    .table-responsive-wrap td.col-keperluan,
+    .table-responsive-wrap td.col-nama {
+        white-space: normal;
+        min-width: 140px;
+    }
+
+    .status-note {
+        white-space: normal !important;
+        display: block;
+        max-width: 180px;
+    }
+
+    .btn-aksi {
+        white-space: nowrap;
+    }
+
+    .paginationw {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .paginationw ul.pagination {
+        margin: 0;
+        flex-wrap: wrap;
+    }
+
+    /* ===== Tampilan khusus HP ===== */
+    @media (max-width: 767px) {
+        .content-header h1 {
+            font-size: 20px;
+        }
+
+        .nav-tabs-custom .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .nav-tabs-custom .nav-tabs > li {
+            float: none;
+        }
+
+        .nav-tabs-custom .nav-tabs > li > a {
+            padding: 8px 10px;
+            font-size: 12px;
+        }
+
+        .table-responsive-wrap th,
+        .table-responsive-wrap td {
+            font-size: 12px;
+            padding: 6px 8px;
+        }
+
+        .btn-aksi {
+            font-size: 11px;
+            padding: 5px 8px;
+        }
+
+        .label {
+            font-size: 10px;
+        }
+
+        .search-bar-wrap .input-group {
+            max-width: 100%;
+        }
+    }
+</style>
+
 <aside class="right-side">
     <section class="content-header">
         <h1>Persetujuan <small>Surat Keterangan Masih Kuliah</small></h1>
@@ -61,67 +168,71 @@ error_reporting(0);
                 $i      = $posisi + 1;
                 ?>
 
-                <div class="input-group" style="max-width:450px; margin-bottom:10px;">
-                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    <input type="text" id="keyword_wadir_mk" class="form-control" placeholder="Cari nama, NIM, jurusan..." autocomplete="off">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" id="btn_reset_wadir_mk" type="button"><i class="fa fa-times"></i></button>
-                    </span>
+                <div class="search-bar-wrap">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input type="text" id="keyword_wadir_mk" class="form-control" placeholder="Cari nama, NIM, jurusan..." autocomplete="off">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" id="btn_reset_wadir_mk" type="button"><i class="fa fa-times"></i></button>
+                        </span>
+                    </div>
+                    <small id="info_wadir_mk" class="text-muted"></small>
+                    <span id="loading_wadir_mk" style="display:none; color:#888;"><i class="fa fa-spinner fa-spin"></i></span>
                 </div>
-                <small id="info_wadir_mk" class="text-muted"></small>
-                <span id="loading_wadir_mk" style="display:none; color:#888; margin-left:8px;"><i class="fa fa-spinner fa-spin"></i></span>
 
-                <table class="table table-bordered table-striped table-hover">
-                    <thead>
-                        <tr class="info">
-                            <th>No.</th>
-                            <th>Nama Mahasiswa</th>
-                            <th>NIM</th>
-                            <th>Jurusan</th>
-                            <th>Keperluan</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center" width="8%">Preview</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody_wadir_mk">
-                    <?php
-                    $ada = false;
-                    while ($a = mysqli_fetch_array($query)):
-                        $ada = true;
-                        $sp  = $a['status_persetujuan'];
-                        $id  = $a['id_surat_keterangan_masih_kuliah'];
-                    ?>
-                        <tr>
-                            <td><?php echo $i++; ?></td>
-                            <td><?php echo $a['nama_mahasiswa']; ?></td>
-                            <td><?php echo $a['nim_mahasiswa']; ?></td>
-                            <td><?php echo $a['jurusan']; ?></td>
-                            <td><?php echo $a['keperluan']; ?></td>
-                            <td class="text-center">
-                                <?php if ($sp == 'Disetujui_Resepsionis'): ?>
-                                    <span class="label label-warning"><i class="fa fa-clock-o"></i> Menunggu Persetujuan</span>
-                                <?php elseif ($sp == 'Disetujui'): ?>
-                                    <span class="label label-success"><i class="fa fa-check"></i> Disetujui</span>
-                                <?php elseif ($sp == 'Ditolak_Wadir'): ?>
-                                    <span class="label label-danger"><i class="fa fa-times"></i> Ditolak</span>
-                                    <?php if (!empty($a['catatan_penolakan'])): ?>
-                                        <br><small class="text-danger"><?php echo $a['catatan_penolakan']; ?></small>
+                <div class="table-responsive-wrap">
+                    <table class="table table-bordered table-striped table-hover">
+                        <thead>
+                            <tr class="info">
+                                <th>No.</th>
+                                <th>Nama Mahasiswa</th>
+                                <th>NIM</th>
+                                <th>Jurusan</th>
+                                <th>Keperluan</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center" width="8%">Preview</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody_wadir_mk">
+                        <?php
+                        $ada = false;
+                        while ($a = mysqli_fetch_array($query)):
+                            $ada = true;
+                            $sp  = $a['status_persetujuan'];
+                            $id  = $a['id_surat_keterangan_masih_kuliah'];
+                        ?>
+                            <tr>
+                                <td><?php echo $i++; ?></td>
+                                <td class="col-nama"><?php echo $a['nama_mahasiswa']; ?></td>
+                                <td><?php echo $a['nim_mahasiswa']; ?></td>
+                                <td><?php echo $a['jurusan']; ?></td>
+                                <td class="col-keperluan"><?php echo $a['keperluan']; ?></td>
+                                <td class="text-center">
+                                    <?php if ($sp == 'Disetujui_Resepsionis'): ?>
+                                        <span class="label label-warning"><i class="fa fa-clock-o"></i> Menunggu Persetujuan</span>
+                                    <?php elseif ($sp == 'Disetujui'): ?>
+                                        <span class="label label-success"><i class="fa fa-check"></i> Disetujui</span>
+                                    <?php elseif ($sp == 'Ditolak_Wadir'): ?>
+                                        <span class="label label-danger"><i class="fa fa-times"></i> Ditolak</span>
+                                        <?php if (!empty($a['catatan_penolakan'])): ?>
+                                            <span class="status-note text-danger"><?php echo $a['catatan_penolakan']; ?></span>
+                                        <?php endif; ?>
                                     <?php endif; ?>
-                                <?php endif; ?>
-                            </td>
-                            <td class="text-center">
-                                <a href="03_preview_surat_keterangan_masih_kuliah.php?id_surat_keterangan_masih_kuliah=<?php echo $id; ?>&return=03_persetujuan_surat_keterangan_masih_kuliah.php"
-                                   class="btn btn-primary btn-xs">
-                                    <i class="fa fa-eye"></i> Lihat
-                                </a>
-                            </td>
-                        </tr>
-                    <?php endwhile; ?>
-                    <?php if (!$ada): ?>
-                        <tr><td colspan="7" class="text-center text-muted">Tidak ada data.</td></tr>
-                    <?php endif; ?>
-                    </tbody>
-                </table>
+                                </td>
+                                <td class="text-center">
+                                    <a href="03_preview_surat_keterangan_masih_kuliah.php?id_surat_keterangan_masih_kuliah=<?php echo $id; ?>&return=03_persetujuan_surat_keterangan_masih_kuliah.php"
+                                       class="btn btn-primary btn-xs btn-aksi">
+                                        <i class="fa fa-eye"></i> Lihat
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                        <?php if (!$ada): ?>
+                            <tr><td colspan="7" class="text-center text-muted">Tidak ada data.</td></tr>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
+                </div>
 
                 <div id="pagination_wadir_mk">
                 <?php
@@ -153,13 +264,13 @@ error_reporting(0);
         var sp=r.status_persetujuan,c=r.catatan_penolakan||'';
         if(sp==='Disetujui_Resepsionis') return "<span class='label label-warning'><i class='fa fa-clock-o'></i> Menunggu Persetujuan</span>";
         if(sp==='Disetujui')             return "<span class='label label-success'><i class='fa fa-check'></i> Disetujui</span>";
-        if(sp==='Ditolak_Wadir'){var h="<span class='label label-danger'><i class='fa fa-times'></i> Ditolak</span>";if(c)h+="<br><small class='text-danger'>"+escHtml(c)+"</small>";return h;}
+        if(sp==='Ditolak_Wadir'){var h="<span class='label label-danger'><i class='fa fa-times'></i> Ditolak</span>";if(c)h+="<span class='status-note text-danger'>"+escHtml(c)+"</span>";return h;}
         return '';
     }
 
     function renderAksi(r){
         var id=r.id_surat_keterangan_masih_kuliah;
-        return "<a href='03_preview_surat_keterangan_masih_kuliah.php?id_surat_keterangan_masih_kuliah="+id+"&return=03_persetujuan_surat_keterangan_masih_kuliah.php' class='btn btn-primary btn-xs'><i class='fa fa-eye'></i> Lihat</a>";
+        return "<a href='03_preview_surat_keterangan_masih_kuliah.php?id_surat_keterangan_masih_kuliah="+id+"&return=03_persetujuan_surat_keterangan_masih_kuliah.php' class='btn btn-primary btn-xs btn-aksi'><i class='fa fa-eye'></i> Lihat</a>";
     }
 
     function doSearch(kw){
@@ -182,7 +293,7 @@ error_reporting(0);
             if(rows.length===0){elTbody.innerHTML="<tr><td colspan='7' class='text-center'>Data tidak ditemukan.</td></tr>";elInfo.textContent='0 hasil';return;}
             var html='';
             for(var i=0;i<rows.length;i++){var r=rows[i];
-                html+="<tr><td>"+(i+1)+"</td><td>"+escHtml(r.nama_mahasiswa)+"</td><td>"+escHtml(r.nim_mahasiswa)+"</td><td>"+escHtml(r.jurusan)+"</td><td>"+escHtml(r.keperluan)+"</td><td class='text-center'>"+renderStatus(r)+"</td><td class='text-center'>"+renderAksi(r)+"</td></tr>";
+                html+="<tr><td>"+(i+1)+"</td><td class='col-nama'>"+escHtml(r.nama_mahasiswa)+"</td><td>"+escHtml(r.nim_mahasiswa)+"</td><td>"+escHtml(r.jurusan)+"</td><td class='col-keperluan'>"+escHtml(r.keperluan)+"</td><td class='text-center'>"+renderStatus(r)+"</td><td class='text-center'>"+renderAksi(r)+"</td></tr>";
             }
             elTbody.innerHTML=html;
             elInfo.textContent=rows.length+' hasil ditemukan';

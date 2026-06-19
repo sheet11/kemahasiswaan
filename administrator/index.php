@@ -1,345 +1,340 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <meta charset="UTF-8">
-    <title>Login form</title>
-    <link href="assets/css/font-awesome.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="assets/css/reset.css">
-        <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-        <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login — Aplikasi Akademik</title>
+<link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
 
-    
-        <style>
-      /* NOTE: The styles were added inline because Prefixfree needs access to your styles and they must be inlined if they are on local disk! */
-      /*still in the works :P*/
-/*variables*/
-/*general style*/
-/*google font*/
-@import "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,300,400,700)";
-body {
-  font: 13px/20px "Open Sans", Tahoma, Verdana, sans-serif;
-  color: #a7a599;
-  background: #31302b;
-}
+  :root{
+    --ink:#1b2420;
+    --ink-soft:#5b665f;
+    --paper:#f3f1ea;
+    --panel:#ffffff;
+    --line:#e4dfd2;
 
-/*Login form style*/
-/* === Logo === */
-.logo {
-  background-position: center;
-  height: 60px;
-  width: 140px;
-  margin: 100px auto 30px auto;
-}
-
-/* === Form === */
-.form {
-  width: 100%;
-}
-.form .field {
-  position: relative;
-  margin: 0 50px;
-}
-.form .field i {
-  font-size: 18px;
-  left: 0px;
-  top: 0px;
-  position: absolute;
-  height: 44px;
-  width: 44px;
-  color: #f7f3eb;
-  background: #676056;
-  text-align: center;
-  line-height: 44px;
-  transition: all 0.3s ease-out;
-  pointer-events: none;
-}
-
-/* === Login styles === */
-.login {
-  position: relative;
-  margin: 100px auto;
-  width: 370px;
-  height: 315px;
-  background: white;
-  border-radius: 3px;
-}
-.login:before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  bottom: -8px;
-  left: -8px;
-  z-index: -1;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-.login h1 {
-  line-height: 55px;
-  font-size: 24px;
-  font-weight: bold;
-  font-family: 'Open Sans', sans-serif;
-  text-transform: uppercase;
-  color: #fff;
-  text-align: center;
-  background: #1abc9c;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-}
-.login .submit {
-  text-align: center;
-}
-.login p:first-child {
-  margin-top: 30px;
-}
-.login p .remember {
-  float: left;
-}
-.login p .remember label {
-  color: #a7a599;
-  font-size: 12px;
-  cursor: pointer;
-}
-.login p .forgot {
-  float: right;
-  margin-right: 50px;
-}
-.login p .forgot a {
-  color: #a7a599;
-  font-size: 12px;
-  text-decoration: none;
-  font-style: italic;
-  transition: all 0.3s ease-out;
-}
-.login p .forgot a:hover {
-  color: #f2672e;
-}
-
-/*input style*/
-/* === Input Form === */
-::-webkit-input-placeholder {
-  color: #ded9cf;
-  font-family: 'Open Sans';
-}
-
-:-moz-placeholder {
-  color: #ded9cf !important;
-  font-family: 'Open Sans';
-}
-
-.form input[type=text], input[type=password], select[type=select] {
-  font-family: 'Open Sans', Calibri, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 10px 15px 10px 55px;
-  position: relative;
-  width: 200px;
-  height: 24px;
-  color: #676056;
-  border: none;
-  background: #f7f3eb;
-  color: #777;
-  transition: color 0.3s ease-out;
-}
-
-.form select[type=select] {
-  font-family: 'Open Sans', Calibri, Arial, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  padding: 10px 15px 10px 55px;
-  position: relative;
-  width: 270px;
-  height: 45px;
-  color: #676056;
-  border: none;
-  background: #f7f3eb;
-  color: #777;
-  transition: color 0.3s ease-out;
-}
-
-
-
-.form input[type=text] {
-  margin-bottom: 15px;
-}
-
-.form input[type=text]:hover ~ i,
-.form input[type=password]:hover ~ i {
-  color: #27ae60;
-}
-
-.form input[type=text]:focus ~ i,
-.form input[type=password]:focus ~ i {
-  color: #27ae60;
-}
-
-.form input[type=text]:focus,
-.form input[type=password]:focus,
-.form button[type=submit]:focus {
-  outline: none;
-}
-
-.form input[type=submit] {
-  margin-top: 15px;
-  width: 270px;
-  text-align: center;
-  font-size: 14px;
-  font-family: 'Open Sans',sans-serif;
-  font-weight: bold;
-  padding: 12px 0;
-  letter-spacing: 0;
-  box-shadow: inset 0px 0px 0px 0px #1abc9c;
-  color: #fff;
-  background-color: #16a085;
-  text-shadow: none;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  margin-bottom: 20px;
-  -webkit-animation: shadowFadeOut 0.4s;
-  -moz-animation: shadowFadeOut 0.4s;
-}
-
-.form input[type=submit]:hover, input[type=submit]:focus {
-  color: #fff;
-  box-shadow: inset 0px 46px 0px 0px #1abc9c;
-  -webkit-animation: shadowFade 0.4s;
-  -moz-animation: shadowFade 0.4s;
-}
-
-/*keyframes for input animation*/
-@keyframes shadowFade {
-  0% {
-    box-shadow: inset 0px 0px 0px 0px #1abc9c;
-    color: #fff;
+    /* Kemenkes greens + accent blue, used sparingly */
+    --kemenkes-green:#00824a;
+    --kemenkes-green-deep:#005c34;
+    --kemenkes-blue:#0067ac;
+    --gold:#c9a24a;
   }
-  100% {
-    box-shadow: inset 0px 46px 0px 0px #1abc9c;
-    color: #fff;
-  }
-}
-@keyframes shadowFadeOut {
-  0% {
-    box-shadow: inset 0px 46px 0px 0px #1abc9c;
-    color: #fff;
-  }
-  100% {
-    box-shadow: inset 0px 0px 0px 0px #1abc9c;
-    color: #fff;
-  }
-}
-@-webkit-keyframes shadowFade {
-  0% {
-    box-shadow: inset 0px 0px 0px 0px #1abc9c;
-    color: #fff;
-  }
-  100% {
-    box-shadow: inset 0px 46px 0px 0px #1abc9c;
-    color: #fff;
-  }
-}
-@-webkit-keyframes shadowFadeOut {
-  0% {
-    box-shadow: inset 0px 46px 0px 0px #1abc9c;
-    color: #fff;
-  }
-  100% {
-    box-shadow: inset 0px 0px 0px 0px #1abc9c;
-    color: #fff;
-  }
-}
-@-moz-keyframes shadowFade {
-  0% {
-    box-shadow: inset 0px 0px 0px 0px #1abc9c;
-    color: #fff;
-  }
-  100% {
-    box-shadow: inset 0px 46px 0px 0px #1abc9c;
-    color: #fff;
-  }
-}
-@-moz-keyframes shadowFadeOut {
-  0% {
-    box-shadow: inset 0px 44px 0px 0px #1abc9c;
-    color: #fff;
-  }
-  100% {
-    box-shadow: inset 0px 0px 0px 0px #1abc9c;
-    color: #fff;
-  }
-}
-/*continued styling for input */
-.form input[type="checkbox"] {
-  display: none;
-}
 
-/*.form input[type="checkbox"] + label span {
-    display:inline-block;
-    width:16px;
-    height:16px;
-    margin: -2px 4px 0 50px;
-    vertical-align:middle;
-    background:url("../img/checkbox.png") left top no-repeat;
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    font-family:'Inter', -apple-system, sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+  }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:24px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0,130,74,0.08), transparent 45%),
+      radial-gradient(circle at 85% 85%, rgba(0,103,172,0.07), transparent 45%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* === Card === */
+  .card{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:380px;
+    background:var(--panel);
+    border-radius:6px;
+    box-shadow: 0 26px 54px -20px rgba(0,60,40,0.28);
+    overflow:hidden;
+  }
+
+  .card-top{
+    background:linear-gradient(155deg, var(--kemenkes-green) 0%, var(--kemenkes-green-deep) 100%);
+    padding:38px 40px 32px;
+    text-align:center;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  .card-top::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:3px;
+    background:linear-gradient(90deg, var(--kemenkes-blue), var(--gold));
+  }
+
+  .mark-glyph{
+    width:48px;
+    height:48px;
+    margin:0 0 16px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    border:1.5px solid rgba(255,255,255,0.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .mark-glyph svg{ width:24px; height:24px; }
+
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:#cdeede;
+    margin:0 0 8px;
+  }
+
+  .title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:21px;
+    line-height:1.3;
+    color:#ffffff;
+    margin:0;
+    letter-spacing:0.01em;
+    max-width:260px;
+  }
+
+  /* === Form body === */
+  .card-body{
+    padding:36px 40px 40px;
+  }
+
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+
+  .field{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .field label{
+    display:block;
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+  }
+
+  .field input{
+    width:100%;
+    height:44px;
+    font-family:'Inter', sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+    background:#f7f5ef;
+    border:1.5px solid var(--line);
+    border-radius:9px;
+    padding:0 14px;
+    transition:border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .field input#password{
+    padding-right:44px;
+  }
+
+  .toggle-eye{
+    position:absolute;
+    right:8px;
+    bottom:0;
+    width:44px;
+    height:44px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:none;
+    border:none;
+    padding:0;
     cursor:pointer;
-}
-.form input[type="checkbox"]:checked + label span {
-    background:url("../img/checkbox.png") -16px top no-repeat;
-}*/
-/* === Copyright === */
-.copyright {
-  margin-top: 30px;
-  text-align: center;
-}
-.copyright p, .copyright a {
-  color: #828078;
-  font-size: 12px;
-  text-decoration: none;
-  transition: color 0.3s ease-out;
-}
-.copyright p a:hover, .copyright a a:hover {
-  color: #f2672e;
-}
+    color:#a8a294;
+    transition:color 0.2s ease;
+  }
 
-    </style>
+  .toggle-eye:hover{
+    color:var(--kemenkes-green-deep);
+  }
 
-    
-        <script src="assets/js/prefixfree.min.js"></script>
+  .toggle-eye:focus-visible{
+    outline:2px solid var(--kemenkes-blue);
+    outline-offset:2px;
+    border-radius:6px;
+  }
 
-    
-  </head>
+  .toggle-eye svg{
+    width:18px;
+    height:18px;
+    pointer-events:none;
+  }
 
-  <body>
+  .toggle-eye .eye-off{
+    display:none;
+  }
 
-    <div class="login">
-    <h1>Aplikasi Akademik</h1>
+  .toggle-eye.is-visible .eye-on{
+    display:none;
+  }
 
-    <form class="form" action="proseslogin.php" method="post" enctype="multipart/form-data">
+  .toggle-eye.is-visible .eye-off{
+    display:block;
+  }
 
-      <p class="field">
-        <input type="text" name="username" placeholder="Username" required/>
-        <i class="fa fa-user"></i>
-      </p>
+  .field input::placeholder{
+    color:#bdb6a4;
+  }
 
-     
-      <p class="field">
-        <input type="password" name="password" placeholder="Password" required/>
-        <i class="fa fa-lock"></i>
-      </p>
+  .field input:focus{
+    outline:none;
+    border-color:var(--kemenkes-green);
+    background:#ffffff;
+    box-shadow: 0 0 0 3px rgba(0,130,74,0.10);
+  }
 
-      <p class="submit"><input type="submit" name="sent" value="Login"></p>
+  .submit{
+    margin-top:4px;
+    width:100%;
+    height:46px;
+    font-family:'Inter', sans-serif;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:#ffffff;
+    background:var(--kemenkes-green-deep);
+    border:none;
+    border-radius:9px;
+    cursor:pointer;
+    transition:background 0.25s ease, transform 0.15s ease;
+  }
 
+  .submit:hover{
+    background:var(--kemenkes-green);
+  }
 
-    </form>
-  </div> <!--/ Login-->
+  .submit:active{
+    transform:translateY(1px);
+  }
 
-<div class="copyright">
-    <p>Copyright &copy; 2026. Created by <a href="" target="_blank">Poltekkes Kemenkes Bengkulu</a></p>
-    
-    
-    
-    
-    
-  </body>
+  .submit:focus-visible{
+    outline:2px solid var(--kemenkes-blue);
+    outline-offset:3px;
+  }
+
+  .copyright{
+    margin-top:18px;
+    text-align:center;
+    font-size:11px;
+    color:#8b8576;
+    position:relative;
+    z-index:1;
+  }
+
+  .copyright a{
+    color:#8b8576;
+    text-decoration:none;
+  }
+
+  @media (max-width: 420px){
+    .card-top{ padding:32px 28px 28px; }
+    .card-body{ padding:32px 28px 36px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+  <div>
+    <div class="card">
+
+      <div class="card-top">
+        <div class="mark-glyph">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 3L3 8L12 13L21 8L12 3Z" stroke="#ffffff" stroke-width="1.3" stroke-linejoin="round"/>
+            <path d="M6 11V17C6 17 8.5 19 12 19C15.5 19 18 17 18 17V11" stroke="#ffffff" stroke-width="1.3" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <p class="eyebrow">Poltekkes Kemenkes Bengkulu</p>
+        <h1 class="title">Sistem Informasi Kemahasiswaan</h1>
+      </div>
+
+      <div class="card-body">
+        <form action="proseslogin.php" method="post" enctype="multipart/form-data">
+
+          <div class="field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Masukkan username" required>
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Masukkan password" required>
+            <button type="button" class="toggle-eye" id="toggleEye" aria-label="Tampilkan password" aria-pressed="false">
+              <svg class="eye-on" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <svg class="eye-off" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2 12s3.5-6.5 10-6.5S22 12 22 12s-3.5 6.5-10 6.5S2 12 2 12Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/>
+                <line x1="3.5" y1="20.5" x2="20.5" y2="3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <button type="submit" name="sent" class="submit">Login</button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <p class="copyright">Copyright &copy; 2026. Created by <a href="" target="_blank">Poltekkes Kemenkes Bengkulu</a></p>
+  </div>
+
+  <script>
+    const pwdInput = document.getElementById('password');
+    const eyeBtn = document.getElementById('toggleEye');
+
+    eyeBtn.addEventListener('click', function(){
+      const isVisible = pwdInput.type === 'text';
+      pwdInput.type = isVisible ? 'password' : 'text';
+      eyeBtn.classList.toggle('is-visible', !isVisible);
+      eyeBtn.setAttribute('aria-pressed', String(!isVisible));
+      eyeBtn.setAttribute('aria-label', isVisible ? 'Tampilkan password' : 'Sembunyikan password');
+    });
+  </script>
+
+</body>
 </html>
