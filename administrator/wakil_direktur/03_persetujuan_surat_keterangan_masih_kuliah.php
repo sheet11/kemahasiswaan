@@ -6,109 +6,57 @@ error_reporting(0);
 ?>
 
 <style>
-    /* ===== Responsive styling tambahan (tidak mengubah logika PHP/JS) ===== */
-    .content-header h1 small {
-        font-size: 14px;
-    }
-
-    .nav-tabs-custom .nav-tabs > li > a {
-        font-weight: 500;
-    }
+    .content-header h1 small { font-size: 14px; }
+    .nav-tabs-custom .nav-tabs > li > a { font-weight: 500; }
 
     .search-bar-wrap {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 12px;
+        display: flex; align-items: center; flex-wrap: wrap;
+        gap: 8px; margin-bottom: 12px;
     }
-
     .search-bar-wrap .input-group {
-        margin-bottom: 0;
-        width: 100%;
-        max-width: 450px;
+        margin-bottom: 0; width: 100%; max-width: 450px;
     }
 
-    .table-responsive-wrap {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+    .bulk-action-bar {
+        display: flex; align-items: center; flex-wrap: wrap;
+        gap: 10px; margin-bottom: 10px;
+        padding: 10px 14px;
+        background: #f0f7ff;
+        border: 1px solid #c2d9f0;
+        border-radius: 4px;
     }
-
-    .table-responsive-wrap table {
-        margin-bottom: 0;
+    .bulk-action-bar .bulk-info {
+        flex: 1; font-size: 13px; color: #31708f; font-weight: 500;
     }
+    table.table.table-striped > tbody > tr.row-checked > td,
+    table.table.table-striped > tbody > tr.row-checked.row-checked > td {
+        background-color: #ffe066 !important;
+    }
+    tr.row-menunggu { cursor: pointer; }
+    tr.row-menunggu td:first-child { color: #337ab7; }
 
+    .table-responsive-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-responsive-wrap table { margin-bottom: 0; }
     .table-responsive-wrap th,
-    .table-responsive-wrap td {
-        white-space: nowrap;
-        vertical-align: middle !important;
-    }
-
+    .table-responsive-wrap td { white-space: nowrap; vertical-align: middle !important; }
     .table-responsive-wrap td.col-keperluan,
-    .table-responsive-wrap td.col-nama {
-        white-space: normal;
-        min-width: 140px;
-    }
+    .table-responsive-wrap td.col-nama { white-space: normal; min-width: 140px; }
+    .status-note { white-space: normal !important; display: block; max-width: 180px; }
+    .btn-aksi { white-space: nowrap; }
+    .paginationw { margin-top: 15px; text-align: center; }
+    .paginationw ul.pagination { margin: 0; flex-wrap: wrap; }
 
-    .status-note {
-        white-space: normal !important;
-        display: block;
-        max-width: 180px;
-    }
-
-    .btn-aksi {
-        white-space: nowrap;
-    }
-
-    .paginationw {
-        margin-top: 15px;
-        text-align: center;
-    }
-
-    .paginationw ul.pagination {
-        margin: 0;
-        flex-wrap: wrap;
-    }
-
-    /* ===== Tampilan khusus HP ===== */
     @media (max-width: 767px) {
-        .content-header h1 {
-            font-size: 20px;
-        }
-
-        .nav-tabs-custom .nav-tabs {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .nav-tabs-custom .nav-tabs > li {
-            float: none;
-        }
-
-        .nav-tabs-custom .nav-tabs > li > a {
-            padding: 8px 10px;
-            font-size: 12px;
-        }
-
+        .content-header h1 { font-size: 20px; }
+        .nav-tabs-custom .nav-tabs { display: flex; flex-wrap: wrap; }
+        .nav-tabs-custom .nav-tabs > li { float: none; }
+        .nav-tabs-custom .nav-tabs > li > a { padding: 8px 10px; font-size: 12px; }
         .table-responsive-wrap th,
-        .table-responsive-wrap td {
-            font-size: 12px;
-            padding: 6px 8px;
-        }
-
-        .btn-aksi {
-            font-size: 11px;
-            padding: 5px 8px;
-        }
-
-        .label {
-            font-size: 10px;
-        }
-
-        .search-bar-wrap .input-group {
-            max-width: 100%;
-        }
+        .table-responsive-wrap td { font-size: 12px; padding: 6px 8px; }
+        .btn-aksi { font-size: 11px; padding: 5px 8px; }
+        .label { font-size: 10px; }
+        .search-bar-wrap .input-group { max-width: 100%; }
+        .bulk-action-bar { flex-direction: column; align-items: flex-start; }
     }
 </style>
 
@@ -128,6 +76,12 @@ error_reporting(0);
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <i class="fa fa-check"></i> <strong>Berhasil!</strong> Surat telah <strong>disetujui</strong>. Karyawan sudah dapat mencetak surat ini.
+                </div>
+            <?php elseif ($_GET['pesan'] == 'disetujui_massal'): ?>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <i class="fa fa-check-circle"></i> <strong>Berhasil!</strong>
+                    <strong><?php echo (int)$_GET['jml']; ?> surat</strong> telah disetujui sekaligus.
                 </div>
             <?php elseif ($_GET['pesan'] == 'ditolak'): ?>
                 <div class="alert alert-danger alert-dismissible">
@@ -166,7 +120,35 @@ error_reporting(0);
                 $posisi = $p->cariPosisi($batas);
                 $query  = mysqli_query($kon, "SELECT * FROM tb_surat_keterangan_masih_kuliah $where ORDER BY id_surat_keterangan_masih_kuliah DESC LIMIT $posisi,$batas");
                 $i      = $posisi + 1;
+
+                $rows_temp    = [];
+                $ada_menunggu = false;
+                while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+                    $rows_temp[] = $row;
+                    if ($row['status_persetujuan'] == 'Disetujui_Resepsionis') {
+                        $ada_menunggu = true;
+                    }
+                }
                 ?>
+
+                <?php if ($ada_menunggu): ?>
+                <div class="bulk-action-bar" id="bulkBar">
+                    <span class="bulk-info" id="bulkInfo">
+                        <i class="fa fa-info-circle"></i>
+                        Klik baris surat yang ingin disetujui, lalu klik tombol <strong>Setujui Terpilih</strong>.
+                    </span>
+                    <button type="button" class="btn btn-success btn-sm" id="btnBulkSetujui" style="display:none;">
+                        <i class="fa fa-check-circle"></i> Setujui Terpilih
+                        (<span id="badgeCount">0</span>)
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" id="btnPilihSemua">
+                        <i class="fa fa-check-square-o"></i> Pilih Semua
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" id="btnBatalSemua" style="display:none;">
+                        <i class="fa fa-square-o"></i> Batalkan Semua
+                    </button>
+                </div>
+                <?php endif; ?>
 
                 <div class="search-bar-wrap">
                     <div class="input-group">
@@ -196,12 +178,13 @@ error_reporting(0);
                         <tbody id="tbody_wadir_mk">
                         <?php
                         $ada = false;
-                        while ($a = mysqli_fetch_array($query)):
-                            $ada = true;
-                            $sp  = $a['status_persetujuan'];
-                            $id  = $a['id_surat_keterangan_masih_kuliah'];
+                        foreach ($rows_temp as $a):
+                            $ada     = true;
+                            $sp      = $a['status_persetujuan'];
+                            $id      = $a['id_surat_keterangan_masih_kuliah'];
+                            $bisa_cb = ($sp == 'Disetujui_Resepsionis');
                         ?>
-                            <tr>
+                            <tr id="row-<?php echo $id; ?>" <?php echo $bisa_cb ? 'class="row-menunggu" data-id="'.$id.'"' : ''; ?>>
                                 <td><?php echo $i++; ?></td>
                                 <td class="col-nama"><?php echo $a['nama_mahasiswa']; ?></td>
                                 <td><?php echo $a['nim_mahasiswa']; ?></td>
@@ -226,9 +209,9 @@ error_reporting(0);
                                     </a>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endforeach; ?>
                         <?php if (!$ada): ?>
-                            <tr><td colspan="7" class="text-center text-muted">Tidak ada data.</td></tr>
+                            <tr><td colspan="8" class="text-center text-muted">Tidak ada data.</td></tr>
                         <?php endif; ?>
                         </tbody>
                     </table>
@@ -236,74 +219,289 @@ error_reporting(0);
 
                 <div id="pagination_wadir_mk">
                 <?php
-                $jmldata    = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM tb_surat_keterangan_masih_kuliah $where"));
+                $jmldata    = mysqli_num_rows(mysqli_query($kon, "SELECT * FROM tb_surat_keterangan_masih_kuliah $where"));
                 $jmlhalaman = $p->jumlahHalaman($jmldata, $batas);
                 echo "<div class='paginationw'>".$p->navHalaman($_GET['halaman'] ?? 1, $jmlhalaman)."</div>";
                 ?>
                 </div>
+
             </div>
         </div>
     </section>
 </aside>
 
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="modalBulkSetujui" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#00a65a;color:#fff;border-radius:4px 4px 0 0;">
+                <button type="button" class="close" data-dismiss="modal" style="color:#fff;">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-check-circle"></i> Konfirmasi Persetujuan</h4>
+            </div>
+            <div class="modal-body text-center">
+                <p style="font-size:15px;">Anda akan menyetujui<br>
+                    <strong><span id="modalJml">0</span> surat</strong> sekaligus.
+                </p>
+                <p class="text-muted" style="font-size:12px;">
+                    Surat yang dipilih akan langsung berstatus <strong>Disetujui</strong>
+                    dan mahasiswa dapat mencetak surat tersebut.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <i class="fa fa-times"></i> Batal
+                </button>
+                <button type="button" class="btn btn-success" id="btnKonfirmasiBulk">
+                    <i class="fa fa-check"></i> Ya, Setujui Semua
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-(function () {
-    var timer=null,DELAY=350,MIN_CHARS=2;
-    var elInput=document.getElementById('keyword_wadir_mk');
-    var elTbody=document.getElementById('tbody_wadir_mk');
-    var elPaging=document.getElementById('pagination_wadir_mk');
-    var elInfo=document.getElementById('info_wadir_mk');
-    var elLoad=document.getElementById('loading_wadir_mk');
-    var elReset=document.getElementById('btn_reset_wadir_mk');
-    var filterAktif=new URLSearchParams(window.location.search).get('filter')||'semua';
-    var validStatus=['Disetujui_Resepsionis','Disetujui','Ditolak_Wadir'];
+/* updateUI dibuat global agar bisa dipanggil dari bagian lain jika perlu */
+function applyRowColor(row) {
+    var tds = row.querySelectorAll('td');
+    if (row.classList.contains('row-checked')) {
+        tds.forEach(function(td) { td.style.setProperty('background-color', '#ffe066', 'important'); });
+    } else {
+        tds.forEach(function(td) { td.style.removeProperty('background-color'); });
+    }
+}
 
-    function escHtml(s){if(!s)return '';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function updateUI() {
+    var semua   = document.querySelectorAll('tr.row-menunggu');
+    var checked = document.querySelectorAll('tr.row-menunggu.row-checked');
+    var jml     = checked.length;
+    var total   = semua.length;
 
-    function renderStatus(r){
-        var sp=r.status_persetujuan,c=r.catatan_penolakan||'';
-        if(sp==='Disetujui_Resepsionis') return "<span class='label label-warning'><i class='fa fa-clock-o'></i> Menunggu Persetujuan</span>";
-        if(sp==='Disetujui')             return "<span class='label label-success'><i class='fa fa-check'></i> Disetujui</span>";
-        if(sp==='Ditolak_Wadir'){var h="<span class='label label-danger'><i class='fa fa-times'></i> Ditolak</span>";if(c)h+="<span class='status-note text-danger'>"+escHtml(c)+"</span>";return h;}
-        return '';
+    var btnBulk  = document.getElementById('btnBulkSetujui');
+    var badge    = document.getElementById('badgeCount');
+    var bulkInfo = document.getElementById('bulkInfo');
+    var btnPilih = document.getElementById('btnPilihSemua');
+    var btnBatal = document.getElementById('btnBatalSemua');
+
+    /* Terapkan warna kuning langsung via inline style agar pasti menang
+       melawan CSS tema (table-striped, dsb). */
+    semua.forEach(function(row) { applyRowColor(row); });
+
+    /* Tombol Setujui Terpilih — muncul kalau minimal 1 dipilih */
+    if (btnBulk) {
+        if (jml > 0) {
+            btnBulk.style.display = 'inline-block';
+        } else {
+            btnBulk.style.display = 'none';
+        }
     }
 
-    function renderAksi(r){
-        var id=r.id_surat_keterangan_masih_kuliah;
+    /* Badge jumlah di dalam tombol */
+    if (badge) badge.textContent = jml;
+
+    /* Teks info */
+    if (bulkInfo) {
+        if (jml === 0) {
+            bulkInfo.innerHTML = '<i class="fa fa-info-circle"></i> Klik baris surat yang ingin disetujui, lalu klik tombol <strong>Setujui Terpilih</strong>.';
+        } else {
+            bulkInfo.innerHTML = '<i class="fa fa-check-square-o" style="color:#00a65a;"></i> <strong>' + jml + ' dari ' + total + '</strong> surat dipilih.';
+        }
+    }
+
+    /* Tombol Pilih Semua / Batalkan Semua */
+    if (btnPilih && btnBatal) {
+        if (jml === total && total > 0) {
+            btnPilih.style.display = 'none';
+            btnBatal.style.display = 'inline-block';
+        } else {
+            btnPilih.style.display = 'inline-block';
+            btnBatal.style.display = 'none';
+        }
+    }
+}
+
+(function () {
+    /* Pilih Semua */
+    var btnPilih = document.getElementById('btnPilihSemua');
+    if (btnPilih) {
+        btnPilih.addEventListener('click', function() {
+            document.querySelectorAll('tr.row-menunggu').forEach(function(row) { row.classList.add('row-checked'); });
+            updateUI();
+        });
+    }
+
+    /* Batalkan Semua */
+    var btnBatal = document.getElementById('btnBatalSemua');
+    if (btnBatal) {
+        btnBatal.addEventListener('click', function() {
+            document.querySelectorAll('tr.row-menunggu').forEach(function(row) { row.classList.remove('row-checked'); });
+            updateUI();
+        });
+    }
+
+    /* Klik baris (selain tombol Lihat) men-toggle pilihan.
+       Tidak ada lagi checkbox; seleksi murni lewat class row-checked
+       pada elemen <tr>, di-trigger oleh klik di kolom nomor / baris. */
+    var tbody = document.getElementById('tbody_wadir_mk');
+    if (tbody) {
+        tbody.addEventListener('click', function(e) {
+            if (e.target.closest('a')) return;
+
+            var row = e.target.closest('tr.row-menunggu');
+            if (!row) return;
+
+            row.classList.toggle('row-checked');
+            updateUI();
+        });
+    }
+
+    /* Buka modal saat klik Setujui Terpilih */
+    var btnBulk = document.getElementById('btnBulkSetujui');
+    if (btnBulk) {
+        btnBulk.addEventListener('click', function() {
+            var jml = document.querySelectorAll('tr.row-menunggu.row-checked').length;
+            if (jml === 0) return;
+            document.getElementById('modalJml').textContent = jml;
+            $('#modalBulkSetujui').modal('show');
+        });
+    }
+
+    /* Konfirmasi → kirim AJAX */
+    var btnKonfirmasi = document.getElementById('btnKonfirmasiBulk');
+    if (btnKonfirmasi) {
+        btnKonfirmasi.addEventListener('click', function() {
+            var checked = document.querySelectorAll('tr.row-menunggu.row-checked');
+            var ids = [];
+            checked.forEach(function(row) { ids.push(row.getAttribute('data-id')); });
+            if (ids.length === 0) return;
+
+            btnKonfirmasi.disabled = true;
+            btnKonfirmasi.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Memproses...';
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'proses_bulk_setujui.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState !== 4) return;
+                $('#modalBulkSetujui').modal('hide');
+                var resp;
+                try { resp = JSON.parse(xhr.responseText); } catch(e) { resp = {status:'error'}; }
+                if (resp.status === 'ok') {
+                    var filterNow = new URLSearchParams(window.location.search).get('filter') || 'semua';
+                    window.location.href = window.location.pathname
+                        + '?filter=' + filterNow
+                        + '&pesan=disetujui_massal&jml=' + resp.jml;
+                } else {
+                    alert('Terjadi kesalahan: ' + (resp.pesan || 'Silakan coba lagi.'));
+                    btnKonfirmasi.disabled = false;
+                    btnKonfirmasi.innerHTML = '<i class="fa fa-check"></i> Ya, Setujui Semua';
+                }
+            };
+            xhr.send('ids=' + encodeURIComponent(JSON.stringify(ids)) + '&jenis=masih_kuliah');
+        });
+    }
+}());
+
+/* ================================================================
+   LIVE SEARCH
+   ================================================================ */
+(function () {
+    var timer=null, DELAY=350, MIN_CHARS=2;
+    var elInput  = document.getElementById('keyword_wadir_mk');
+    var elTbody  = document.getElementById('tbody_wadir_mk');
+    var elPaging = document.getElementById('pagination_wadir_mk');
+    var elInfo   = document.getElementById('info_wadir_mk');
+    var elLoad   = document.getElementById('loading_wadir_mk');
+    var elReset  = document.getElementById('btn_reset_wadir_mk');
+    var filterAktif = new URLSearchParams(window.location.search).get('filter') || 'semua';
+    var validStatus = ['Disetujui_Resepsionis','Disetujui','Ditolak_Wadir'];
+
+    function escHtml(s) {
+        if (!s) return '';
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function renderStatus(r) {
+        var sp=r.status_persetujuan, c=r.catatan_penolakan||'';
+        if (sp==='Disetujui_Resepsionis') return "<span class='label label-warning'><i class='fa fa-clock-o'></i> Menunggu Persetujuan</span>";
+        if (sp==='Disetujui')             return "<span class='label label-success'><i class='fa fa-check'></i> Disetujui</span>";
+        if (sp==='Ditolak_Wadir') {
+            var h = "<span class='label label-danger'><i class='fa fa-times'></i> Ditolak</span>";
+            if (c) h += "<span class='status-note text-danger'>"+escHtml(c)+"</span>";
+            return h;
+        }
+        return '';
+    }
+    function renderAksi(r) {
+        var id = r.id_surat_keterangan_masih_kuliah;
         return "<a href='03_preview_surat_keterangan_masih_kuliah.php?id_surat_keterangan_masih_kuliah="+id+"&return=03_persetujuan_surat_keterangan_masih_kuliah.php' class='btn btn-primary btn-xs btn-aksi'><i class='fa fa-eye'></i> Lihat</a>";
     }
 
-    function doSearch(kw){
-        if(kw.length===0){reset();return;}
-        if(kw.length<MIN_CHARS)return;
-        elLoad.style.display='inline';
-        var xhr=new XMLHttpRequest();
-        xhr.open('GET','../karyawan/ajax_search_surat.php?tabel=masih_kuliah&keyword='+encodeURIComponent(kw),true);
-        xhr.onreadystatechange=function(){
-            if(xhr.readyState!==4)return;
-            elLoad.style.display='none';
-            if(xhr.status!==200){elTbody.innerHTML="<tr><td colspan='7' class='text-center text-danger'>Gagal memuat data.</td></tr>";return;}
-            var resp;try{resp=JSON.parse(xhr.responseText);}catch(e){elTbody.innerHTML="<tr><td colspan='7' class='text-center text-danger'>Response tidak valid.</td></tr>";return;}
-            if(resp.error){elTbody.innerHTML="<tr><td colspan='7' class='text-center text-danger'>"+escHtml(resp.error)+"</td></tr>";return;}
-            elPaging.style.display='none';
-            var rows=resp.data.filter(function(r){
-                if(filterAktif&&filterAktif!=='semua') return r.status_persetujuan===filterAktif;
-                return validStatus.indexOf(r.status_persetujuan)!==-1;
-            });
-            if(rows.length===0){elTbody.innerHTML="<tr><td colspan='7' class='text-center'>Data tidak ditemukan.</td></tr>";elInfo.textContent='0 hasil';return;}
-            var html='';
-            for(var i=0;i<rows.length;i++){var r=rows[i];
-                html+="<tr><td>"+(i+1)+"</td><td class='col-nama'>"+escHtml(r.nama_mahasiswa)+"</td><td>"+escHtml(r.nim_mahasiswa)+"</td><td>"+escHtml(r.jurusan)+"</td><td class='col-keperluan'>"+escHtml(r.keperluan)+"</td><td class='text-center'>"+renderStatus(r)+"</td><td class='text-center'>"+renderAksi(r)+"</td></tr>";
+    function doSearch(kw) {
+        if (kw.length === 0) { reset(); return; }
+        if (kw.length < MIN_CHARS) return;
+        elLoad.style.display = 'inline';
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '../karyawan/ajax_search_surat.php?tabel=masih_kuliah&keyword='+encodeURIComponent(kw), true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState !== 4) return;
+            elLoad.style.display = 'none';
+            if (xhr.status !== 200) {
+                elTbody.innerHTML = "<tr><td colspan='8' class='text-center text-danger'>Gagal memuat data.</td></tr>";
+                return;
             }
-            elTbody.innerHTML=html;
-            elInfo.textContent=rows.length+' hasil ditemukan';
+            var resp;
+            try { resp = JSON.parse(xhr.responseText); } catch(e) {
+                elTbody.innerHTML = "<tr><td colspan='8' class='text-center text-danger'>Response tidak valid.</td></tr>";
+                return;
+            }
+            if (resp.error) {
+                elTbody.innerHTML = "<tr><td colspan='8' class='text-center text-danger'>"+escHtml(resp.error)+"</td></tr>";
+                return;
+            }
+            elPaging.style.display = 'none';
+            var rows = resp.data.filter(function(r) {
+                if (filterAktif && filterAktif !== 'semua') return r.status_persetujuan === filterAktif;
+                return validStatus.indexOf(r.status_persetujuan) !== -1;
+            });
+            if (rows.length === 0) {
+                elTbody.innerHTML = "<tr><td colspan='8' class='text-center'>Data tidak ditemukan.</td></tr>";
+                elInfo.textContent = '0 hasil';
+                return;
+            }
+            var html = '';
+            for (var i = 0; i < rows.length; i++) {
+                var r = rows[i];
+                var isMenunggu = (r.status_persetujuan === 'Disetujui_Resepsionis');
+                html += "<tr id='row-"+r.id_surat_keterangan_masih_kuliah+"'" + (isMenunggu ? " class='row-menunggu' data-id='"+r.id_surat_keterangan_masih_kuliah+"'" : "") + ">";
+                html += "<td>" + (i+1) + "</td>";
+                html += "<td class='col-nama'>" + escHtml(r.nama_mahasiswa) + "</td>";
+                html += "<td>" + escHtml(r.nim_mahasiswa) + "</td>";
+                html += "<td>" + escHtml(r.jurusan) + "</td>";
+                html += "<td class='col-keperluan'>" + escHtml(r.keperluan) + "</td>";
+                html += "<td class='text-center'>" + renderStatus(r) + "</td>";
+                html += "<td class='text-center'>" + renderAksi(r) + "</td>";
+                html += "</tr>";
+            }
+            elTbody.innerHTML = html;
+            elInfo.textContent = rows.length + ' hasil ditemukan';
+            updateUI();
         };
         xhr.send();
     }
 
-    function reset(){elInfo.textContent='';elPaging.style.display='';window.location.href=window.location.pathname+(filterAktif&&filterAktif!=='semua'?'?filter='+filterAktif:'');}
-    elInput.addEventListener('input',function(){clearTimeout(timer);var kw=this.value.trim();timer=setTimeout(function(){doSearch(kw);},DELAY);});
-    elReset.addEventListener('click',function(){elInput.value='';reset();});
-    elInput.addEventListener('keydown',function(e){if(e.key==='Enter'){clearTimeout(timer);doSearch(this.value.trim());}});
+    function reset() {
+        elInfo.textContent = '';
+        elPaging.style.display = '';
+        window.location.href = window.location.pathname + (filterAktif && filterAktif !== 'semua' ? '?filter='+filterAktif : '');
+    }
+
+    elInput.addEventListener('input', function() {
+        clearTimeout(timer);
+        var kw = this.value.trim();
+        timer = setTimeout(function() { doSearch(kw); }, DELAY);
+    });
+    elReset.addEventListener('click', function() { elInput.value = ''; reset(); });
+    elInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') { clearTimeout(timer); doSearch(this.value.trim()); }
+    });
 }());
 </script>

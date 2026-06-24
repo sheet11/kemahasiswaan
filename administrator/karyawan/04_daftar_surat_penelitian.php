@@ -139,18 +139,15 @@
                         $hal_ini = '04_daftar_surat_penelitian.php';
                         $html    = '';
 
-                        // Cetak — hanya jika wadir sudah setujui
                         if ($sp == 'Disetujui')
                             $html .= "<a href='04_cetak_surat_penelitian.php?id_surat_penelitian=$id$param' class='btn btn-info btn-xs' title='Cetak Surat'><span class='glyphicon glyphicon-print'></span></a> ";
 
-                        // Setujui & Tolak — jika masih bisa diproses karyawan
                         if ($sp == 'Menunggu' || $sp == 'Telah_Direvisi') {
                             $lbl = ($sp == 'Telah_Direvisi') ? 'Setujui Revisi ke Wadir' : 'Setujui & Teruskan ke Wadir';
                             $html .= "<a href='proses_karyawan.php?aksi=setujui&jenis=penelitian&id=$id&return=$hal_ini' onclick=\"return confirm('$lbl?')\" class='btn btn-success btn-xs' title='$lbl'><i class='fa fa-check'></i></a> ";
                             $html .= "<a href='proses_karyawan.php?aksi=tolak&jenis=penelitian&id=$id&return=$hal_ini' class='btn btn-warning btn-xs' title='Kembalikan ke Mahasiswa'><i class='fa fa-undo'></i></a> ";
                         }
 
-                        // Preview selalu tampil
                         $html .= "<a href='04_preview_surat_penelitian.php?id_surat_penelitian=$id&return=$hal_ini' class='btn btn-primary btn-xs' title='Preview'><i class='fa fa-eye'></i></a> ";
                         $html .= "<a href='04_edit_surat_penelitian.php?id_surat_penelitian=$id$param' class='btn btn-default btn-xs' title='Edit'><span class='glyphicon glyphicon-pencil'></span></a> ";
                         $html .= "<a href='04_delete_surat_penelitian.php?id_surat_penelitian=$id$param' onclick='return confirm(\"Hapus surat {$a['nama_mahasiswa']}?\")' class='btn btn-danger btn-xs' title='Hapus'><span class='glyphicon glyphicon-remove'></span></a>";
@@ -218,6 +215,8 @@
     var urlParams = new URLSearchParams(window.location.search);
     var FILTER    = urlParams.get('filter') || 'semua';
 
+    var STORAGE_KEY = 'keyword_pen_' + FILTER;
+
     function escHtml(s) {
         if (!s) return '';
         return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -276,11 +275,30 @@
     }
 
     function resetView(){
+        sessionStorage.removeItem(STORAGE_KEY);
         elInfo.textContent=''; elPaging.style.display='';
         window.location.href=window.location.pathname+(FILTER!=='semua'?'?filter='+FILTER:'');
     }
-    elInput.addEventListener('input',function(){clearTimeout(timer);var kw=this.value.trim();timer=setTimeout(function(){doSearch(kw);},DELAY);});
+
+    elInput.addEventListener('input',function(){
+        var kw=this.value.trim();
+        if(kw.length>0) sessionStorage.setItem(STORAGE_KEY, kw);
+        else sessionStorage.removeItem(STORAGE_KEY);
+        clearTimeout(timer);
+        timer=setTimeout(function(){doSearch(kw);},DELAY);
+    });
+
     elReset.addEventListener('click',function(){elInput.value='';resetView();});
-    elInput.addEventListener('keydown',function(e){if(e.key==='Enter'){clearTimeout(timer);doSearch(this.value.trim());}});
+
+    elInput.addEventListener('keydown',function(e){
+        if(e.key==='Enter'){clearTimeout(timer);doSearch(this.value.trim());}
+    });
+
+    var savedKw = sessionStorage.getItem(STORAGE_KEY);
+    if(savedKw){
+        elInput.value = savedKw;
+        doSearch(savedKw);
+    }
+
 }());
 </script>

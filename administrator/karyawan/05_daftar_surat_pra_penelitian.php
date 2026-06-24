@@ -126,18 +126,15 @@
                         $hal_ini = '05_daftar_surat_pra_penelitian.php';
                         $html    = '';
 
-                        // Cetak hanya jika wadir sudah setujui
                         if ($sp == 'Disetujui')
                             $html .= "<a href='05_cetak_surat_pra_penelitian.php?id_surat_pra_penelitian=$id$param' class='btn btn-info btn-xs' title='Cetak'><span class='glyphicon glyphicon-print'></span></a> ";
 
-                        // Setujui & Tolak jika masih bisa diproses karyawan
                         if ($sp == 'Menunggu' || $sp == 'Telah_Direvisi') {
                             $lbl = ($sp == 'Telah_Direvisi') ? 'Setujui Revisi ke Wadir' : 'Setujui & Teruskan ke Wadir';
                             $html .= "<a href='proses_karyawan.php?aksi=setujui&jenis=pra_penelitian&id=$id&return=$hal_ini' onclick=\"return confirm('$lbl?')\" class='btn btn-success btn-xs' title='$lbl'><i class='fa fa-check'></i></a> ";
                             $html .= "<a href='proses_karyawan.php?aksi=tolak&jenis=pra_penelitian&id=$id&return=$hal_ini' class='btn btn-warning btn-xs' title='Kembalikan ke Mahasiswa'><i class='fa fa-undo'></i></a> ";
                         }
 
-                        // Preview selalu tampil
                         $html .= "<a href='05_preview_surat_pra_penelitian.php?id_surat_pra_penelitian=$id&return=$hal_ini' class='btn btn-primary btn-xs' title='Preview'><i class='fa fa-eye'></i></a> ";
                         $html .= "<a href='05_edit_surat_pra_penelitian.php?id_surat_pra_penelitian=$id$param' class='btn btn-default btn-xs' title='Edit'><span class='glyphicon glyphicon-pencil'></span></a> ";
                         // $html .= "<a href='05_kembalikan_surat_pra_penelitian.php?id_surat_pra_penelitian=$id$param' class='btn btn-warning btn-xs' title='Kembalikan'><span class='glyphicon glyphicon-envelope'></span></a> ";
@@ -186,16 +183,21 @@
 
 <script>
 (function () {
-    var timer=null,DELAY=350,MIN_CHARS=2;
-    var elInput=document.getElementById('keyword_pra'),elTbody=document.getElementById('tbody_pra'),
-        elPaging=document.getElementById('pagination_pra'),elInfo=document.getElementById('info_pra'),
-        elLoad=document.getElementById('loading_pra'),elReset=document.getElementById('btn_reset_pra');
-    var FILTER=new URLSearchParams(window.location.search).get('filter')||'semua';
+    var timer=null, DELAY=350, MIN_CHARS=2;
+    var elInput  = document.getElementById('keyword_pra');
+    var elTbody  = document.getElementById('tbody_pra');
+    var elPaging = document.getElementById('pagination_pra');
+    var elInfo   = document.getElementById('info_pra');
+    var elLoad   = document.getElementById('loading_pra');
+    var elReset  = document.getElementById('btn_reset_pra');
+    var FILTER   = new URLSearchParams(window.location.search).get('filter') || 'semua';
+
+    var STORAGE_KEY = 'keyword_pra_' + FILTER;
 
     function escHtml(s){if(!s)return '';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
     function renderStatus(r){
-        var sp=r.status_persetujuan,st=r.status,cat=r.catatan_penolakan||'';
+        var sp=r.status_persetujuan, st=r.status, cat=r.catatan_penolakan||'';
         switch(sp){
             case 'Menunggu':              return "<span class='label label-warning' style='font-size:12px;'><i class='fa fa-clock-o'></i> Menunggu Review</span>";
             case 'Perlu_Revisi':          var h="<span class='label label-warning' style='font-size:12px;background:#e67e22;'><i class='fa fa-edit'></i> Perlu Revisi</span>";if(cat)h+="<br><small style='color:#d68910;'>"+escHtml(cat)+"</small>";return h;
@@ -207,7 +209,7 @@
     }
 
     function renderAksi(r){
-        var id=r.id_surat_pra_penelitian,nama=escHtml(r.nama_mahasiswa),sp=r.status_persetujuan,html='';
+        var id=r.id_surat_pra_penelitian, nama=escHtml(r.nama_mahasiswa), sp=r.status_persetujuan, html='';
         var hal_ini='05_daftar_surat_pra_penelitian.php';
         if(sp==='Disetujui')
             html+="<a href='05_cetak_surat_pra_penelitian.php?id_surat_pra_penelitian="+id+"' class='btn btn-info btn-xs'><span class='glyphicon glyphicon-print'></span></a> ";
@@ -224,28 +226,56 @@
     }
 
     function doSearch(kw){
-        if(kw.length===0){resetView();return;}if(kw.length<MIN_CHARS)return;
+        if(kw.length===0){resetView();return;}
+        if(kw.length<MIN_CHARS) return;
         elLoad.style.display='inline';
         var xhr=new XMLHttpRequest();
-        xhr.open('GET','ajax_search_surat.php?tabel=pra_penelitian&keyword='+encodeURIComponent(kw),true);
+        xhr.open('GET','ajax_search_surat.php?tabel=pra_penelitian&keyword='+encodeURIComponent(kw)+'&filter='+encodeURIComponent(FILTER),true);
         xhr.onreadystatechange=function(){
-            if(xhr.readyState!==4)return;elLoad.style.display='none';
+            if(xhr.readyState!==4) return;
+            elLoad.style.display='none';
             if(xhr.status!==200){elTbody.innerHTML="<tr><td colspan='9' class='text-center text-danger'>Gagal memuat data.</td></tr>";return;}
-            var resp;try{resp=JSON.parse(xhr.responseText);}catch(e){return;}
+            var resp; try{resp=JSON.parse(xhr.responseText);}catch(e){return;}
             elPaging.style.display='none';
             var rows=resp.data;
             if(FILTER&&FILTER!=='semua') rows=rows.filter(function(r){return r.status_persetujuan===FILTER;});
             if(!rows||rows.length===0){elTbody.innerHTML="<tr><td colspan='9' class='text-center'>Data tidak ditemukan.</td></tr>";elInfo.textContent='0 hasil';return;}
             var html='';
-            for(var i=0;i<rows.length;i++){var r=rows[i];
+            for(var i=0;i<rows.length;i++){
+                var r=rows[i];
                 html+="<tr><td>"+(i+1)+"</td><td>"+escHtml(r.nama_mahasiswa)+"</td><td>"+escHtml(r.nim_mahasiswa)+"</td><td>"+escHtml(r.prodi)+"</td><td>"+escHtml(r.judul_kti)+"</td><td>"+escHtml(r.tujuan)+"</td><td>"+escHtml(r.keterangan)+"</td><td>"+renderStatus(r)+"</td><td>"+renderAksi(r)+"</td></tr>";
             }
-            elTbody.innerHTML=html;elInfo.textContent=rows.length+' hasil ditemukan';
-        };xhr.send();
+            elTbody.innerHTML=html;
+            elInfo.textContent=rows.length+' hasil ditemukan';
+        };
+        xhr.send();
     }
-    function resetView(){elInfo.textContent='';elPaging.style.display='';window.location.href=window.location.pathname+(FILTER!=='semua'?'?filter='+FILTER:'');}
-    elInput.addEventListener('input',function(){clearTimeout(timer);var kw=this.value.trim();timer=setTimeout(function(){doSearch(kw);},DELAY);});
+
+    function resetView(){
+        sessionStorage.removeItem(STORAGE_KEY);
+        elInfo.textContent=''; elPaging.style.display='';
+        window.location.href=window.location.pathname+(FILTER!=='semua'?'?filter='+FILTER:'');
+    }
+
+    elInput.addEventListener('input',function(){
+        var kw=this.value.trim();
+        if(kw.length>0) sessionStorage.setItem(STORAGE_KEY, kw);
+        else sessionStorage.removeItem(STORAGE_KEY);
+        clearTimeout(timer);
+        timer=setTimeout(function(){doSearch(kw);},DELAY);
+    });
+
     elReset.addEventListener('click',function(){elInput.value='';resetView();});
-    elInput.addEventListener('keydown',function(e){if(e.key==='Enter'){clearTimeout(timer);doSearch(this.value.trim());}});
+
+    elInput.addEventListener('keydown',function(e){
+        if(e.key==='Enter'){clearTimeout(timer);doSearch(this.value.trim());}
+    });
+
+    var savedKw = sessionStorage.getItem(STORAGE_KEY);
+    if(savedKw){
+        elInput.value = savedKw;
+        doSearch(savedKw);
+    }
+
 }());
 </script>
