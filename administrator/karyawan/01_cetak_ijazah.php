@@ -35,7 +35,7 @@
         <?php } else { ?>
           Nomor Ijazah Nasional:  
         <?php } ?> <?php echo "$a[no_seri_ijazah]"; ?></td> -->
-        <td align="right" style='font-size:10.0pt;'>Nomor Sertifikat Nasional: <?php echo "$a[no_seri_ijazah]"; ?></td>
+        <td align="right" style='font-size:10.0pt;'>Nomor Ijazah Nasional: <?php echo "$a[no_seri_ijazah]"; ?></td>
     </tr>
   </table>
 <br>
@@ -64,7 +64,7 @@
         <?php } else { ?>
           Memberikan Ijazah Kepada: 
         <?php } ?></td> -->
-        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'> Diberikan Sertifikat Kepada:  </td>
+        <td align="center" colspan ="4" style='font-size:12.0pt;line-height:14px;'> Memberikan Ijazah Kepada:  </td>
       </tr>
 
     <tr>
@@ -98,7 +98,7 @@
     </tr>
 
     <tr>
-      <td align="center" colspan="4" style='font-size:12.0pt;line-height:16px;'>beserta segala hak, wewenang dan kewajiban yang melekat pada gelar tersebut.</td>
+      <td align="center" colspan="4" style='font-size:12.0pt;line-height:16px;'>beserta segala hak, wewenang, dan kewajiban yang melekat pada gelar tersebut.</td>
     </tr>
 
 
@@ -153,9 +153,10 @@
     </tr>
     <tr>
         <td align="center" style="text-decoration: overline;line-height:1.4;"><?php echo "$a[nip_direktur]"; ?></td>
-        <td align="center">&nbsp;NIK: <?php echo "$a[nik]"; ?></td>
+        <td align="center"></td>
         <td align="center" style="text-decoration: overline;"><?php echo "$a[nip_pudir]"; ?></td>
-    </tr>
+            <!-- &nbsp;NIK: <?php echo "$a[nik]"; ?> -->
+      </tr>
 </table>
 
 </table>

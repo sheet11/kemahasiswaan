@@ -91,7 +91,7 @@ include "01_nav.php";
                                     <th>Jenis Surat</th>
                                     <th class="text-center"><span class="label label-warning">Menunggu</span></th>
                                     <th class="text-center"><span class="label label-success">Disetujui</span></th>
-                                    <th class="text-center"><span class="label label-danger">Ditolak</span></th>
+                                    <!-- <th class="text-center"><span class="label label-danger">Ditolak</span></th> -->
                                     <th class="text-center">Total</th>
                                 </tr>
                             </thead>
@@ -106,13 +106,12 @@ include "01_nav.php";
                                 foreach ($surat_list as $s) {
                                     $menunggu  = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='Menunggu'"));
                                     $disetujui = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='Disetujui'"));
-                                    $ditolak   = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='Ditolak'"));
-                                    $total     = $menunggu + $disetujui + $ditolak;
+                                    // $ditolak   = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='Ditolak'"));
+                                    $total     = $menunggu + $disetujui;
                                     echo "<tr>
                                         <td>{$s['label']}</td>
                                         <td class='text-center'><span class='badge' style='background:#f39c12'>$menunggu</span></td>
                                         <td class='text-center'><span class='badge' style='background:#00a65a'>$disetujui</span></td>
-                                        <td class='text-center'><span class='badge' style='background:#dd4b39'>$ditolak</span></td>
                                         <td class='text-center'><strong>$total</strong></td>
                                     </tr>";
                                 }

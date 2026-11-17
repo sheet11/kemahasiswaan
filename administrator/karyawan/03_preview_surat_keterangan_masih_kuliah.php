@@ -141,7 +141,7 @@ $sl = isset($status_label[$sp]) ? $status_label[$sp] : ['class'=>'s-menunggu','l
         <tr><td colspan="3">Yang bertandatangan dibawah ini :</td></tr>
         <tr><td>&emsp;&emsp;&emsp;Nama</td><td width="2%">:</td><td>Septiyanti, S.Kep, Ners, M.Pd</td></tr>
         <tr><td>&emsp;&emsp;&emsp;NIP</td><td>:</td><td>197409161997032001</td></tr>
-        <tr><td>&emsp;&emsp;&emsp;Pangkat, Golongan/Ruang</td><td>:</td><td>Pembina/IV B</td></tr>
+        <tr><td>&emsp;&emsp;&emsp;Pangkat, Golongan/Ruang</td><td>:</td><td>Pembina Utama Muda/IV C</td></tr>
         <tr><td>&emsp;&emsp;&emsp;Jabatan</td><td>:</td><td>Wakil Direktur Bidang Akademik</td></tr>
         <tr><td colspan="3">&nbsp;</td></tr>
         <tr><td colspan="3">Dengan ini menyatakan bahwa :</td></tr>

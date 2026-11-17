@@ -69,6 +69,7 @@ if($_SESSION['level'] == "karyawan"){ ?>
 					<td>
 						
 						<a href='01_cetak_ijazah.php?id_ijazah=$a[id_ijazah]'class=' glyphicon glyphicon-print btn btn-success'> </a>
+						<a href='01_cetak_ulang_ijazah.php?id_ijazah=$a[id_ijazah]'class='btn btn-info'>Cetak Ulang</a>
 							
 			
 

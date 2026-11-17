@@ -46,6 +46,69 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
+        <style>
+            /* ===== Perbaikan header agar tidak tabrakan dengan tombol sidebar-toggle di HP ===== */
+
+            /* Pastikan header tidak overflow, dan logo tidak mendorong elemen lain */
+            .header {
+                position: relative;
+            }
+
+            .header .logo {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Teks panjang "Sistem Informasi Kemahasiswaan..." */
+            .navbar-right .user-menu > a > span {
+                white-space: nowrap;
+            }
+
+            /* Beri sedikit padding kanan agar tidak mepet ujung layar */
+            .navbar-static-top {
+                padding-right: 10px;
+            }
+
+            /* ===== Tampilan khusus HP/tablet kecil ===== */
+            @media (max-width: 767px) {
+                /* Logo: kecilkan font supaya tidak makan banyak tempat */
+                .header .logo {
+                    font-size: 16px;
+                    max-width: 60%;
+                }
+
+                /* Sembunyikan teks panjang di navbar kanan, ganti jadi ikon saja */
+                .navbar-right .user-menu > a > span {
+                    display: none;
+                }
+
+                .navbar-right .user-menu > a::before {
+                    font-family: FontAwesome;
+                    content: "\f013"; /* ikon gear sebagai pengganti teks */
+                    font-size: 16px;
+                }
+
+                /* Pastikan tombol sidebar-toggle tetap punya ruang sendiri, tidak tertindih */
+                .sidebar-toggle {
+                    position: relative;
+                    z-index: 10;
+                }
+
+                .navbar-right {
+                    margin-right: 5px;
+                }
+            }
+
+            /* ===== Tampilan untuk layar sangat kecil (HP kecil) ===== */
+            @media (max-width: 420px) {
+                .header .logo {
+                    font-size: 14px;
+                    max-width: 50%;
+                }
+            }
+        </style>
     </head>
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
