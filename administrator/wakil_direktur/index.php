@@ -98,13 +98,14 @@ include "01_nav.php";
                             <tbody>
                                 <?php
                                 $surat_list = [
-                                    // ['label' => 'Surat Keterangan Lulus',        'tabel' => 'tb_surat_keterangan_lulus'],
-                                    ['label' => 'Surat Keterangan Masih Kuliah', 'tabel' => 'tb_surat_keterangan_masih_kuliah'],
-                                    ['label' => 'Surat Pra Penelitian',          'tabel' => 'tb_surat_pra_penelitian'],
-                                    ['label' => 'Surat Penelitian',              'tabel' => 'tb_surat_penelitian'],
+                                    ['label' => 'Surat Keterangan Lulus',        'tabel' => 'tb_surat_keterangan_lulus', 'status' => 'Menunggu'],
+                                    ['label' => 'Surat Keterangan Masih Kuliah', 'tabel' => 'tb_surat_keterangan_masih_kuliah', 'status' => 'Disetujui_Resepsionis'],
+                                    ['label' => 'Surat Pra Penelitian',          'tabel' => 'tb_surat_pra_penelitian', 'status' => 'Disetujui_Resepsionis'],
+                                    ['label' => 'Surat Penelitian',              'tabel' => 'tb_surat_penelitian', 'status' => 'Disetujui_Resepsionis'],
                                 ];
                                 foreach ($surat_list as $s) {
-                                    $menunggu  = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='Menunggu'"));
+                                    $menunggu_status = mysqli_real_escape_string($kon, $s['status']);
+                                    $menunggu  = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='$menunggu_status'"));
                                     $disetujui = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='Disetujui'"));
                                     // $ditolak   = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM {$s['tabel']} WHERE status_persetujuan='Ditolak'"));
                                     $total     = $menunggu + $disetujui;
