@@ -2,6 +2,10 @@
 include "01_nav.php";
 include "../config/koneksi.php";
 include "../config/class_paging.php";
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+$jumlah_menunggu_bulk = mysqli_num_rows(mysqli_query($kon, "SELECT id_surat_penelitian FROM tb_surat_penelitian WHERE status_persetujuan='Disetujui_Resepsionis'"));
 error_reporting(0);
 ?>
 
@@ -123,6 +127,14 @@ error_reporting(0);
 
     <section class="content">
 
+        <?php if (isset($_GET['pesan']) && $_GET['pesan'] == 'bulk_disetujui'): ?>
+            <div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>
+                <i class="fa fa-check"></i> <strong>Berhasil!</strong> <?php echo (int)($_GET['jumlah'] ?? 0); ?> surat penelitian berhasil disetujui.
+            </div>
+        <?php elseif (isset($_GET['pesan']) && $_GET['pesan'] == 'bulk_gagal'): ?>
+            <div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Persetujuan surat gagal. Silakan coba lagi.</div>
+        <?php endif; ?>
+
         <?php if (isset($_GET['pesan'])): ?>
             <?php if ($_GET['pesan'] == 'disetujui'): ?>
                 <div class="alert alert-success alert-dismissible">
@@ -145,6 +157,13 @@ error_reporting(0);
                 </li>
                 <li <?php echo (isset($_GET['filter']) && $_GET['filter']=='Ditolak_Wadir') ? 'class="active"' : ''; ?>>
                     <a href="?filter=Ditolak_Wadir"><span class="label label-danger">Ditolak</span></a>
+                </li>
+                <li class="pull-right" style="padding:8px 10px 0;">
+                    <form method="post" action="proses_setujui_semua.php" style="display:inline;" onsubmit="return confirm('Setujui semua <?php echo (int)$jumlah_menunggu_bulk; ?> surat penelitian yang masih menunggu?');">
+                        <input type="hidden" name="jenis" value="penelitian">
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                        <button type="submit" class="btn btn-success btn-sm" <?php echo $jumlah_menunggu_bulk === 0 ? 'disabled' : ''; ?>><i class="fa fa-check"></i> Setujui Semua (<?php echo (int)$jumlah_menunggu_bulk; ?>)</button>
+                    </form>
                 </li>
             </ul>
             <div class="tab-content">
