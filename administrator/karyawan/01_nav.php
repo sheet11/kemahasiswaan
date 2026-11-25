@@ -27,6 +27,16 @@
         <link href="../assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
         <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
+        <style>
+            body.sidebar-collapsed > .header .logo { display: none !important; }
+            body.sidebar-collapsed > .header .navbar { margin-left: 0 !important; }
+            body.surat-page-scroll-locked .left-side,
+            body.mk-page-scroll-locked .left-side { max-height:100vh; overflow-y:auto; }
+            @media screen and (min-width:992px) {
+                body.surat-page-scroll-locked .left-side,
+                body.mk-page-scroll-locked .left-side { height:calc(100vh - 50px); }
+            }
+        </style>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -130,8 +140,7 @@
                         </li>  
 
 	                    <li class="treeview">
-	                        <a href=""><i class="fa fa-desktop"></i>Laporan<span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i></a>
+                            <a href="#"><i class="fa fa-desktop"></i> Laporan <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
 	                        <ul class="treeview-menu">
 	                        	<li> 
 	                                <a href="10_laporan_pra_penelitian.php"><i class="fa fa-desktop"></i> Surat Pra Penelitian</a>
@@ -146,8 +155,7 @@
 	                    </li> 
 
                         <li class="treeview">
-                            <a href=""><i class="fa fa-desktop"></i>Pengaturan<span class="pull-right-container">
-                                  <i class="fa fa-angle-left pull-right"></i></a>
+                            <a href="#"><i class="fa fa-desktop"></i> Pengaturan <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>
                             <ul class="treeview-menu">
                                 <li> 
                                     <a href="user_edit.php"><i class="fa fa-desktop"></i> User</a>
@@ -195,7 +203,7 @@
         <script src="../assets/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 
         <!-- AdminLTE App -->
-        <script src="../assets/js/AdminLTE/app.js" type="text/javascript"></script>
+        <script src="../assets/js/AdminLTE/app.js?v=sidebar-brand-20261124" type="text/javascript"></script>
         
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="../assets/js/AdminLTE/dashboard.js" type="text/javascript"></script>        

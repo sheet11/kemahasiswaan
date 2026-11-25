@@ -15,6 +15,7 @@ $(function() {
         //If window is small enough, enable sidebar push menu
         if ($(window).width() <= 992) {
             $('.row-offcanvas').toggleClass('active');
+            $('body').toggleClass('sidebar-collapsed');
             $('.left-side').removeClass("collapse-left");
             $(".right-side").removeClass("strech");
             $('.row-offcanvas').toggleClass("relative");
@@ -22,6 +23,7 @@ $(function() {
             //Else, enable content streching
             $('.left-side').toggleClass("collapse-left");
             $(".right-side").toggleClass("strech");
+            $('body').toggleClass('sidebar-collapsed');
         }
     });
 

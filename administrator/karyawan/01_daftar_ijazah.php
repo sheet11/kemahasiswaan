@@ -91,20 +91,17 @@ if($_SESSION['level'] == "karyawan"){ ?>
 	 
 	</div>
 </div>	
-		<script src="../assets/js/jquery-1.11.1.min.js"></script>
-        <script src="../assets/js/bootstrap.min.js"></script>
         <script src="../assets/js/jquery.dataTables.min.js"></script>
         <script src="../assets/js/dataTables.bootstrap.js"></script>	
         <script type="text/javascript">
             $(function() {
                 $('#example1').dataTable({
-					stateSave: true
+					stateSave: true,
+					paging: false
 				});
             });
         </script>		
 <?php
 }
-
-
 
 

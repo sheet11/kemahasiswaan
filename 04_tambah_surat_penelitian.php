@@ -4,7 +4,9 @@
 <aside class="right-side">
     <section class="content-header">
     	<div class="container-fluid" style="margin:10px;">
-			<form method="post" action="" enctype="multipart/form-data">	
+			<form method="post" action="student_submission.php" enctype="multipart/form-data">
+				<input type="hidden" name="submission_type" value="penelitian">
+				<input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
 				<table style="width:100%" class="table table-basic">
 					<tr>
 						<td class="info" colspan="3"><b>Tambah Data Surat Penelitian</b></td> 
@@ -134,18 +136,5 @@
 		</div>
 	</div>
 </div>
-		<?php
-			if(isset($_POST['submit'])){
-					$date = date("Y-m-d");		
-					$judul = addslashes($_POST["judul_kti"]);
-					$query=mysqli_query($kon,"insert into tb_surat_penelitian(nama_mahasiswa, nim_mahasiswa, no_hp, lama_penelitian,tempat_penelitian, judul_kti, jurusan,  prodi, tugas_akhir, tujuan, tanggal_cetak,tahun_akademik, tembusan)
-										values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[no_hp]','$_POST[lama_penelitian]','$_POST[tempat_penelitian]', '$judul','$_POST[jurusan]','$_POST[prodi]','$_POST[tugas_akhir]','$_POST[tujuan]','$date','$_POST[tahun_akademik]','$_POST[tembusan]')");				
-						if($query){
-								echo"<script>alert('Data Berhasil di Simpan');window.location='04_daftar_surat_penelitian.php'</script>";
-						} else {
-							echo "Data Gagal Disimpan";
-						}
-					}					
-		?>
 	</body>
 </html>

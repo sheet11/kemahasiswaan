@@ -6,6 +6,8 @@ if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 $jumlah_menunggu_bulk = mysqli_num_rows(mysqli_query($kon, "SELECT id_surat_penelitian FROM tb_surat_penelitian WHERE status_persetujuan='Disetujui_Resepsionis'"));
+$jumlah_disetujui = mysqli_num_rows(mysqli_query($kon, "SELECT id_surat_penelitian FROM tb_surat_penelitian WHERE status_persetujuan='Disetujui'"));
+$jumlah_ditolak = mysqli_num_rows(mysqli_query($kon, "SELECT id_surat_penelitian FROM tb_surat_penelitian WHERE status_persetujuan='Ditolak_Wadir'"));
 error_reporting(0);
 ?>
 
@@ -18,6 +20,12 @@ error_reporting(0);
     .nav-tabs-custom .nav-tabs > li > a {
         font-weight: 500;
     }
+    .nav-tabs-custom .nav-tabs > li.bulk-approve-tab { float: right !important; padding: 8px 10px 0; }
+    .nav-tabs-custom .nav-tabs .bulk-approve-tab form { margin: 0; }
+    .table-responsive-wrap td.col-judul { max-width: 240px; }
+    .table-responsive-wrap .action-buttons { display: flex; justify-content: center; gap: 5px; flex-wrap: wrap; }
+    .table-responsive-wrap .action-buttons form { display: inline; margin: 0; }
+    .page-result-count { margin: 10px 0; }
 
     .search-bar-wrap {
         display: flex;
@@ -54,6 +62,7 @@ error_reporting(0);
         white-space: normal;
         min-width: 160px;
     }
+    .table-responsive-wrap td.col-judul { max-width: 240px; }
 
     .status-note {
         white-space: normal !important;
@@ -89,6 +98,10 @@ error_reporting(0);
         .nav-tabs-custom .nav-tabs > li {
             float: none;
         }
+        .nav-tabs-custom .nav-tabs > li.bulk-approve-tab { float:none !important; margin: 6px 8px 10px; padding: 0; }
+        .nav-tabs-custom .nav-tabs > li.bulk-approve-tab form,
+        .nav-tabs-custom .nav-tabs > li.bulk-approve-tab button { width: 100%; }
+        .nav-tabs-custom .nav-tabs > li.bulk-approve-tab button { white-space: normal; }
 
         .nav-tabs-custom .nav-tabs > li > a {
             padding: 8px 10px;
@@ -131,7 +144,7 @@ error_reporting(0);
             <div class="alert alert-success alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>
                 <i class="fa fa-check"></i> <strong>Berhasil!</strong> <?php echo (int)($_GET['jumlah'] ?? 0); ?> surat penelitian berhasil disetujui.
             </div>
-        <?php elseif (isset($_GET['pesan']) && $_GET['pesan'] == 'bulk_gagal'): ?>
+        <?php elseif (isset($_GET['pesan']) && in_array($_GET['pesan'], ['bulk_gagal', 'gagal', 'tidak_dapat_disetujui'], true)): ?>
             <div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert">&times;</button>Persetujuan surat gagal. Silakan coba lagi.</div>
         <?php endif; ?>
 
@@ -150,26 +163,26 @@ error_reporting(0);
                     <a href="?filter=semua">Semua</a>
                 </li>
                 <li <?php echo (isset($_GET['filter']) && $_GET['filter']=='Disetujui_Resepsionis') ? 'class="active"' : ''; ?>>
-                    <a href="?filter=Disetujui_Resepsionis"><span class="label label-warning">Menunggu Persetujuan Saya</span></a>
+                    <a href="?filter=Disetujui_Resepsionis"><span class="label label-warning">Menunggu Saya (<?php echo $jumlah_menunggu_bulk; ?>)</span></a>
                 </li>
                 <li <?php echo (isset($_GET['filter']) && $_GET['filter']=='Disetujui') ? 'class="active"' : ''; ?>>
-                    <a href="?filter=Disetujui"><span class="label label-success">Disetujui</span></a>
+                    <a href="?filter=Disetujui"><span class="label label-success">Disetujui (<?php echo $jumlah_disetujui; ?>)</span></a>
                 </li>
                 <li <?php echo (isset($_GET['filter']) && $_GET['filter']=='Ditolak_Wadir') ? 'class="active"' : ''; ?>>
-                    <a href="?filter=Ditolak_Wadir"><span class="label label-danger">Ditolak</span></a>
+                    <a href="?filter=Ditolak_Wadir"><span class="label label-danger">Ditolak (<?php echo $jumlah_ditolak; ?>)</span></a>
                 </li>
-                <li class="pull-right" style="padding:8px 10px 0;">
+                <li class="bulk-approve-tab">
                     <form method="post" action="proses_setujui_semua.php" style="display:inline;" onsubmit="return confirm('Setujui semua <?php echo (int)$jumlah_menunggu_bulk; ?> surat penelitian yang masih menunggu?');">
                         <input type="hidden" name="jenis" value="penelitian">
                         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
-                        <button type="submit" class="btn btn-success btn-sm" <?php echo $jumlah_menunggu_bulk === 0 ? 'disabled' : ''; ?>><i class="fa fa-check"></i> Setujui Semua (<?php echo (int)$jumlah_menunggu_bulk; ?>)</button>
+                        <button type="submit" class="btn btn-success btn-sm" <?php echo $jumlah_menunggu_bulk === 0 ? 'disabled title="Tidak ada surat menunggu"' : ''; ?>><i class="fa fa-check"></i> Setujui Semua (<?php echo (int)$jumlah_menunggu_bulk; ?>)</button>
                     </form>
                 </li>
             </ul>
             <div class="tab-content">
 
                 <?php
-                $filter = isset($_GET['filter']) && $_GET['filter'] != 'semua' ? $_GET['filter'] : '';
+                $filter = isset($_GET['filter']) && in_array($_GET['filter'], ['Disetujui_Resepsionis', 'Disetujui', 'Ditolak_Wadir'], true) ? $_GET['filter'] : '';
                 if ($filter) {
                     $where = "WHERE status_persetujuan='$filter'";
                 } else {
@@ -204,7 +217,7 @@ error_reporting(0);
                                 <th>Jurusan</th>
                                 <th>Judul KTI</th>
                                 <th class="text-center">Status</th>
-                                <th class="text-center" width="8%">Preview</th>
+                                <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_pen">
@@ -217,10 +230,10 @@ error_reporting(0);
                         ?>
                             <tr>
                                 <td><?php echo $i++; ?></td>
-                                <td class="col-nama"><?php echo $a['nama_mahasiswa']; ?></td>
-                                <td><?php echo $a['nim_mahasiswa']; ?></td>
-                                <td><?php echo $a['jurusan']; ?></td>
-                                <td class="col-judul"><?php echo substr($a['judul_kti'], 0, 60) . (strlen($a['judul_kti']) > 60 ? '...' : ''); ?></td>
+                                <td class="col-nama" title="<?php echo htmlspecialchars($a['nama_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($a['nama_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td><?php echo htmlspecialchars($a['nim_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td><?php echo htmlspecialchars($a['jurusan'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td class="col-judul" title="<?php echo htmlspecialchars($a['judul_kti'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars(substr($a['judul_kti'], 0, 60) . (strlen($a['judul_kti']) > 60 ? '...' : ''), ENT_QUOTES, 'UTF-8'); ?></td>
                                 <td class="text-center">
                                     <?php if ($sp == 'Disetujui_Resepsionis'): ?>
                                         <span class="label label-warning"><i class="fa fa-clock-o"></i> Menunggu Persetujuan</span>
@@ -229,28 +242,38 @@ error_reporting(0);
                                     <?php elseif ($sp == 'Ditolak_Wadir'): ?>
                                         <span class="label label-danger"><i class="fa fa-times"></i> Ditolak</span>
                                         <?php if (!empty($a['catatan_penolakan'])): ?>
-                                            <span class="status-note text-danger"><?php echo $a['catatan_penolakan']; ?></span>
+                                            <span class="status-note text-danger" title="<?php echo htmlspecialchars($a['catatan_penolakan'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($a['catatan_penolakan'], ENT_QUOTES, 'UTF-8'); ?></span>
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center">
+                                    <div class="action-buttons">
+                                    <?php if ($sp == 'Disetujui_Resepsionis'): ?>
+                                        <form method="post" action="proses_setujui_satu.php" onsubmit="return confirm('Setujui surat ini?');">
+                                            <input type="hidden" name="jenis" value="penelitian"><input type="hidden" name="id" value="<?php echo (int)$id; ?>">
+                                            <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            <button type="submit" class="btn btn-success btn-xs btn-aksi"><i class="fa fa-check"></i> Setujui</button>
+                                        </form>
+                                    <?php endif; ?>
                                     <a href="04_preview_surat_penelitian.php?id_surat_penelitian=<?php echo $id; ?>&return=04_persetujuan_surat_penelitian.php"
                                        class="btn btn-primary btn-xs btn-aksi">
                                         <i class="fa fa-eye"></i> Lihat
                                     </a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
                         <?php if (!$ada): ?>
-                            <tr><td colspan="7" class="text-center text-muted">Tidak ada data.</td></tr>
+                            <tr><td colspan="7" class="text-center text-muted">Belum ada surat pada filter ini.</td></tr>
                         <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
 
+                <?php $jmldata = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM tb_surat_penelitian $where")); ?>
+                <div class="page-result-count text-muted">Menampilkan <?php echo $ada ? $posisi + 1 : 0; ?>–<?php echo $i - 1; ?> dari <?php echo (int)$jmldata; ?> surat.</div>
                 <div id="pagination_pen">
                 <?php
-                $jmldata    = mysqli_num_rows(mysqli_query($kon,"SELECT * FROM tb_surat_penelitian $where"));
                 $jmlhalaman = $p->jumlahHalaman($jmldata, $batas);
                 echo "<div class='paginationw'>".$p->navHalaman($_GET['halaman'] ?? 1, $jmlhalaman)."</div>";
                 ?>
@@ -267,11 +290,13 @@ error_reporting(0);
     var elInput=document.getElementById('keyword_pen');
     var elTbody=document.getElementById('tbody_pen');
     var elPaging=document.getElementById('pagination_pen');
+    var elResultCount=document.querySelector('.page-result-count');
     var elInfo=document.getElementById('info_pen');
     var elLoad=document.getElementById('loading_pen');
     var elReset=document.getElementById('btn_reset_pen');
     var filterAktif=new URLSearchParams(window.location.search).get('filter')||'semua';
     var validStatus=['Disetujui_Resepsionis','Disetujui','Ditolak_Wadir'];
+    var csrfToken=<?php echo json_encode($_SESSION['csrf_token']); ?>;
 
     function escHtml(s){if(!s)return '';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
@@ -287,7 +312,8 @@ error_reporting(0);
 
     function renderAksi(r){
         var id=r.id_surat_penelitian;
-        return "<a href='04_preview_surat_penelitian.php?id_surat_penelitian="+id+"&return=04_persetujuan_surat_penelitian.php' class='btn btn-primary btn-xs btn-aksi'><i class='fa fa-eye'></i> Lihat</a>";
+        var approve=r.status_persetujuan==='Disetujui_Resepsionis' ? "<form method='post' action='proses_setujui_satu.php' onsubmit=\"return confirm('Setujui surat ini?');\"><input type='hidden' name='jenis' value='penelitian'><input type='hidden' name='id' value='"+id+"'><input type='hidden' name='csrf_token' value='"+csrfToken+"'><button class='btn btn-success btn-xs btn-aksi' type='submit'><i class='fa fa-check'></i> Setujui</button></form>" : '';
+        return "<div class='action-buttons'>"+approve+"<a href='04_preview_surat_penelitian.php?id_surat_penelitian="+id+"&return=04_persetujuan_surat_penelitian.php' class='btn btn-primary btn-xs btn-aksi'><i class='fa fa-eye'></i> Lihat</a></div>";
     }
 
     function doSearch(kw){
@@ -303,6 +329,7 @@ error_reporting(0);
             var resp;try{resp=JSON.parse(xhr.responseText);}catch(e){elTbody.innerHTML="<tr><td colspan='7' class='text-center text-danger'>Response tidak valid.</td></tr>";return;}
             if(resp.error){elTbody.innerHTML="<tr><td colspan='7' class='text-center text-danger'>"+escHtml(resp.error)+"</td></tr>";return;}
             elPaging.style.display='none';
+            if(elResultCount)elResultCount.style.display='none';
             var rows=resp.data.filter(function(r){
                 if(filterAktif&&filterAktif!=='semua') return r.status_persetujuan===filterAktif;
                 return validStatus.indexOf(r.status_persetujuan)!==-1;

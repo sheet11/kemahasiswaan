@@ -5,7 +5,9 @@
 <aside class="right-side">
     <section class="content-header">
     	<div class="container-fluid" style="margin:10px;">
-			<form method="post" action="" enctype="multipart/form-data">	
+			<form method="post" action="student_submission.php" enctype="multipart/form-data">
+				<input type="hidden" name="submission_type" value="masih_kuliah">
+				<input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
 				<table style="width:100%" class="table table-basic">
 					<tr>
 						<td colspan="3" class="success"><b>Data Mahasiswa</b></td> 
@@ -158,16 +160,3 @@
 		</div>
 	</div>
 </div>
-		<?php
-			if(isset($_POST['submit']))
-				{
-					$date = date("Y-m-d");
-														
-				$query=mysqli_query($kon,"insert into tb_surat_keterangan_masih_kuliah(nama_mahasiswa, nim_mahasiswa, keperluan, tingkat,semester, tahun_akademik, nama_orang_tua, nip, pekerjaan, pangkat, instansi, jurusan, prodi, tanggal_cetak)
-									values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[keperluan]','$_POST[tingkat]','$_POST[semester]','$_POST[tahun_akademik]','$_POST[nama_orang_tua]','$_POST[nip]','$_POST[pekerjaan]','$_POST[pangkat]','$_POST[instansi]','$_POST[jurusan]','$_POST[prodi]','$date')");
-							
-					if($query){
-						echo"<script>alert('Data Berhasil di Simpan');window.location='03_daftar_surat_keterangan_masih_kuliah.php'</script>";
-					}
-				}					
-		?>

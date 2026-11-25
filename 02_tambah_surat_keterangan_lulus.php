@@ -5,7 +5,9 @@
 <aside class="right-side">
     <section class="content-header">
     	<div class="container-fluid" style="margin:10px;">
-			<form method="post" action="" enctype="multipart/form-data">	
+			<form method="post" action="student_submission.php" enctype="multipart/form-data">
+				<input type="hidden" name="submission_type" value="keterangan_lulus">
+				<input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
 				<table style="width:100%" class="table table-basic">
 					<tr>
 					<td class="info"><b>Tambah Data Surat Keterangan Lulus</b></td> 
@@ -134,24 +136,5 @@
 		</div>
 	</div>
 </div>
-		<?php
-			include "../config/koneksi.php";
-	
-				if(isset($_POST['submit'])){
-					$date = date("Y-m-d");
-														
-				$query=mysqli_query($kon,"insert into tb_surat_keterangan_lulus (nama_mahasiswa, nim_mahasiswa, keperluan, tempat_lahir, tanggal_lahir, jurusan,  prodi, tahun_akademik, nomor_surat, tanggal_sk, tanggal_wisudah, tanggal_cetak)
-									values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[keperluan]','$_POST[tempat_lahir]','$_POST[tanggal_lahir]','$_POST[jurusan]','$_POST[prodi]','$_POST[tahun_akademik]','$_POST[nomor_surat]','$_POST[tanggal_sk]','$_POST[tanggal_wisudah]', '$date')");
-					
-										
-					if($query){
-						echo"<script>alert('Data Berhasil di Simpan');window.location='02_daftar_surat_keterangan_lulus.php'</script>";
-					}else{
-						echo "<script>alert('Data Gagal Disimpan, Coba lagi');window.location='02_daftar_surat_keterangan_lulus.php'</script>";
-					}
-				}					
-		?>
-
- 	
 	</body>
 </html>

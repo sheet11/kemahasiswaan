@@ -26,7 +26,7 @@ $allowed = [
     'keterangan_lulus' => [
         'table' => 'tb_surat_keterangan_lulus',
         'pk'    => 'id_surat_keterangan_lulus',
-        'kolom' => ['nim_mahasiswa','nama_mahasiswa','jurusan','prodi','tempat_lahir','tanggal_lahir','tahun_akademik','status'],
+        'kolom' => ['nim_mahasiswa','nama_mahasiswa','jurusan','prodi','keperluan','tempat_lahir','tanggal_lahir','tahun_akademik','status','status_persetujuan'],
     ],
 ];
 
@@ -46,6 +46,10 @@ $where_filter = '';
 if ($tabel === 'keterangan_lulus' && $filter !== 'semua') {
     $safe_filter  = mysqli_real_escape_string($kon, $filter);
     $where_filter = "AND `status` = '$safe_filter'";
+}
+if ($tabel === 'keterangan_lulus' && isset($_GET['filter_persetujuan']) && $_GET['filter_persetujuan'] !== 'semua') {
+    $safe_filter = mysqli_real_escape_string($kon, $_GET['filter_persetujuan']);
+    $where_filter = "AND `status_persetujuan` = '$safe_filter'";
 }
 
 // Cari di semua kolom sekaligus

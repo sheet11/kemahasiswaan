@@ -5,7 +5,9 @@
 <aside class="right-side">
     <section class="content-header">
     	<div class="container-fluid" style="margin:30px;">
-			<form method="post" action="" enctype="multipart/form-data">	
+			<form method="post" action="student_submission.php" enctype="multipart/form-data">
+				<input type="hidden" name="submission_type" value="pra_penelitian">
+				<input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
 				<table style="width:100%" class="table table-basic">
 					<tr>
 					<td class="info" colspan="3"><b>Tambah Data Surat Pra Penelitian</b></td> 
@@ -123,18 +125,5 @@
 			</form>
 	</div>
 </div>
-		<?php
-			include"../config/koneksi.php";
-				if(isset($_POST['submit'])){
-					$date = date("Y-m-d");	
-					$judul = addslashes($_POST["judul_kti"]);							
-				$query=mysqli_query($kon,"insert into tb_surat_pra_penelitian(nama_mahasiswa, nim_mahasiswa,no_hp, judul_kti, lokasi, jurusan, prodi, tugas_akhir, tujuan, tahun_akademik, tanggal_cetak)
-									values('$_POST[nama_mahasiswa]','$_POST[nim_mahasiswa]','$_POST[no_hp]','$judul','$_POST[lokasi]','$_POST[jurusan]','$_POST[prodi]','$_POST[tugas_akhir]','$_POST[tujuan]','$_POST[tahun_akademik]','$date')");				
-					if($query)
-						{
-							echo"<script>alert('Data Berhasil di Simpan');window.location='05_daftar_surat_pra_penelitian.php'</script>";
-						}
-				}					
-		?> 	
 	</body>
 </html>

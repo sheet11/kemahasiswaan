@@ -22,6 +22,8 @@
             .badge-menunggu  { background-color: #f39c12; }
             .badge-disetujui { background-color: #00a65a; }
             .badge-ditolak   { background-color: #dd4b39; }
+            body.sidebar-collapsed > .header .logo { display: none !important; }
+            body.sidebar-collapsed > .header .navbar { margin-left: 0 !important; }
         </style>
     </head>
     <body class="skin-black">
@@ -69,6 +71,12 @@
                         </li>
 
                         <li>
+                            <a href="02_persetujuan_surat_keterangan_lulus.php">
+                                <i class="fa fa-circle-o"></i>
+                                <span>Surat Keterangan Lulus</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="03_persetujuan_surat_keterangan_masih_kuliah.php">
                                 <i class="fa fa-circle-o"></i>
                                 <span>Surat Masih Kuliah</span>
@@ -110,7 +118,7 @@
         <script src="../assets/js/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>
         <script src="../assets/js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <script src="../assets/js/plugins/iCheck/icheck.min.js" type="text/javascript"></script>
-        <script src="../assets/js/AdminLTE/app.js" type="text/javascript"></script>
+        <script src="../assets/js/AdminLTE/app.js?v=sidebar-brand-20261124" type="text/javascript"></script>
         <script src="../assets/js/AdminLTE/dashboard.js" type="text/javascript"></script>
     </body>
 </html>

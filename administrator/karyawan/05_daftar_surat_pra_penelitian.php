@@ -1,9 +1,30 @@
 <?php 
     include"01_nav.php";
     error_reporting(0);
-    include"../config/class_paging.php";
 ?>
 <aside class="right-side">
+    <style>
+        html.surat-page-scroll-locked, body.surat-page-scroll-locked { overflow-y:hidden !important; }
+        .surat-table-scroll { height:calc(100vh - 270px); min-height:260px; overflow-x:hidden; overflow-y:auto; overscroll-behavior:contain; overflow-anchor:none; border:1px solid #ddd; background:#fff; }
+        .surat-table-scroll .table { width:100%; min-width:0; margin-bottom:0; table-layout:fixed; border-collapse:separate; border-spacing:0; }
+        .surat-table-scroll th:first-child, .surat-table-scroll td:first-child { width:4%; text-align:center; }
+        .surat-table-scroll th,.surat-table-scroll td { white-space:normal !important; overflow-wrap:anywhere; }
+        .surat-table-scroll th:nth-child(2),.surat-table-scroll td:nth-child(2) { width:13%; }
+        .surat-table-scroll th:nth-child(3),.surat-table-scroll td:nth-child(3) { width:10%; }
+        .surat-table-scroll th:nth-child(4),.surat-table-scroll td:nth-child(4) { width:12%; }
+        .surat-table-scroll th:nth-child(5),.surat-table-scroll td:nth-child(5) { width:19%; }
+        .surat-table-scroll th:nth-child(6),.surat-table-scroll td:nth-child(6) { width:12%; }
+        .surat-table-scroll th:nth-child(7),.surat-table-scroll td:nth-child(7) { width:10%; }
+        .surat-table-scroll th:nth-child(8),.surat-table-scroll td:nth-child(8) { width:10%; }
+        .surat-table-scroll th:nth-child(9),.surat-table-scroll td:nth-child(9) { width:10%; }
+        .surat-table-scroll td:nth-child(8) .label { display:inline-block; max-width:100%; white-space:normal !important; line-height:1.3; }
+        .surat-table-scroll td:last-child .btn { margin:1px 2px 1px 0; }
+        .surat-table-scroll thead th { position:sticky; top:0; z-index:5; background:#d9edf7 !important; background-clip:padding-box; box-shadow:0 1px 0 #c8dce7; }
+        .surat-scroll-status { padding:10px; text-align:center; color:#777; background:#f9f9f9; }
+        @media(max-width:767px) { .surat-table-scroll { height:calc(100vh - 330px); min-height:220px; } }
+        .surat-list-table { border-collapse:separate; border-spacing:0; }
+        .surat-list-table thead th { position:sticky; top:0; z-index:5; background:#d9edf7 !important; background-clip:padding-box; box-shadow:0 1px 0 #c8dce7; }
+    </style>
     <section class="content-header">
         <div class="container-fluid" style="margin:10px;">
 
@@ -26,6 +47,8 @@
                 $cnt_direvisi = mysqli_num_rows(mysqli_query($kon,"SELECT id_surat_pra_penelitian FROM tb_surat_pra_penelitian WHERE status_persetujuan='Telah_Direvisi'"));
                 $cnt_wadir    = mysqli_num_rows(mysqli_query($kon,"SELECT id_surat_pra_penelitian FROM tb_surat_pra_penelitian WHERE status_persetujuan='Disetujui_Resepsionis'"));
                 $cnt_cetak    = mysqli_num_rows(mysqli_query($kon,"SELECT id_surat_pra_penelitian FROM tb_surat_pra_penelitian WHERE status_persetujuan='Disetujui'"));
+                $batas        = 50;
+                $total_rows   = mysqli_num_rows(mysqli_query($kon, "SELECT id_surat_pra_penelitian FROM tb_surat_pra_penelitian $where_filter"));
 
                 function isActive($f, $current) {
                     return $f === $current ? 'style="box-shadow:0 0 0 3px rgba(0,0,0,0.25); opacity:1;"' : 'style="opacity:0.7;"';
@@ -89,13 +112,14 @@
                 <?php endif; ?>
             <?php endif; ?>
 
-            <table style="width:100%;" class="table table-bordered">
+            <div class="surat-table-scroll" id="surat_table_scroll" tabindex="0" aria-label="Daftar surat; gulir tabel untuk memuat data berikutnya">
+            <table style="width:100%;" class="table table-bordered surat-list-table">
                 <thead>
                     <tr class="info">
                         <th>No.</th><th>Nama Mahasiswa</th><th>NIM</th><th>Prodi</th><th>Judul</th><th>Tujuan</th><th>Keterangan</th><th>Status</th><th width="18%">Aksi</th>
                     </tr>
                 </thead>
-                <tbody id="tbody_pra">
+                <tbody id="tbody_pra" data-loaded="<?php echo min($batas, $total_rows); ?>" data-total="<?php echo (int)$total_rows; ?>">
                 <?php
                     function kolomStatus($a) {
                         $sp     = $a['status_persetujuan'];
@@ -145,12 +169,11 @@
                         return $html;
                     }
 
-                    $p      = new Paging;
-                    $batas  = 10;
-                    $posisi = $p->cariPosisi($batas);
+                    $posisi = 0;
                     $order  = "ORDER BY FIELD(status_persetujuan,'Telah_Direvisi','Menunggu','Perlu_Revisi','Disetujui_Resepsionis','Disetujui'), id_surat_pra_penelitian DESC";
                     $query  = mysqli_query($kon, "SELECT * FROM tb_surat_pra_penelitian $where_filter $order LIMIT $posisi,$batas");
                     $i      = $posisi + 1;
+                    $initial_rows = mysqli_num_rows($query);
 
                     while ($a = mysqli_fetch_array($query)) {
                         $id  = $a['id_surat_pra_penelitian'];
@@ -168,84 +191,18 @@
                               </tr>";
                         $i++;
                     }
+                    if ($initial_rows === 0) echo "<tr><td colspan='9' class='text-center text-muted'>Tidak ada surat pada filter ini.</td></tr>";
                 ?>
                 </tbody>
             </table>
-
-            <div id="pagination_pra">
-            <?php
-                $jmldata    = mysqli_num_rows(mysqli_query($kon,"SELECT id_surat_pra_penelitian FROM tb_surat_pra_penelitian $where_filter"));
-                $jmlhalaman = $p->jumlahHalaman($jmldata, $batas);
-                echo "<div class='paginationw'>".$p->navHalaman($_GET['halaman'] ?? 1, $jmlhalaman)."</div>";
-            ?>
+            <div id="surat_scroll_sentinel" style="height:1px;"></div>
+            </div>
+            <div id="surat_scroll_status" class="surat-scroll-status" role="status" aria-live="polite">
+                <?php if ($total_rows > 0): ?>Menampilkan <?php echo min($batas, $total_rows); ?> dari <?php echo (int)$total_rows; ?> surat. Gulir tabel ke bawah untuk memuat berikutnya.<?php else: ?>Belum ada surat pada filter ini.<?php endif; ?>
             </div>
 
         </div>
     </section>
 </aside>
 
-<script>
-(function () {
-    var timer=null,DELAY=350,MIN_CHARS=2;
-    var elInput=document.getElementById('keyword_pra'),elTbody=document.getElementById('tbody_pra'),
-        elPaging=document.getElementById('pagination_pra'),elInfo=document.getElementById('info_pra'),
-        elLoad=document.getElementById('loading_pra'),elReset=document.getElementById('btn_reset_pra');
-    var FILTER=new URLSearchParams(window.location.search).get('filter')||'semua';
-
-    function escHtml(s){if(!s)return '';return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-
-    function renderStatus(r){
-        var sp=r.status_persetujuan,st=r.status,cat=r.catatan_penolakan||'';
-        switch(sp){
-            case 'Menunggu':              return "<span class='label label-warning' style='font-size:12px;'><i class='fa fa-clock-o'></i> Menunggu Review</span>";
-            case 'Perlu_Revisi':          var h="<span class='label label-warning' style='font-size:12px;background:#e67e22;'><i class='fa fa-edit'></i> Perlu Revisi</span>";if(cat)h+="<br><small style='color:#d68910;'>"+escHtml(cat)+"</small>";return h;
-            case 'Telah_Direvisi':        return "<span class='label label-info' style='font-size:12px;'><i class='fa fa-refresh'></i> Telah Direvisi</span>";
-            case 'Disetujui_Resepsionis': return "<span class='label label-default' style='font-size:12px;background:#8e44ad;color:#fff;'><i class='fa fa-arrow-up'></i> Diproses Wadir</span>";
-            case 'Disetujui':             if(st==='Sudah Dicetak') return "<span class='label label-primary' style='font-size:12px;'><i class='fa fa-print'></i> Sudah Dicetak</span>"; return "<span class='label label-success' style='font-size:12px;'><i class='fa fa-check-circle'></i> Disetujui Wadir</span>";
-            default:                      return "<span class='label label-default'>"+escHtml(sp)+"</span>";
-        }
-    }
-
-    function renderAksi(r){
-        var id=r.id_surat_pra_penelitian,nama=escHtml(r.nama_mahasiswa),sp=r.status_persetujuan,html='';
-        var hal_ini='05_daftar_surat_pra_penelitian.php';
-        if(sp==='Disetujui')
-            html+="<a href='05_cetak_surat_pra_penelitian.php?id_surat_pra_penelitian="+id+"' class='btn btn-info btn-xs'><span class='glyphicon glyphicon-print'></span></a> ";
-        if(sp==='Menunggu'||sp==='Telah_Direvisi'){
-            var lbl=sp==='Telah_Direvisi'?'Setujui Revisi ke Wadir':'Setujui & Teruskan ke Wadir';
-            html+="<a href='proses_karyawan.php?aksi=setujui&jenis=pra_penelitian&id="+id+"&return="+hal_ini+"' onclick=\"return confirm('"+lbl+"?')\" class='btn btn-success btn-xs'><i class='fa fa-check'></i></a> ";
-            html+="<a href='proses_karyawan.php?aksi=tolak&jenis=pra_penelitian&id="+id+"&return="+hal_ini+"' class='btn btn-warning btn-xs'><i class='fa fa-undo'></i></a> ";
-        }
-        html+="<a href='05_preview_surat_pra_penelitian.php?id_surat_pra_penelitian="+id+"&return="+hal_ini+"' class='btn btn-primary btn-xs'><i class='fa fa-eye'></i></a> ";
-        html+="<a href='05_edit_surat_pra_penelitian.php?id_surat_pra_penelitian="+id+"' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-pencil'></span></a> ";
-        // html+="<a href='05_kembalikan_surat_pra_penelitian.php?id_surat_pra_penelitian="+id+"' class='btn btn-warning btn-xs'><span class='glyphicon glyphicon-envelope'></span></a> ";
-        html+="<a href='05_delete_surat_pra_penelitian.php?id_surat_pra_penelitian="+id+"' onclick=\"return confirm('Hapus "+nama+"?')\" class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span></a>";
-        return html;
-    }
-
-    function doSearch(kw){
-        if(kw.length===0){resetView();return;}if(kw.length<MIN_CHARS)return;
-        elLoad.style.display='inline';
-        var xhr=new XMLHttpRequest();
-        xhr.open('GET','ajax_search_surat.php?tabel=pra_penelitian&keyword='+encodeURIComponent(kw),true);
-        xhr.onreadystatechange=function(){
-            if(xhr.readyState!==4)return;elLoad.style.display='none';
-            if(xhr.status!==200){elTbody.innerHTML="<tr><td colspan='9' class='text-center text-danger'>Gagal memuat data.</td></tr>";return;}
-            var resp;try{resp=JSON.parse(xhr.responseText);}catch(e){return;}
-            elPaging.style.display='none';
-            var rows=resp.data;
-            if(FILTER&&FILTER!=='semua') rows=rows.filter(function(r){return r.status_persetujuan===FILTER;});
-            if(!rows||rows.length===0){elTbody.innerHTML="<tr><td colspan='9' class='text-center'>Data tidak ditemukan.</td></tr>";elInfo.textContent='0 hasil';return;}
-            var html='';
-            for(var i=0;i<rows.length;i++){var r=rows[i];
-                html+="<tr><td>"+(i+1)+"</td><td>"+escHtml(r.nama_mahasiswa)+"</td><td>"+escHtml(r.nim_mahasiswa)+"</td><td>"+escHtml(r.prodi)+"</td><td>"+escHtml(r.judul_kti)+"</td><td>"+escHtml(r.tujuan)+"</td><td>"+escHtml(r.keterangan)+"</td><td>"+renderStatus(r)+"</td><td>"+renderAksi(r)+"</td></tr>";
-            }
-            elTbody.innerHTML=html;elInfo.textContent=rows.length+' hasil ditemukan';
-        };xhr.send();
-    }
-    function resetView(){elInfo.textContent='';elPaging.style.display='';window.location.href=window.location.pathname+(FILTER!=='semua'?'?filter='+FILTER:'');}
-    elInput.addEventListener('input',function(){clearTimeout(timer);var kw=this.value.trim();timer=setTimeout(function(){doSearch(kw);},DELAY);});
-    elReset.addEventListener('click',function(){elInput.value='';resetView();});
-    elInput.addEventListener('keydown',function(e){if(e.key==='Enter'){clearTimeout(timer);doSearch(this.value.trim());}});
-}());
-</script>
+<script src="05_infinite_scroll.js"></script>

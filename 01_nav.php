@@ -1,17 +1,34 @@
-<!DOCTYPE html>
 <?php
-    session_start();
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
 
     if(empty($_SESSION['nim']))
     {
-        header("location:login.php");
+        header("Location: login.php", true, 303);
+        exit;
     }
-    include"config/koneksi.php";
-    include"assets/js/date.php";
+    require_once "config/koneksi.php";
+    require_once "assets/js/date.php";
     error_reporting(0);
 
-    $u=mysqli_fetch_array(mysqli_query($kon,"select * from tb_user where username='$_SESSION[nim]'"));
+    $userStmt = mysqli_prepare($kon, "SELECT * FROM tb_user WHERE username = ? LIMIT 1");
+    mysqli_stmt_bind_param($userStmt, "s", $_SESSION['nim']);
+    mysqli_stmt_execute($userStmt);
+    $u = mysqli_fetch_assoc(mysqli_stmt_get_result($userStmt));
+    mysqli_stmt_close($userStmt);
+    if (!$u) {
+        $_SESSION = [];
+        session_destroy();
+        header("Location: login.php", true, 303);
+        exit;
+    }
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    $csrf_token = $_SESSION['csrf_token'];
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">

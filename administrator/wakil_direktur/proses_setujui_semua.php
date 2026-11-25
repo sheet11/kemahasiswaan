@@ -12,12 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$token = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
-if (empty($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $token)) {
-    header('location:index.php?pesan=gagal');
-    exit;
-}
-
 // Status awal yang memang menunggu persetujuan Wadir pada tiap jenis surat.
 $surat = [
     'ket_lulus' => ['tabel' => 'tb_surat_keterangan_lulus', 'status' => 'Menunggu', 'halaman' => '02_persetujuan_surat_keterangan_lulus.php'],
@@ -35,6 +29,11 @@ if (!isset($surat[$jenis])) {
 $item = $surat[$jenis];
 $tabel = $item['tabel'];
 $halaman = $item['halaman'];
+$token = isset($_POST['csrf_token']) && is_string($_POST['csrf_token']) ? $_POST['csrf_token'] : '';
+if (empty($_SESSION['csrf_token']) || !is_string($_SESSION['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $token)) {
+    header('location:' . $halaman . '?pesan=bulk_gagal');
+    exit;
+}
 $tanggal = date('Y-m-d');
 $status = mysqli_real_escape_string($kon, $item['status']);
 $sql = "UPDATE `$tabel`

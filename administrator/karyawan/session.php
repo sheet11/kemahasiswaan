@@ -1,11 +1,12 @@
 <?php
-	session_start();
-	include"../config/koneksi.php";
-	
-	if (!isset($_SESSION['level'])){
-		header('location:../index.php');
+	if (session_status() !== PHP_SESSION_ACTIVE) {
+		session_start();
 	}
-	elseif ($_SESSION['level'] != "karyawan"){
-		header('location:../index.php');
+
+	if (!isset($_SESSION['level']) || $_SESSION['level'] !== "karyawan") {
+		header('Location: ../index.php', true, 303);
+		exit;
 	}
+
+	require_once "../config/koneksi.php";
 ?>

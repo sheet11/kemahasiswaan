@@ -32,8 +32,11 @@ if (!$cek) { echo "<script>alert('Data tidak ditemukan!'); window.history.back()
 
 // ── Setujui ───────────────────────────────────────────────────────────────────
 if ($aksi == 'setujui') {
-    // Wadir hanya bisa setujui jika sudah divalidasi karyawan
-    if ($cek['status_persetujuan'] != 'Disetujui_Resepsionis') {
+    // Tiap jenis surat menggunakan status awal menunggu yang berbeda.
+    $status_boleh_disetujui = $jenis == 'ket_lulus'
+        ? in_array($cek['status_persetujuan'], ['Menunggu', 'Ditolak'], true)
+        : $cek['status_persetujuan'] == 'Disetujui_Resepsionis';
+    if (!$status_boleh_disetujui) {
         echo "<script>alert('Surat ini belum divalidasi oleh Karyawan.'); window.history.back();</script>"; exit;
     }
     mysqli_query($kon, "UPDATE `$tabel` SET 
