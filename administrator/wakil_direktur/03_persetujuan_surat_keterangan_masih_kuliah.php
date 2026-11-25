@@ -165,27 +165,19 @@ error_reporting(0);
         <?php endif; ?>
 
         <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-                <li <?php echo (!isset($_GET['filter']) || $_GET['filter']=='semua') ? 'class="active"' : ''; ?>>
-                    <a href="?filter=semua">Semua</a>
-                </li>
-                <li <?php echo (isset($_GET['filter']) && $_GET['filter']=='Disetujui_Resepsionis') ? 'class="active"' : ''; ?>>
-                    <a href="?filter=Disetujui_Resepsionis"><span class="label label-warning">Menunggu Saya (<?php echo $jumlah_menunggu_bulk; ?>)</span></a>
-                </li>
-                <li <?php echo (isset($_GET['filter']) && $_GET['filter']=='Disetujui') ? 'class="active"' : ''; ?>>
-                    <a href="?filter=Disetujui"><span class="label label-success">Disetujui (<?php echo $jumlah_disetujui; ?>)</span></a>
-                </li>
-                <li <?php echo (isset($_GET['filter']) && $_GET['filter']=='Ditolak_Wadir') ? 'class="active"' : ''; ?>>
-                    <a href="?filter=Ditolak_Wadir"><span class="label label-danger">Ditolak (<?php echo $jumlah_ditolak; ?>)</span></a>
-                </li>
-                <li class="bulk-approve-tab">
-                    <form method="post" action="proses_setujui_semua.php" style="display:inline;" onsubmit="return confirm('Setujui semua <?php echo (int)$jumlah_menunggu_bulk; ?> surat masih kuliah yang masih menunggu?');">
-                        <input type="hidden" name="jenis" value="masih_kuliah">
-                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
-                        <button type="submit" class="btn btn-success btn-sm" <?php echo $jumlah_menunggu_bulk === 0 ? 'disabled title="Tidak ada surat menunggu"' : ''; ?>><i class="fa fa-check"></i> Setujui Semua (<?php echo (int)$jumlah_menunggu_bulk; ?>)</button>
-                    </form>
-                </li>
-            </ul>
+            <div class="wadir-filter-toolbar">
+                <div class="wadir-status-tabs" aria-label="Filter status surat">
+                    <a class="wadir-filter-chip <?php echo (!isset($_GET['filter']) || $_GET['filter']=='semua') ? 'active' : ''; ?>" href="?filter=semua">Semua</a>
+                    <a class="wadir-filter-chip <?php echo (isset($_GET['filter']) && $_GET['filter']=='Disetujui_Resepsionis') ? 'active' : ''; ?>" href="?filter=Disetujui_Resepsionis"><span class="label label-warning">Menunggu Saya (<?php echo $jumlah_menunggu_bulk; ?>)</span></a>
+                    <a class="wadir-filter-chip <?php echo (isset($_GET['filter']) && $_GET['filter']=='Disetujui') ? 'active' : ''; ?>" href="?filter=Disetujui"><span class="label label-success">Disetujui (<?php echo $jumlah_disetujui; ?>)</span></a>
+                    <a class="wadir-filter-chip <?php echo (isset($_GET['filter']) && $_GET['filter']=='Ditolak_Wadir') ? 'active' : ''; ?>" href="?filter=Ditolak_Wadir"><span class="label label-danger">Ditolak (<?php echo $jumlah_ditolak; ?>)</span></a>
+                </div>
+                <form class="wadir-bulk-form" method="post" action="proses_setujui_semua.php" onsubmit="return confirm('Setujui semua <?php echo (int)$jumlah_menunggu_bulk; ?> surat masih kuliah yang masih menunggu?');">
+                    <input type="hidden" name="jenis" value="masih_kuliah">
+                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+                    <button type="submit" class="btn btn-success btn-sm" <?php echo $jumlah_menunggu_bulk === 0 ? 'disabled title="Tidak ada surat menunggu"' : ''; ?>><i class="fa fa-check"></i> Setujui Semua (<?php echo (int)$jumlah_menunggu_bulk; ?>)</button>
+                </form>
+            </div>
             <div class="tab-content">
 
                 <?php
@@ -215,7 +207,7 @@ error_reporting(0);
                 </div>
 
                 <div class="table-responsive-wrap">
-                    <table class="table table-bordered table-striped table-hover">
+                    <table class="table table-bordered table-striped table-hover wadir-mobile-cards">
                         <thead>
                             <tr class="info">
                                 <th>No.</th>
@@ -236,12 +228,12 @@ error_reporting(0);
                             $id  = $a['id_surat_keterangan_masih_kuliah'];
                         ?>
                             <tr>
-                                <td><?php echo $i++; ?></td>
-                            <td class="col-nama" title="<?php echo htmlspecialchars($a['nama_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($a['nama_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($a['nim_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td><?php echo htmlspecialchars($a['jurusan'], ENT_QUOTES, 'UTF-8'); ?></td>
-                            <td class="col-keperluan" title="<?php echo htmlspecialchars($a['keperluan'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($a['keperluan'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                <td class="text-center">
+                                <td data-mobile-label="No."><?php echo $i++; ?></td>
+                            <td data-mobile-label="Nama Mahasiswa" class="col-nama" title="<?php echo htmlspecialchars($a['nama_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($a['nama_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td data-mobile-label="NIM"><?php echo htmlspecialchars($a['nim_mahasiswa'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td data-mobile-label="Jurusan"><?php echo htmlspecialchars($a['jurusan'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td data-mobile-label="Keperluan" class="col-keperluan" title="<?php echo htmlspecialchars($a['keperluan'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($a['keperluan'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td data-mobile-label="Status" class="text-center">
                                     <?php if ($sp == 'Disetujui_Resepsionis'): ?>
                                         <span class="label label-warning"><i class="fa fa-clock-o"></i> Menunggu Persetujuan</span>
                                     <?php elseif ($sp == 'Disetujui'): ?>
@@ -253,7 +245,7 @@ error_reporting(0);
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </td>
-                                <td class="text-center">
+                                <td data-mobile-label="Aksi" class="text-center">
                                     <div class="action-buttons">
                                     <?php if ($sp == 'Disetujui_Resepsionis'): ?>
                                         <form method="post" action="proses_setujui_satu.php" onsubmit="return confirm('Setujui surat ini?');">
@@ -341,7 +333,7 @@ error_reporting(0);
             if(rows.length===0){elTbody.innerHTML="<tr><td colspan='7' class='text-center'>Data tidak ditemukan.</td></tr>";elInfo.textContent='0 hasil';return;}
             var html='';
             for(var i=0;i<rows.length;i++){var r=rows[i];
-                html+="<tr><td>"+(i+1)+"</td><td class='col-nama'>"+escHtml(r.nama_mahasiswa)+"</td><td>"+escHtml(r.nim_mahasiswa)+"</td><td>"+escHtml(r.jurusan)+"</td><td class='col-keperluan'>"+escHtml(r.keperluan)+"</td><td class='text-center'>"+renderStatus(r)+"</td><td class='text-center'>"+renderAksi(r)+"</td></tr>";
+                html+="<tr><td data-mobile-label='No.'>"+(i+1)+"</td><td data-mobile-label='Nama Mahasiswa' class='col-nama'>"+escHtml(r.nama_mahasiswa)+"</td><td data-mobile-label='NIM'>"+escHtml(r.nim_mahasiswa)+"</td><td data-mobile-label='Jurusan'>"+escHtml(r.jurusan)+"</td><td data-mobile-label='Keperluan' class='col-keperluan'>"+escHtml(r.keperluan)+"</td><td data-mobile-label='Status' class='text-center'>"+renderStatus(r)+"</td><td data-mobile-label='Aksi' class='text-center'>"+renderAksi(r)+"</td></tr>";
             }
             elTbody.innerHTML=html;
             elInfo.textContent=rows.length+' hasil ditemukan';

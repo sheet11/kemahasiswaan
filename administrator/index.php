@@ -219,6 +219,17 @@
     box-shadow: 0 0 0 3px rgba(0,130,74,0.10);
   }
 
+  .login-error{
+    margin:0 0 18px;
+    padding:11px 13px;
+    border:1px solid #f2b8b5;
+    border-radius:4px;
+    background:#fff1f0;
+    color:#a32620;
+    font-size:13px;
+    line-height:1.45;
+  }
+
   .submit{
     margin-top:4px;
     width:100%;
@@ -290,6 +301,10 @@
       </div>
 
       <div class="card-body">
+        <?php if (isset($_GET['pesan']) && $_GET['pesan'] === 'gagal'): ?>
+          <div class="login-error" role="alert">Username atau password salah. Silakan coba lagi.</div>
+        <?php endif; ?>
+
         <form action="proseslogin.php" method="post" enctype="multipart/form-data">
 
           <div class="field">

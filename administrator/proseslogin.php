@@ -124,12 +124,14 @@ else
 		}
 		else
 		{
-			echo "Gagal Masuk";
+			header("Location: index.php?pesan=gagal", true, 303);
+			exit;
 		}	
 	}
 	else
 	{
-		echo "Gagal Masuk";
+		header("Location: index.php?pesan=gagal", true, 303);
+		exit;
 	}	
 }
 ?>

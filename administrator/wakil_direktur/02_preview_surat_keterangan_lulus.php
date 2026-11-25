@@ -30,6 +30,7 @@ $return   = isset($_GET['return']) ? $_GET['return'] : '02_persetujuan_surat_ket
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Preview - Surat Keterangan Lulus</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
@@ -69,13 +70,16 @@ $return   = isset($_GET['return']) ? $_GET['return'] : '02_persetujuan_surat_ket
             body { background: #fff; }
         }
     </style>
+    <link href="../assets/css/wadir-preview.css" rel="stylesheet">
 </head>
 <body>
 
 <!-- Toolbar Aksi -->
 <div class="toolbar">
     <span class="title"><i class="fa fa-file-text-o"></i> Preview Surat Keterangan Lulus &mdash; <?php echo $a['nama_mahasiswa']; ?></span>
+</div>
 
+<div class="preview-actions">
     <?php if ($sp == 'Menunggu'): ?>
         <a href="proses_persetujuan.php?aksi=setujui&jenis=ket_lulus&id=<?php echo $id; ?>&return=<?php echo urlencode($return); ?>"
            onclick="return confirm('Setujui surat ini?')"

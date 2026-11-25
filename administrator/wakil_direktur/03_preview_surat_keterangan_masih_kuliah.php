@@ -20,6 +20,7 @@ $tanggal2 = tgl_indo($a['tanggal_cetak']);
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Preview - Surat Keterangan Masih Kuliah</title>
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/font-awesome.min.css" rel="stylesheet">
@@ -35,12 +36,15 @@ $tanggal2 = tgl_indo($a['tanggal_cetak']);
         table { font-family:Arial; line-height:150%; font-size:11.0pt; }
         @media print { .toolbar,.status-bar{display:none!important;} .surat-wrapper{margin:0;box-shadow:none;padding:30px;} body{background:#fff;} }
     </style>
+    <link href="../assets/css/wadir-preview.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="toolbar">
     <span class="title"><i class="fa fa-file-text-o"></i> Preview Surat Masih Kuliah &mdash; <?php echo $a['nama_mahasiswa']; ?></span>
+</div>
 
+<div class="preview-actions">
     <?php if ($sp == 'Disetujui_Resepsionis'): ?>
         <a href="proses_persetujuan.php?aksi=setujui&jenis=masih_kuliah&id=<?php echo $id; ?>&return=<?php echo urlencode($return); ?>"
            onclick="return confirm('Setujui surat ini?')" class="btn btn-success btn-sm">
