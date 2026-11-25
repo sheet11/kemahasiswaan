@@ -47,7 +47,17 @@ if ($ada > 0) {
     $_SESSION['level']        = $row['level'];
     header("location:resepsionis/index.php");
 	}
-	
+	elseif($row['level'] == "admin_ijazah")
+	{
+		session_start(); // memulai fungsi session
+		$_SESSION['username'] = $username;
+		$_SESSION['nama_lengkap'] = $row['nama_lengkap'];
+		$_SESSION['unit_kerja'] = $row['unit_kerja'];
+		$_SESSION['jabatan'] = $row['jabatan'];
+		$_SESSION['grade'] = $row['grade'];
+		$_SESSION['level'] = $row['level'];
+		header("location:admin_ijazah/index.php"); // jika berhasil login, maka masuk ke file home.php
+	}
 	elseif($row['level'] == "administrator")
 	{
 		session_start(); // memulai fungsi session
